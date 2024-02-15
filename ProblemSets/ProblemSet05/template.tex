@@ -1,0 +1,195 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700.009}\\Problem Set 5}
+\author{\huge{Ezekiel Berumen}}
+\date{20 February 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\qs{}{Show directly that the following vectors constitute a basis for $\mathbb{R}^4$, do not appeal to the dimension of $\mathbb{R}^4$ to do so, show that they are both linearly independent and span $\mathbb{R}^4$.
+$$
+\left[\begin{array}{l}
+1 \\
+2 \\
+3 \\
+4
+\end{array}\right],\left[\begin{array}{c}
+0 \\
+-1 \\
+0 \\
+-2
+\end{array}\right],\left[\begin{array}{l}
+1 \\
+0 \\
+1 \\
+0
+\end{array}\right],\left[\begin{array}{c}
+3 \\
+-1 \\
+7 \\
+0
+\end{array}\right]
+$$}
+\sol In order to show that the set of vectors is a basis of $\mathbb{R}^4$,  I will show that the vectors span $\mathbb{R}^4$. In doing so it will also be proved that the vectors are linearly indepdent.  To do so we must show that a given vector say
+$$
+\vec{v} =
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4
+\end{bmatrix}
+\in \mathbb{R}^4
+$$
+can be represented as some linear combination of the four vectors that we are given.  That is to to say that there exists some scalars $c_1, c_2,c_3,c_4\in\mathbb{R}$ such that
+$$
+c_1 \begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix} + c_2 \begin{bmatrix} 0 \\ -1 \\ 0 \\ -2 \end{bmatrix}
++ c_3 \begin{bmatrix} 1 \\ 0 \\ 1 \\ 0 \end{bmatrix} + c_4 \begin{bmatrix} 3 \\ -1 \\ 7 \\ 0 \end{bmatrix}
+= \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}
+$$
+This implies that it is possible to set up a system of equations,  and further an augmented matrix to then perform row reduction operations to find whether a consistent solution exists for the system.  In this case,  a consistent solution will imply that there exists scalars such that any arbitrary vector from $\mathbb{R}^4$ can be found in the span of the vectors.  See:
+$$
+\begin{aligned}
+c_1 + 0c_2 + c_3 + 3c_4 & = x_1 \\
+2c_1 - c_2 + 0c_3 - c_4 &  = x_2 \\
+3c_1 + 0c_2 + 1c_3 + 7c_4 & = x_3 \\
+4c_1 - 2c_2 + 0c_3 + 0c_4 & = x_4 \\
+\end{aligned}
+$$
+$$
+\begin{array}{cccc|c}
+    1 & 0 & 1 & 3 & x_1 \\
+    2 & -1 & 0 & -1 & x_2 \\
+    3 & 0 & 1 & 7 & x_3 \\
+    4 & -2 & 0 & 0 & x_4 \\
+\end{array}
+$$
+The augmented matrix can now be row reduced to determine whether it is consistent.  See:
+\begin{align*}
+	&\begin{array}{cccc|c}
+		1 & 0 & 1 & 3 & x_1 \\
+		0 & -1 & -2 & -7 & -2x_1 + x_2 \\
+		0 & 0 & -2 & -2 & -3x_1 + x_3 \\
+		0 & -2 & -4 & -12 & -4x_1 + x_4
+	\end{array}
+	&& \begin{aligned} & R_2 - 2R_1 \rightarrow R_2 \\ & R_3 - 3R_1 \rightarrow R_3 \\ & R_4 - 4R_1 
+	\rightarrow R_4 \end{aligned}
+	&\begin{array}{cccc|c}
+		1 & 0 & 1 & 3 & x_1 \\
+		0 & 1 & 2 & 7 & 2x_1 - x_2 \\
+		0 & 0 & -2 & -2 & -3x_1 + x_3 \\
+		0 & -2 & -4 & -12 & -4x_1 + x_4
+	\end{array}
+	&& -R_2 \rightarrow R_2 \\
+	&\begin{array}{cccc|c}
+		1 & 0 & 1 & 3 &  x_1 \\
+		0 & 1 & 2 & 7 & 2x_1 - x_2 \\
+		0 & 0 & -2 & -2 & -3x_1 + x_3 \\
+		0 & 0 & 0 & 2 & -2x_2 + x_4
+	\end{array}
+	&& R_4 + 2R_2 \rightarrow R_4
+	&\begin{array}{cccc|c}
+		1 & 0 & 1 & 2 &  x_1 \\
+		0 & 1 & 2 & 7 & 2x_1 - x_2 \\
+		0 & 0 & 1 & 1 & \frac{3x_1 - x_3}{2} \\
+		0 & 0 & 0 & 2 & -2x_2 + x_4
+	\end{array}
+	&& -\frac{1}{2}R_3 \rightarrow R_3 \\
+	&\begin{array}{cccc|c}
+		1 & 0 & 0 & 2 &  -\frac{x_1 -x_3}{2}\\
+		0 & 1 & 0 & 5 & -x_1-x_2+x_3\\
+		0 & 0 & 1 & 1 & \frac{3x_1 - x_3}{2} \\
+		0 & 0 & 0 & 2 & -2x_2 + x_4
+	\end{array}
+	&& \begin{aligned} & R_1 - R_3 \rightarrow R_1 \\ & R_2 - 2R_3 \rightarrow R_2\end{aligned}
+	&\begin{array}{cccc|c}
+		1 & 0 & 0 & 0 & -\frac{x_1 - x_3}{2} + 2x_2 -x_4 \\
+		0 & 1 & 0 & 1 & -x_1 + x_2 + x_3 + x_4 \\
+		0 & 0 & 1 & 0 & \frac{3x_1 + x_2 - x_3 - x_4}{2} \\
+		0 & 0 & 0 & 2 & -2x_2 + x_4
+	\end{array}
+	&& \begin{aligned} & R_1 - R_4 \rightarrow R_1 \\ & R2 - 2R_4 \rightarrow R_2 \\ & R_3 - \frac{1}{2}R_4 
+	\rightarrow R_3\end{aligned}
+\end{align*}
+\qs{}{Are the following vectors linearly independent? Do they span $\mathbb{R}^3$ ? Justify your answers.
+$$
+\left[\begin{array}{c}
+1 \\
+-1 \\
+2
+\end{array}\right],\left[\begin{array}{c}
+-2 \\
+1 \\
+-1
+\end{array}\right],\left[\begin{array}{c}
+0 \\
+-1 \\
+3
+\end{array}\right],\left[\begin{array}{c}
+-1 \\
+-1 \\
+4
+\end{array}\right]
+$$}
+
+\qs{}{What is the dimension of the following subspace of $\mathbb{R}^3$ ? Justify your answer.
+$$
+\operatorname{span}\left(\left[\begin{array}{c}
+1 \\
+-1 \\
+2
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+3 \\
+4
+\end{array}\right],\left[\begin{array}{l}
+2 \\
+1 \\
+8
+\end{array}\right]\right)
+$$}
+
+\qs{}{Suppose $T: \mathbb{R}^3 \rightarrow \mathbb{R}^2$ was a linear transformation so that
+$$
+T\left(\left[\begin{array}{c}
+1 \\
+-1 \\
+2
+\end{array}\right]\right)=\left[\begin{array}{l}
+1 \\
+2
+\end{array}\right] \quad \text { and } \quad T\left(\left[\begin{array}{l}
+0 \\
+2 \\
+3
+\end{array}\right]\right)=\left[\begin{array}{l}
+2 \\
+3
+\end{array}\right] .
+$$
+
+What is
+$$
+T\left(\left[\begin{array}{c}
+2 \\
+4 \\
+13
+\end{array}\right]\right) ?
+$$}
+
+\qs{}{Verify that the following is a linear transformation:
+$$
+\begin{gathered}
+T: C([0,1]) \rightarrow C([0,1]) \\
+T(f)=\int x^2 f(x) \mathrm{d} x
+\end{gathered}
+$$
+where the constant of integration is always zero. Would this function be a linear transformation if the constant of integration was one instead?}
+
+\qs{}{}
+
+\end{document}
