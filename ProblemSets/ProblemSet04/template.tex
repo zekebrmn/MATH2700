@@ -1,0 +1,294 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{MATH 2700.009}\\PROBLEM SET 4}
+\author{\huge{Ezekiel Berumen}}
+\date{Due February 13}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+
+\qs{}{Verify that
+$$
+W=\left\{\left[\begin{array}{l}
+x \\
+0 \\
+y
+\end{array}\right]: x, y \in \mathbb{R}\right\}
+$$
+is a subspace of $\mathbb{R}^3$.}
+\sol \\
+(1) $\vec{0} \in W$, Take $x=y=0$ \\
+(2) $a,b \in \mathbb{R}$, $\begin{pmatrix} x \\ 0 \\ y \end{pmatrix} + \begin{pmatrix} a \\ 0 \\ b \end{pmatrix} = \begin{pmatrix} x + a \\ 0 \\ y + b \end{pmatrix} \in W$ \\
+(3) $r \in \mathbb{R}$, $r\begin{pmatrix} x \\ 0 \\ y \end{pmatrix} = \begin{pmatrix} rx \\ 0 \\ ry \end{pmatrix} \in W$ \\
+(1), (2), (3) $\implies$ W is a subspace of $\mathbb{R}^3$
+
+\qs{}{Verify that $W=\left\{t x^2: t \in \mathbb{R}\right\}$ is a subspace of $\mathbb{P}_3$.}
+\sol \\
+(1) $\vec{0} \in W$, Take $t=0$ $\implies$ $\vec{0}=$ deg(0) polynomial.  \\
+(2) $r\in \mathbb{R}$, $tx^2 + rx^2 = (t + r)x^2$ $\implies$ $tx^2+rx^2 \in W$ Since $t,r \in \mathbb{R}$ \\
+(3) $r \in \mathbb{R}$, $r(tx^2) = rtx^2 = (rt)x^2$ $\implies$ $r(tx^2) \in W$ Since $t,r \in \mathbb{R}$\\
+(1), (2), (3) $\implies$ W is a subspace of $\mathbb{P}_3$
+
+\qs{}{Is $\mathbb{R}^2$ a subspace of $\mathbb{R}^3$ ? Why or why not?}
+\sol
+No, this is because $\mathbb{R}^2$ contains ordered pairs, whereas $\mathbb{R}^3$ contains ordered 3-tuples, i.e., the entry sizes do not match. 
+\qs{}{Let
+$$
+\mathbb{D}_3=\left\{\left[\begin{array}{ccc}
+d_1 & 0 & 0 \\
+0 & d_2 & 0 \\
+0 & 0 & d_3
+\end{array}\right]: d_1, d_2, d_3 \in \mathbb{R}\right\} .
+$$
+
+Verify that $\mathbb{D}_3$ is a subspace of $\mathbb{R}^{3 \times 3}$.}
+\sol \\
+(1) $\vec{0} \in \mathbb{D}_3$, take $d_1=d_2=d_3=0$ \\
+(2)
+ $c_1, c_2, c_3 \in \mathbb{R}$, 
+$\begin{bmatrix} d_1 & 0 & 0 \\ 0 & d_2 & 0 \\ 0 & 0 & d_3 \end{bmatrix}$ + 
+$\begin{bmatrix} c_1 & 0 & 0 \\ 0 & c_2 & 0 \\ 0 & 0 & c_3 \end{bmatrix}$ = 
+$\begin{bmatrix} d_1+c_1 & 0 & 0 \\ 0 & d_2+c_2 & 0 \\ 0 & 0 & d_3+c_3 \end{bmatrix}\in\mathbb{D}_3$ \\
+(3) $r \in \mathbb{R}$,
+$r\begin{bmatrix} d_1 & 0 & 0 \\ 0 & d_2 & 0 \\ 0 & 0 & d_3 \end{bmatrix}$ =
+$\begin{bmatrix} rd_1 & 0 & 0 \\ 0 & rd_2 & 0 \\ 0 & 0 & rd_3 \end{bmatrix}\in\mathbb{D}_3$\\
+(1), (2), (3) $\implies$ $\mathbb{D}_3$ is a subspace of $\mathbb{R}^{3 \times 3}$
+
+\qs{}{Recall $\mathbb{E}$ from the last homework, let
+$$
+W_1=\left\{\left[\begin{array}{l}
+t \\
+0
+\end{array}\right]: t \in \mathbb{R}\right\} \quad \text { and } \quad W_2=\left\{\left[\begin{array}{c}
+2 t-1 \\
+t-1
+\end{array}\right]: t \in \mathbb{R}\right\} .
+$$
+(i) Is $W_1$ a subspace of $\mathbb{R}^2$ ? If it is, verify this, if not, explain why not.\\
+(ii) Is $W_2$ a subspace of $\mathbb{R}^2$ ? If it is, verify this, if not, explain why not.\\
+(iii) Is $W_1$ a subspace of $\mathbb{E}$ ? If it is, verify this, if not, explain why not.\\
+(iv) Is $W_2$ a subspace of $\mathbb{E}$ ? If it is, verify this, if not, explain why not.}
+\begin{note}
+Recall from Homework 03, Question 7:  \\
+$\mathbb{E}$ is a vector space that is generated when $\mathbb{R}^2$ is equiped with addition and a scalar multiplcation by 
+$$
+\begin{pmatrix} x \\ y \end{pmatrix} \oplus \begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} x + a +1 \\ y + b + 1 \end{pmatrix} \quad \text{and} \quad
+c \odot \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} cx + c -1 \\ cy + c -1 \end{pmatrix}
+$$
+\end{note}
+\sol \\
+(i) $W_1 \le \mathbb{R}^2 $\\
+$\indent$ (1) $\vec{0}\in W_1$, take $t=0$ \\
+$\indent$ (2) $r\in\mathbb{R}$,
+ $\begin{bmatrix} t \\ 0 \end{bmatrix}$ +
+$\begin{bmatrix} r \\ 0 \end{bmatrix}$ =
+$\begin{bmatrix} t + r \\ 0 \end{bmatrix}\in W_1$ \\
+$\indent$ (3) $r\in\mathbb{R}$,
+$r \begin{bmatrix} t \\ 0 \end{bmatrix}$ =
+$\begin{bmatrix} rt \\ 0 \end{bmatrix}\in W_1$\\
+$\indent$ (1), (2), (3) $\implies$ $W_1$ is a subspace of $\mathbb{R}^2$ \\
+(ii) $W_2 \le \mathbb{R}^2$\\
+$\indent$ $W_2$ is not a subspace of $\mathbb{R}^2$. This is because $\vec{0}$ of $\mathbb{R}^2$ is not an element of $W_2$\\
+(iii) $W_1 \le \mathbb{E}$ \\
+$\indent$ $W_1$ is not a subspace of $\mathbb{E}$. This is because the $\vec{0}^{\mathbb{E}}$ is $\begin{bmatrix} -1 \\ -1 \end{bmatrix}$, which $\notin W_`1$ \\
+(iv) $W_2 \le \mathbb{E}$ \\
+$\indent$ (1) $\vec{0}^{\mathbb{E}}\in W_2$, take $t=0$ because $\begin{bmatrix} 2(0)-1 \\ 0 -1 \end{bmatrix}\in W_2$ \\
+$\indent$ (2) To show $W_2$ is closed under addition with regard to $\mathbb{E}$, take some $t,n,m \in \mathbb{R}$ such that $t = n+m$
+\begin{align*}
+\begin{bmatrix} 2n - 1 \\ n -1 \end{bmatrix} \oplus \begin{bmatrix} 2m -1 \\ m -1 \end{bmatrix} & = \begin{bmatrix} 2n +2m -2 +1 \\ n + m -2 +1 \end{bmatrix} \\
+& = \begin{bmatrix} 2(n + m) - 1 \\ (n + m) - 1 \end{bmatrix} \\
+& = \begin{bmatrix} 2t -1 \\ t - 1 \end{bmatrix}
+\end{align*}
+$\indent$ (3) To show $W_2$ is closed under multiplication with regard to $\mathbb{E}$, take some $t,r,m \in \mathbb{R}$ such that $t = r \times m$
+\begin{align*}
+r \odot \begin{bmatrix} 2m -1 \\ m - 1\end{bmatrix} &  = \begin{bmatrix} r(2m-1) + r -1 \\ r(m-1) + r - 1 \end{bmatrix} \\
+& = \begin{bmatrix} 2rm -1 \\ rm - 1 \end{bmatrix} \\
+& = \begin{bmatrix} 2t - 1 \\ t - 1 \end{bmatrix}
+\end{align*}
+$\indent$ (1), (2), (3) $\implies$ $W_2$ is a subspace of $\mathbb{E}$ \\
+
+\qs{}{Let
+$$
+S=\left\{\left[\begin{array}{c}
+1 \\
+-1 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+0 \\
+2
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+0 \\
+-1
+\end{array}\right],\left[\begin{array}{c}
+2 \\
+-1 \\
+-1
+\end{array}\right]\right\} .
+$$
+$S \subseteq \mathbb{R}^3$, is $S$ a spanning set for $\mathbb{R}^3$ ? That is, does $\operatorname{span}(S)=\mathbb{R}^3$ ?}
+\sol Firstly, it can be shown that span($S$) $=$ span($S'$) where we take
+$$S'=\left\{\left[\begin{array}{c}
+1 \\
+-1 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+0 \\
+2
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+0 \\
+-1
+\end{array}\right]\right\}.$$
+This is because the vector that we have removed to generate $S'$ can be generated using a combination of the remaining vectors, see:
+$$
+\begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} - 
+\begin{bmatrix} 0 \\ 0 \\ 2 \end{bmatrix} +
+\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} =
+\begin{bmatrix} 2 \\ -1 \\ -1 \end{bmatrix}
+$$
+In order to show that $S'$ is a spanning set for $\mathbb{R}^3$,  it must be shown that an abitrary vector say 
+$$\vec{v} = \begin{bmatrix} x \\ y \\ z \end{bmatrix}$$ can be represented as a linear combination of vectors from set $S'$, that is to say that it must be shown that there exists scalars 
+$c_1, c_2, c_3 \in \mathbb{R}$ such that 
+$$
+c_1 \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} + 
+c_2 \begin{bmatrix} 0 \\ 0 \\ 2 \end{bmatrix} + 
+c_3 \begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix} = 
+\begin{bmatrix} x \\ y \\ z \end{bmatrix}
+$$
+This can be done by analyzing a system of equations to find that $c_1 = c_2 = c_3 = 0$, which the system can be found by using the scalar products of the vectors in $S'$. My solution will use a more general solution by utilizing an augmented matrix to show that the vectors are linearly independent and span $\mathbb{R}^3$
+\begin{align*}
+c_1 + 0 c_2 + c_3 & = 0 \\
+-c_1 + 0 c_2 + 0 c_3 & = 0 \\
+0 c_1 + 2 c_2 + 1 c_3 & = 0
+\end{align*}
+\[
+\begin{array}{ccc|c}
+1 & 0 & 1 & 0 \\
+-1 & 0 & 0 & 0 \\
+0 & 2 & 1 & 0
+\end{array}
+\]
+Now, the augmented matrix can be row reduced to determine whether it is consistent, i.e., whether it has a solution, and further whether that solution implies that $c_1 = c_2 = c_3 = 0$
+\begin{align*}
+    &\begin{array}{ccc|c}
+        1 & 0 & 1 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 2 & 1 & 0
+    \end{array}
+    && R_2 + R_1 \rightarrow R_2
+    &&\begin{array}{ccc|c}
+        1 & 0 & 1 & 0 \\
+        0 & 2 & 1 & 0 \\
+        0 & 0 & 1 & 0
+    \end{array}
+    && R_2 \leftrightarrow R_3 \\
+    &\begin{array}{ccc|c}
+        1 & 0 & 1 & 0 \\
+        0 & 1 & \frac{1}{2} & 0 \\
+        0 & 0 & 1 & 0
+    \end{array}
+    && \frac{1}{2}R_2 \rightarrow R_2
+    &&\begin{array}{ccc|c}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0
+    \end{array}
+    && \begin{aligned} & R_1 - R_3 \rightarrow R_1, \\ & R_2 - \frac{1}{2}R_3 \rightarrow R_2 \end{aligned}
+\end{align*}
+Since the RREF($S'$) is reduced to the identity matrix, this implies that $S'$ contains only linearly independent vectors. This is to say that no vector in set $S'$ is a combination of the others. As a result these vectors collectively cover all possible combinations in the space $\mathbb{R}^3$, i.e., span($S'$) = $\mathbb{R}^3$.
+\qs{}{
+Is $S$ from the previous problem linearly independent? If it is not linearly independent, remove one vector from $S$ to make it linearly independent. After you have removed one vector, verify the result is linearly independent.
+}
+\begin{note}
+As discovered in Question 6, the set of vectors $S$ is not linearly independent because it contains a vector which can be generated from a combination of the remaining vectors in the set. Further the result of the row reduced echelon form augmented matrix illustrates that the set $S'$ which has the linearly dependent vector removed, is in fact linearly independent as evidenced by the identity matrix that is produced.
+\end{note}
+\sol S is not linearly dependent, since it contains a vector that is a combination of other vectors in the set. More specifically set $S$ contains the vector 
+$\begin{bmatrix} 2 \\ -1 \\ -1 \end{bmatrix}$. This vector can be removed from the set to be come linearly independent because it can be produced by adding the other vectors, see:
+$$
+\begin{bmatrix} 2 \\ -1 \\ -1 \end{bmatrix} =
+\begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} -
+\begin{bmatrix} 0 \\ 0 \\ 2 \end{bmatrix} +
+\begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}
+$$
+This new resultant set of vectors, we will call it $S'$ can now be tested for linear independece. As mentioned in the solution of Question 6, the system of linear equations found by multiplying the scalars $c_1, c_2, c_3$ by the vectors in set $S'$ to find that $c_1 = c_2 = c_3 = 0$, however since I have already row reduced the augmented matrix generated by the same system of equations, it can be used to verify the linear independence of $S'$, see
+$$
+    \begin{array}{ccc|c}
+        1 & 0 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0
+    \end{array}
+$$
+This indicates that the set of vectors with the linearly dependent vector removed is in fact linearly independent.
+\qs{}{ 
+Verify that
+$$
+\left\{\left[\begin{array}{c}
+1 \\
+-1 \\
+1
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+2 \\
+-1
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+-1 \\
+0
+\end{array}\right]\right\}
+$$
+is linearly independent in $\mathbb{R}^3$.}
+\sol Since I have already used a general approach to verifying linear independence and to verify a spanning set, I will use the more simple approach discussed in class. That is to generate a system of equations to equal the $\vec{0}$ of $\mathbb{R}$ for the vectors in the set, see:
+\begin{align*}
+c_1 + c_2 + c_3 & = 0 \\
+-c_1 + 2 c_2 - c_3 & = 0 \\
+c_1 - c_2 & = 0
+\end{align*}
+We can see from the third equation that:
+$$c_1 = c_2$$
+And further from the second equation:
+\begin{align*}
+-c_2 + 2 c_2 - c_3 & = 0 \\
+c_2 - c_3 & = 0 \\
+c_2 & = c_3 
+\end{align*}
+and lastly from the first equation we see:
+\begin{align*}
+c_3 + c_3 + c_3 & = 0 \\
+3c_3 & = 0 \\
+c_3 & = 0
+\end{align*}
+Thus the solution from the system of equation suggests that $c_1 = c_2 = c_3 = 0$ and further the set of vectors are linearly independent in $\mathbb{R}^3$
+\qs{}{Let $V$ be a vector space and $W_1, W_2$ be subspaces of $V$. Then verify that
+$$
+W_1+W_2=\left\{w_1+w_2: w_1 \in W_1 \text { and } w_2 \in W_2\right\}
+$$
+is a subspace of $V$ by verifying the following: \\
+(a) $\overrightarrow{0} \in W_1+W_2$ (express the zero vector in the form $v+w$ where $v \in W_1$ and $u \in W_2$ ) \\
+(b) Verify that if $v \in W_1+W_2$ and $c \in \mathbb{R}$ is a scalar, then $c v \in W_1+W_2$. \\
+(c) Verify that if $v, u \in W_1+W_2$ then $(v+w) \in W_1+W_2$.}
+\sol To verify that $W_1 + W_2$ is a subspace of $V$, three axioms must be verified: \\
+(a) \\
+Since $W_1 \le V$ and $W_2 \le V$, they both contain the zero vector, say $\vec{0}^{W_1} \in W_1$ and $\vec{0}^{W_2} \in W_2$, then $\vec{0} = \vec{0}^{W_1} + \vec{0}^{W_2}$, so thus $\vec{0}\in W_1 + W_2$ \\
+(b) \\
+If there is a $v \in W_1 + W_2$, then this means that there exist $w_1 \in W_1$ and $w_2 \in W_2$ so that $v = w_1 + w_2$.
+This means that $cv$ can be evaluated as $$cv = c(w_1 + w_2) = cw_1 + cw_2$$
+Because $W_1$ and $W_2$ are subspaces, they are closed under scalar multiplication which means $cw_1 \in W_1$ and $cw_2 \in W_2$, thus $cv\in W_1 + W_2$.\\
+(c) \\
+If there is a $v,u\in W_1 + W_2$, then this means that there exist some $w_{1v},w_{1u}\in W_1$ and $w_{2v},w_{2u} \in W_2$ so that $v = w_{1v} + w_{2v}$ and 
+$u = w_{1u} + w_{2u}$. 
+This means that $v +u$ can be evaluated as $$v+u=(w_{1v} + w_{2v}) + (w_{1u} + w_{2u}) = (w_{1v} + w_{1u}) + (w_{2v} + w_{2u})$$
+Because $W_1$ and $W_2$ are subspaces, they are closed under addition which means $(w_{1v} + w_{1u}) \in W_1$ and  $(w_{2v} + w_{2u}) \in W_2$, thus $v + u \in W_1 + W_2$. \\
+The results of (a), (b), (c) $\implies$ $W_1+W_2$ is a subspace of $V$.
+
+\end{document}
