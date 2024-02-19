@@ -1,0 +1,131 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700.009}\\Notes}
+\author{\huge{Ezekiel Berumen}}
+\date{15 February 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\begin{note}
+- If $V$ is a vector space,  $\mathcal{B}$ $V$ is a basis if it is both linearly independent and $span(\mathcal{B}) = V$. \\
+- $dim(V)$ is the size of a basis for $V$. \\
+\end{note}
+\dfn{}{If $W$ is a subspace of $V$ then $dim(W)$ is the size of a linearly independent set of vectors from which span $W$.}
+
+\dfn{}{
+Vector space $V$ is finite dimensional if it has a finite basis, and otherwise $V$ is infinite dimensional
+}
+
+\section{Rules of Basis'}
+- If $\mathcal{E} \subseteq V$ is a set of fewer than $dim(V)$ vectors, then $\mathcal{E}$ does not span $V$.  \\
+- If $\mathcal{E}$ has more vectors than $dim(V)$, it cannot be linearly independent.  Otherwise $V$ has a basis of size $\ge dim(V)$ \\
+- If $\mathcal{B}$ has $dim(V)$ vectors and is linearly independent, then it also spans.
+
+\ex{}{
+Show
+$$
+\left\{
+\begin{pmatrix}
+x \\ x + y \\ y
+\end{pmatrix}
+: x,y \in \mathbb{R}
+\right\}
+\text{is a subspace}
+$$
+\sol
+$$
+\begin{aligned}
+& = \left\{ x \begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix} + y \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix} : x,y\in\mathbb{R} \right\} \\
+& = \text{span} \left(\begin{pmatrix}1 \\ 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}\right)
+\end{aligned}
+$$
+}
+
+\section{Linear Transformation}
+
+\dfn{}{
+If $V, W$ are vector spaces, a linear transformation from $V$ to $W$ is a function $T: V \rightarrow W$ so that: \\
+1) if $\vec{x},\vec{y}\in V$ then $T(\vec{x}+\vec{y}) = T(\vec{x}) + T(\vec{y})$ \\
+2) if $\vec{x} \in V$ and $c\in\mathbb{R}$ then $T(c\vec{x}) = cT(\vec{x})$
+}
+
+\ex{}{
+$$
+T:\mathbb{R} \rightarrow \mathbb{R}
+$$
+}
+
+\ex{}{
+$$
+T: \mathbb{R}^n \rightarrow \mathbb{R}^k
+$$
+
+$$
+T(\vec{x}) = A\vec{x} \text{ Where } A\in\mathbb{R}^{k\times n} 
+$$
+}
+
+
+
+\ex{}{
+$$
+T: C([0,1]) \rightarrow C([0,1])
+$$
+\sol $T(f) = \int{f(x)dx}$ where the constant of integration is zero
+}
+
+
+
+\begin{note}
+The set of functions on [0, 1] which are differentiable on (0, 1) and continuous at the endpoints and whose derivative is continous is called $C^1([0,1])$
+\end{note}
+
+\mprop{}{If $T: V \rightarrow W$ is a linear transofrmation,  then
+$$
+T(\vec{0}^V) = \vec{0}^W
+$$
+}
+
+\begin{myproof} Prop 0.2.1 \\ 
+$T(\vec{0}^V) = T(\vec{0}^V + \vec{0}^V) = T(\vec{0}^V) + T(\vec{0}^V)$ \\
+So $T(\vec{0}^V) - T(\vec{0}^V) = T(\vec{0}^V) + T(\vec{0}^V) - T(\vec{0}^V)$ \\
+And thus $\vec{0}^W = \vec{0}^V$
+\end{myproof}
+
+\dfn{}{
+If $T: V \rightarrow W$ is a linear transformation: \\
+- $ker(T) = \{\vec{v} \in V : T(\vec{v})=\vec{0}\}$  \\
+- $ran(T) = \{\vec{w} \in W : \vec{w} = T(\vec{v})$ for some $\vec{v} \in V\}$
+}
+
+\begin{note}
+$$
+T: \mathbb{R}^n \rightarrow \mathbb{R}^k
+$$
+$$
+T(\vec{x}) = A\vec{x}
+$$
+We sometimes write $ker(A)$ for $ker(T)$ and $ran(A)$ for $ran(T)$
+\end{note}
+
+\mprop{}{$T: V \rightarrow W$ is a linear transformation then $ker(T)$ is a subspace of $V$, and $ran(T)$ is a subspce of $W$
+}
+
+\begin{myproof} Prop 0.2.2 \\
+- $\vec{0}^V \in ker(T)$ because $T(\vec{0}^V) = \vec{0}^W$ \\
+- If $\vec{x},\vec{y}\in ker(T)$,  then $T(\vec{x}+\vec{y}) = T(\vec{x}) + T(\vec{y}) = \vec{0}^W + \vec{0}^W=\vec{0}^W$ so $\vec{x}+\vec{y} \in ker(T)$ \\
+- If $\vec{x}\in ker(T)$ and $c\in\mathbb{R}$,  $T(c\vec{x}) = cT(\vec{x}) = cT(\vec{x}) = c\vec{0}^W = \vec{0}^W$ so $\vec{x}\in ker(T)$
+\end{myproof}
+
+\dfn{nullity}{
+If $T: V \rightarrow W$ is a linear transformation,  the nullity of $T$ is $dim(ker(T))$ and the rank of $T$ $(rank(T))$ is $dim(ran(T))$
+}
+
+\end{document}
