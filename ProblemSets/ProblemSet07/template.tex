@@ -1,0 +1,278 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700}\\Problem Set 7}
+\author{\huge{Ezekiel Berumen}}
+\date{5 March 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\qs{}{Let $T: \mathbb{P} \rightarrow \mathbb{P}$ be the linear transformation given by $T(p)=\frac{\mathrm{d}^2}{\mathrm{~d} x^2} p(x)$. \\
+(a) Give an explicit description of $\operatorname{ker}(T)$. \\
+(b) Give a basis for $\operatorname{ker}(T)$. \\
+(c) What is $\operatorname{dim}(\operatorname{ker}(T))$ ?
+}
+\sol \\
+\noindent (a) The $\operatorname{ker}(T)$ will consist of all polynomials which are either degree 0 or degree 1.  In either case,  taking the second derrivative of either a degree 0 or degree 1 function will result in the deg 0 polynomial.  \\
+\\ 
+\noindent(b) Since the $\operatorname{ker}(T)$ consists of only the degree 0 or degree 1 polynomials,  it is sufficent to say that the polynomials contained in a basis will be either linear or constant in form.  To construct a basis,  linearly independent polynomials must be found.  A basis can be found by taking any constant, and linear function,  the easiest would be
+$$
+\operatorname{ker}(T) = \operatorname{span}\left(\left\{1, x\right\}\right)
+$$
+This set will form a basis because the linear combination of the two can form any degree 0 or degree 1 polynomial.  \\
+\\
+\noindent(c) Since a basis of $\operatorname{ker}(T)$ was determined to be $\left\{1,x\right\}$,  then the dimension of $\operatorname{ker}(T)$ is 2.  This is bcause by definition of dimension,  it is a representation of the number of elements in a basis.
+
+\qs{}{The following function $T: \mathbb{R}^3 \rightarrow \mathbb{R}^3$ is a linear transformation.  \\
+(a) Find a matrix $A \in \mathbb{R}^{3 \times 3}$ so that $T(\vec{x})=A \vec{x}$ for all $\vec{x} \in \mathbb{R}^3$. \\ Then (b) find bases for $\operatorname{ker}(T)$ and $\operatorname{ran}(T)$ \\
+and (c) what are $\operatorname{dim}(\operatorname{ker}(T))$ and $\operatorname{dim}(\operatorname{ran}(T))$ ?
+$$
+T\left(\left[\begin{array}{l}
+x \\
+y \\
+z
+\end{array}\right]\right)=\left[\begin{array}{c}
+x+y+z \\
+x+y+2 z \\
+y+z
+\end{array}\right]
+$$}
+\sol \\
+\noindent (a) To find $A\in\mathbb{R}^{3\times3}$,  the matrix must be found such that
+$$
+A \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} x + y + z \\ x + y + 2z \\ y + z \end{bmatrix}
+$$
+The only matrix which satisfies this is the matrix defined by
+$$
+A = \begin{bmatrix} 
+1 & 1 & 1 \\
+1 & 1 & 2 \\
+0 & 1 & 1
+\end{bmatrix}
+$$
+Which can be verified via matrix multiplication,  see
+$$
+ \begin{bmatrix} 
+1 & 1 & 1 \\
+1 & 1 & 2 \\
+0 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+x \\ y \\ z
+\end{bmatrix}
+=
+\begin{bmatrix}
+x + y + z \\
+x + y + 2z \\
+y + z
+\end{bmatrix}
+$$
+\noindent
+(b) To find a basis for the $\operatorname{ker}(T)$,  the set of vectors from the domain to the zero vector in the codomain must be found.  That is to say that we must find
+$$
+\text{All vectors } \begin{bmatrix} x \\ y \\ z \end{bmatrix} 
+\text{ such that } T\left(\begin{bmatrix} x \\ y \\ z \end{bmatrix}\right) = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+$$ 
+In order to save time finding a basis for the $\operatorname{ran}(T)$,  we can generated an augmented system of equations,  and this will be easy since $A$ was found in the previous part.  For now, the solution of this system of equations will be some arbritary vector $\vec{v}\in\mathbb{R}^3$.  See:
+$$
+\begin{array}{ccc|c}
+1 & 1 & 1 & a \\
+1 & 1 & 2 & b \\
+0 & 1 & 1 & c
+\end{array}
+\text{ ,  where }
+\begin{bmatrix}
+a \\ b \\ c
+\end{bmatrix} = \vec{v}
+$$
+Now the augmented matrix must be row reduced to determine whether it is consistent,  See:
+\begin{align*}
+	&\begin{array}{ccc|c}
+		1 & 0 & 0 & a - c \\
+		1 & 1 & 2 & b \\
+		0 & 1 & 1 & c
+	\end{array}
+	&& R_1 - R_3 \rightarrow R_1
+	&\begin{array}{ccc|c}
+		1 & 0 & 0 & a - c \\
+		0 & 1 & 2 & b - a + c \\
+		0 & 1 & 1 & c
+	\end{array}
+	&& R_2 - R_1 \rightarrow R_2 \\
+	&\begin{array}{ccc|c}
+		1 & 0 & 0 & a - c \\
+		0 & 1 & 2 & b - a + c \\
+		0 & 0 & -1 & a - b
+	\end{array}
+	&& R_3 - R_2 \rightarrow R_3
+	&\begin{array}{ccc|c}
+		1 & 0 & 0 & a - c \\
+		0 & 1 & 0 & -b + a + c \\
+		0 & 0  & -1 & a - b
+	\end{array}
+	&& R_2 + 2R_3 \rightarrow R_2 \\
+	&\begin{array}{ccc|c}
+		1 & 0 & 0 & a - c \\
+		0 & 1 & 0 & a - b + c \\
+		0 & 0 & 1 & b - a
+	\end{array}
+	&&-R_3 \rightarrow R_3
+\end{align*}
+The row reduced augmented matrix suggests that there is a solution for any vector $\vec{v}\in\mathbb{R}^3$.  In order to find the vectors from the domain which map to the zero vector in the domain,  we can use the solution to the augmented system of equations.  By solving for the $\vec{0}$ using the augmented matrix,  the kernel can be found.  To do so we must set
+$$
+\begin{bmatrix} a \\ b \\ c \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+$$
+Which reveals that the solution using our augmented matrix
+$$
+\begin{array}{ccc|c}
+	1 & 0 & 0 & 0 - 0 \\
+	0 & 1 & 0 & 0 - 0 + 0 \\
+	0 & 0 & 1 & 0 - 0
+\end{array} =
+\begin{array}{ccc|c}
+	1 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0\\
+	0 & 0 & 1 & 0
+\end{array}
+$$
+Also implies that the only vector from the domain of $T$ that maps to the zero vector in the codomain is zero.  Since this is the case,  the basis for the $\operatorname{ker}(T)$ is the empty set,  given that there are no non-trivial vectors contained in the kernel.  \\
+\\
+\noindent To find a basis the range of $T$,  the same solution to the augmented matrix can be used.  An intuitive candidate for the vectors that will make up a basis of the $\operatorname{ran}(T)$ would be the columns of A.  This is because they can be represented as a linear combination which the augmented matrix solves for.  In other words,  given some scalars $c_1,c_2,c_3\in\mathbb{R}$,  we can generate a linear combination via
+$$
+c_1\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} + 
+c_2\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} + 
+c_3\begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}
+$$
+This will generate the same system of equations that the augmented matrix provides a solution for.  The solution of the augmented matrix suggests that the vectors are linearly independent,  because each row contains a pivot at a different position.  Further the augmented matrix solution also implies spanning,  because it provides a manner to find the scalars to produce any vector in $\mathbb{R}^3$ from the given system of equations.  Since the set of vectors are both linearly independent,  as well as spanning,  in $\mathbb{R}^3$,  then it is sufficient to say that a basis for the $\operatorname{ran}(T)$ is
+$$
+\left\{
+\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix},  \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}\right\}
+$$
+This is consistent with the answer of (c),  because the information revealed from this augmented matrix and thus the bases for $\operatorname{ker}(T)$ and $\operatorname{ran}(T)$ would suggest that the dimensions of the bases are 0 and 3 respectively.  This is consistent with what the Rank-Nullity Theorem suggests,  which is that the $\operatorname{dim}(V) = \operatorname{dim}(\operatorname{ker}(T)) + \operatorname{dim}(\operatorname{ran}(T))$ 
+\qs{}{$\mathfrak{B}=\left\langle 1, x+1, x^2+x\right\rangle$ forms an ordered basis for $\mathbb{P}_3$. Give the $\mathfrak{B}$-coordinate vector of each of the following vectors. That is, for each of the following $p$ determine what is $[p]_{\mathfrak{B}}$. \\
+(a) $2+3 x+4 x^2$ \\
+(b) $5+7 x+3 x^2$ \\ 
+(c) $1+x$ \\
+(d) $2+x$}
+\sol \\
+(a) $2+3x+4x^2 = 4(x^2+x) - 1(x+1) + 3(1)$ \\
+$\indent\implies [2+3x+4x^2]_{\mathfrak{B}} = [3,  -1,  4]$ \\
+\\
+(b) $5 + 7x + 3x^2 = 3(x^2+x) + 4(x+1) + 1(1)$ \\
+$\indent\implies [5+7x+3x^2]_{\mathfrak{B}} = [1,  4,  3]$ \\
+\\
+(c) $1 + x = 0(x^2+x) + 1(x+1) + 0(1)$ \\
+$\indent\implies [1+x]_{\mathfrak{B}} = [0,  1,  0]$ \\
+\\
+(d) $2 + x = 0(x^2+x) + 1(x+1) + 1(1)$ \\
+$\indent\implies [2+x]_{\mathfrak{B}} = [1,  1,  0]$
+
+\qs{}{Let $\mathfrak{B}$ be the ordered basis for $\mathbb{P}_3$ from the previous problem and $T: \mathbb{P}_3 \rightarrow \mathbb{P}_3$ be given by $T(p)=\frac{\mathrm{d}}{\mathrm{d} x} p(x)$. Find a matrix $A \in \mathbb{R}^{3 \times 3}$ so that
+$$
+[T(p)]_{\mathfrak{B}}=A[p]_{\mathfrak{B}}
+$$
+for all polynomials $p \in \mathbb{P}_3$. }
+\sol Given that $T(p) = \frac{\mathrm{d}}{\mathrm{d}x}p(x)$,  we can compute the transformed values for the elements in the basis $\mathfrak{B}$.  In doing so we see
+$$
+\begin{aligned}
+T(1) & = \frac{\mathrm{d}}{\mathrm{d} x}1 = 0 \\
+T(x+1) & = \frac{\mathrm{d}}{\mathrm{d} x}(x+1) = 1 \\
+T(x^2 + x) & = \frac{\mathrm{d}}{\mathrm{d} x}(x^2+x) = 2x+1
+\end{aligned}
+$$
+We can now construct a matrix with the columns being the $\mathfrak{B}$-coordinate vectors of these calculated polynomials $p$ so that we have
+$$
+A = \left[
+  \begin{array}{cccc}
+    \vrule & \vrule & & \vrule\\
+    \left[T(b_{1})\right]_{\mathfrak{B}} & \left[T(b_{2})\right]_{\mathfrak{B}} & \ldots & \left[T(b_{n})\right]_{\mathfrak{B}} \\
+    \vrule & \vrule & & \vrule 
+  \end{array}
+\right] =
+\begin{bmatrix}
+0 & 1 & 1 \\
+0 & 0 & 2 \\
+0 & 0 & 0
+\end{bmatrix}
+$$
+And thus a matrix $A\in\mathbb{R}^{3\times3}$ so that $[T(p)]_{\mathfrak{B}}=A[p]_{\mathfrak{B}}$.  This allows to convert the $\mathfrak{B}$-coordinate vector of a polynomial $p$ to the $\mathfrak{B}$-coordinate vector of $T(p)$,  effectively transforming the coordinates without having to find the value of $T(p)$ first.  This matrix will work for the $\mathfrak{B}$-coordinate of any $p$,  but we can verify quickly using one of the coordinates from the previous problem.  For example,  take $T(2 + 3x +4x^2) = 3x + 8$
+\[
+\begin{aligned}
+[3 + 8x]_{\mathfrak{B}} & = \begin{bmatrix} 3 \\ 8 \\ 0 \end{bmatrix} \\
+\begin{bmatrix} 
+0 & 1 & 1 \\
+0 & 0 & 2 \\
+0 & 0 & 0
+\end{bmatrix} \begin{bmatrix}
+3 \\ -1 \\ 4
+\end{bmatrix} & = \begin{bmatrix}
+3 \\ 8 \\ 0
+\end{bmatrix}
+\qquad
+\left(
+\begin{bmatrix}
+3 \\ -1 \\ 4
+\end{bmatrix} \text{ is from the previous question}
+\right)
+\end{aligned}
+\]
+So thus it can be seen that the matrix successfully transforms the coordinates.
+\qs{}{Let
+$$
+\mathfrak{B}=\left\langle\left[\begin{array}{l}
+1 \\
+0 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+1 \\
+1 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+1 \\
+1 \\
+1
+\end{array}\right]\right\rangle .
+$$
+
+Give the $\mathfrak{B}$-coordinate vector for each of the following:
+$$
+\text{(a) } \left[\begin{array}{l}1 \\ 1 \\ 1\end{array}\right] \qquad
+\text{(b) } \left[\begin{array}{l}3 \\ 2 \\ 1\end{array}\right] \qquad
+\text{(c) } \left[\begin{array}{l}1 \\ 0 \\ 1\end{array}\right]
+$$ } 
+\sol \\
+(a)
+$$
+\left[\begin{array}{l} 1 \\ 1 \\ 1 \end{array}\right] =
+0\left[\begin{array}{l} 1 \\0 \\ 0 \end{array}\right] +
+0\left[\begin{array}{l} 1 \\ 1 \\ 0 \end{array}\right] +
+1 \left[\begin{array}{l} 1 \\1 \\ 1 \end{array}\right] \implies
+\left[\left[\begin{array}{l} 1 \\1 \\ 1 \end{array}\right]\right]_{\mathfrak{B}} = 
+\left[\begin{array}{l} 0 \\0 \\ 1 \end{array}\right]
+$$
+(b)
+$$
+\left[\begin{array}{l} 3 \\ 2 \\ 1 \end{array}\right] =
+1\left[\begin{array}{l} 1 \\0 \\ 0 \end{array}\right] +
+1\left[\begin{array}{l} 1 \\ 1 \\ 0 \end{array}\right] +
+1 \left[\begin{array}{l} 1 \\1 \\ 1 \end{array}\right] \implies
+\left[\left[\begin{array}{l} 3 \\2 \\ 1 \end{array}\right]\right]_{\mathfrak{B}} = 
+\left[\begin{array}{l} 1 \\1 \\ 1 \end{array}\right]
+$$
+(c)
+$$
+\left[\begin{array}{l} 1 \\ 0 \\ 1 \end{array}\right] =
+1\left[\begin{array}{l} 1 \\0 \\ 0 \end{array}\right] -
+1\left[\begin{array}{l} 1 \\ 1 \\ 0 \end{array}\right] +
+1 \left[\begin{array}{l} 1 \\1 \\ 1 \end{array}\right] \implies
+\left[\left[\begin{array}{l} 1 \\0 \\ 1 \end{array}\right]\right]_{\mathfrak{B}} = 
+\left[\begin{array}{l} 1 \\ -1 \\ 1 \end{array}\right]
+$$
+
+\end{document}
