@@ -79,7 +79,7 @@ $$
 \text{All vectors } \begin{bmatrix} x \\ y \\ z \end{bmatrix} 
 \text{ such that } T\left(\begin{bmatrix} x \\ y \\ z \end{bmatrix}\right) = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
 $$ 
-In order to save time finding a basis for the $\operatorname{ran}(T)$,  we can generated an augmented system of equations,  and this will be easy since $A$ was found in the previous part.  For now, the solution of this system of equations will be some arbritary vector $\vec{v}\in\mathbb{R}^3$.  See:
+In order to save time finding a basis for the $\operatorname{ran}(T)$,  we can generate an augmented matrix based on the system of equations,  and this will be easy since $A$ was found in the previous part.  For now, the solution of this system of equations will be some arbritary vector $\vec{v}\in\mathbb{R}^3$.  See:
 $$
 \begin{array}{ccc|c}
 1 & 1 & 1 & a \\
@@ -141,15 +141,15 @@ $$
 	0 & 0 & 1 & 0
 \end{array}
 $$
-Also implies that the only vector from the domain of $T$ that maps to the zero vector in the codomain is zero.  Since this is the case,  the basis for the $\operatorname{ker}(T)$ is the empty set,  given that there are no non-trivial vectors contained in the kernel.  \\
+implies that the only vector from the domain of $T$ that maps to the zero vector in the codomain is the zero vector.  Since this is the case,  the basis for the $\operatorname{ker}(T)$ is the empty set,  and this is because there are no non-trivial vectors contained in the kernel.  \\
 \\
-\noindent To find a basis the range of $T$,  the same solution to the augmented matrix can be used.  An intuitive candidate for the vectors that will make up a basis of the $\operatorname{ran}(T)$ would be the columns of A.  This is because they can be represented as a linear combination which the augmented matrix solves for.  In other words,  given some scalars $c_1,c_2,c_3\in\mathbb{R}$,  we can generate a linear combination via
+\noindent To find a basis for the range of $T$,  the same solution to the augmented matrix can be used.  An intuitive candidate for the vectors that will make up a basis of the $\operatorname{ran}(T)$ would be the columns of A.  This is because they can be represented as a linear combination which the augmented matrix solves for.  In other words,  given some scalars $c_1,c_2,c_3\in\mathbb{R}$,  we can generate a linear combination via
 $$
 c_1\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} + 
 c_2\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix} + 
 c_3\begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}
 $$
-This will generate the same system of equations that the augmented matrix provides a solution for.  The solution of the augmented matrix suggests that the vectors are linearly independent,  because each row contains a pivot at a different position.  Further the augmented matrix solution also implies spanning,  because it provides a manner to find the scalars to produce any vector in $\mathbb{R}^3$ from the given system of equations.  Since the set of vectors are both linearly independent,  as well as spanning,  in $\mathbb{R}^3$,  then it is sufficient to say that a basis for the $\operatorname{ran}(T)$ is
+This will generate the same system of equations that the augmented matrix provides a solution for.  The solution of the augmented matrix suggests that the vectors are linearly independent,  because each row contains a pivot at a different position.  Further the augmented matrix solution also implies spanning,  because it provides a manner to find the scalars to produce any vector from $\mathbb{R}^3$ using the given system of equations.  Since the set of vectors are both linearly independent,  as well as spanning, in $\mathbb{R}^3$,  then it is sufficient to say that a basis for the $\operatorname{ran}(T)$ is
 $$
 \left\{
 \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix},  \begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}\right\}
@@ -201,7 +201,7 @@ A = \left[
 0 & 0 & 0
 \end{bmatrix}
 $$
-And thus a matrix $A\in\mathbb{R}^{3\times3}$ so that $[T(p)]_{\mathfrak{B}}=A[p]_{\mathfrak{B}}$.  This allows to convert the $\mathfrak{B}$-coordinate vector of a polynomial $p$ to the $\mathfrak{B}$-coordinate vector of $T(p)$,  effectively transforming the coordinates without having to find the value of $T(p)$ first.  This matrix will work for the $\mathfrak{B}$-coordinate of any $p$,  but we can verify quickly using one of the coordinates from the previous problem.  For example,  take $T(2 + 3x +4x^2) = 3x + 8$
+And thus a matrix $A\in\mathbb{R}^{3\times3}$ has been found so that $[T(p)]_{\mathfrak{B}}=A[p]_{\mathfrak{B}}$.  This allows to convert the $\mathfrak{B}$-coordinate vector of a polynomial $p$ to the $\mathfrak{B}$-coordinate vector of $T(p)$,  effectively transforming the coordinates without having to find the value of $T(p)$ first.  This matrix will work for the $\mathfrak{B}$-coordinate of any $p$,  but we can verify quickly using one of the coordinates from the previous problem.  For example,  take $T(2 + 3x +4x^2) = 3 + 8x$
 \[
 \begin{aligned}
 [3 + 8x]_{\mathfrak{B}} & = \begin{bmatrix} 3 \\ 8 \\ 0 \end{bmatrix} \\
