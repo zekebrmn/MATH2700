@@ -1,0 +1,75 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700.009}\\Problem Set 6}
+\author{\huge{Ezekiel Berumen}}
+\date{29 February 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\qs{}{
+(a) Show that
+$$
+W=\left\{\left[\begin{array}{l}
+x+z \\
+x-y \\
+z+y
+\end{array}\right]: x, y, z \in \mathbb{R}\right\}
+$$
+is a subspace of $\mathbb{R}^3$ by finding vectors $v_1, v_2, v_3 \in \mathbb{R}^3$ so that $W=\operatorname{span}\left(v_1, v_2, v_3\right)$. Then (b) find a basis for $W$. (c) what is $\operatorname{dim}(W)$ ?}
+\sol In order to find vectors $\vec{v_1},\vec{v_2},\vec{v_3} \in \mathbb{R}^3$, vectors from $W$ can be be expressed as a linear combination of $x,y,z$.
+$$
+\begin{bmatrix} x + z \\ x - y \\ z + y \end{bmatrix} =
+x \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} +
+y \begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix} +
+z \begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix}
+$$
+In this sense, this also generates vectors that will span W, because any vector in W can be expressed as linear combination of the vectors $\vec{v_1},\vec{v_2},\vec{v_3}$ that have been generated. Since the set of vectors spans W, then in order to find a basis for W, then it must be shown that these vectors are linearly independent. To find the set of vectors that forms a basis for W, linearly independence must be checked. With these vectors, it is immediately evident that they are not linearly independent. See:
+$$
+\begin{bmatrix} 1 \\ 0 \\ 1 \end{bmatrix} =
+\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} +
+\begin{bmatrix} 0 \\ -1 \\ 1 \end{bmatrix}
+$$
+If we consider the set of vectors excluding this linearly dependent vector, it is clear that the two remaining vectors are linearly independent, and thus they serve to form a basis for $W$. Since the number of vectors in a basis for $W$ is 2, then $\operatorname{dim}\left(W\right)=2$.
+\qs{}{Let
+$$
+A=\left[\begin{array}{cccccc}
+1 & 0 & 1 & -2 & 2 & 3 \\
+2 & 0 & -1 & 2 & 1 & 6 \\
+-1 & 1 & 0 & 2 & 0 & -3 \\
+0 & 1 & 1 & 0 & 2 & 0 \\
+0 & 1 & 1 & 0 & 2 & 0
+\end{array}\right]
+$$
+and let $T: \mathbb{R}^6 \rightarrow \mathbb{R}^5$ be defined by $T(\vec{x})=A \vec{x}$. \\
+(a) Find a basis for $\operatorname{ran}(T)$. What is $\operatorname{dim}(\operatorname{ran}(T))$ ? \\
+(b) Use the Rank-Nullity theorem to find $\operatorname{dim}(\operatorname{ker}(T))$. \\
+(c) Find a basis for $\operatorname{ker}(T)$, i.e. a linearly independent set of vectors from $\operatorname{ker}(T)$ of size $\operatorname{dim}(\operatorname{ker}(T))$. \\
+(d) What are the solution sets to
+$$
+A \vec{x}=\left[\begin{array}{c}
+1 \\
+2 \\
+-1 \\
+0 \\
+0
+\end{array}\right] \quad \text { and } \quad A \vec{x}=\left[\begin{array}{l}
+0 \\
+0 \\
+1 \\
+1 \\
+1
+\end{array}\right] ?
+$$}
+
+\qs{}{Let $V_1, V_2$, and $V_3$ be vector spaces and $T_1: V_1 \rightarrow V_2$ and $T_2: V_2 \rightarrow V_3$ be linear transformations. Show that $T_2 \circ T_1: V_1 \rightarrow V_3$ is a linear transformation by verifying: \\
+(a) If $v, w \in V_1$ are vectors then $T_2 \circ T_1(v+w)=T_2 \circ T_1(v)+T_2 \circ T_1(w)$ \\
+(b) If $v \in V_1$ is a vector and $c \in \mathbb{R}$ is a scalar then $T_2 \circ T_1(c v)=c\left(T_2 \circ T_1(v)\right)$.}
+
+\end{document}

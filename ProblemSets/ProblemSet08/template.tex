@@ -1,0 +1,698 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700.009}\\Problem Set 08}
+\author{\huge{Ezekiel Berumen}}
+\date{19 March 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\qs{}{ Consider the following bases for $\mathbb{R}^4$
+$$
+\mathfrak{B}=\left\langle\begin{bmatrix}
+1 \\
+1 \\
+1 \\
+1
+\end{bmatrix},
+\begin{bmatrix}
+1 \\
+1 \\
+1 \\
+0
+\end{bmatrix},
+\begin{bmatrix}
+1 \\
+1 \\
+0 \\
+0
+\end{bmatrix},
+\begin{bmatrix}
+1 \\
+0 \\
+0 \\
+0
+\end{bmatrix}\right\rangle \quad \text { and } \quad \mathfrak{D}=\left\langle
+\begin{bmatrix}
+2 \\
+1 \\
+0 \\
+0
+\end{bmatrix},
+\begin{bmatrix}
+3 \\
+2 \\
+0 \\
+0
+\end{bmatrix},
+\begin{bmatrix}
+0 \\
+0 \\
+3 \\
+2
+\end{bmatrix},
+\begin{bmatrix}
+0 \\
+0 \\
+4 \\
+3
+\end{bmatrix}\right\rangle
+$$
+and let $\mathfrak{E}=\left\langle\vec{e}_1, \vec{e}_2, \vec{e}_3, \vec{e}_4\right\rangle$ be the standard basis for $\mathbb{R}^4$. Compute each of the following: \\
+(a) $P_{\mathfrak{B} \rightarrow \mathfrak{E}}$ \\
+(b) $P_{\mathfrak{D} \rightarrow \mathfrak{E}}$ \\
+(c) $P_{\mathfrak{E} \rightarrow \mathfrak{B}}$ \\
+(d) $P_{\mathfrak{E} \rightarrow \mathfrak{D}}$ \\
+(e) $P_{\mathfrak{B} \rightarrow \mathfrak{D}}$ \\
+(f) $P_{\mathfrak{D} \rightarrow \mathfrak{B}}$ }
+\begin{note}
+\begin{itemize}
+\item If
+$\left\{\begin{array}{l}
+\mathfrak{E} = \langle \vec{e_1},\ldots,\vec{e_n} \rangle \\
+\mathfrak{B} = \langle \vec{b_1},\ldots,\vec{b_n} \rangle
+\end{array}
+\right.$, then $P_{\mathfrak{B} \rightarrow \mathfrak{E}}[\vec{x}]_{\mathfrak{B}} = [\vec{x}]_{\mathfrak{E}} = \vec{x}$ \\
+\item
+$P_{\mathfrak{B} \rightarrow \mathfrak{E}} = 
+\left[
+  \begin{array}{cccc}
+    \vrule & \vrule & & \vrule\\
+    \vec{b_1} & \vec{b_2} & \ldots & \vec{b_n} \\
+    \vrule & \vrule & & \vrule 
+  \end{array}
+\right]$ Where $\mathfrak{E}$ is the standard basis.
+\item $(P_{\mathfrak{B} \rightarrow \mathfrak{E}})^{-1} = P_{\mathfrak{E}\rightarrow\mathfrak{B}}$
+\item If $\mathfrak{B}_1,\mathfrak{B}_2,$ and $\mathfrak{B}_3$ are bases, then $P_{\mathfrak{B}_2\rightarrow\mathfrak{B}_3}P_{\mathfrak{B}_1\rightarrow\mathfrak{B}_2}[\vec{x}]_{\mathfrak{B}_1}=[\vec{x}]_{\mathfrak{B}_3}$
+\end{itemize}
+\end{note}
+\sol \\
+(a) $P_{\mathfrak{B} \rightarrow \mathfrak{E}} =
+\begin{bmatrix}
+1 & 1 & 1 & 1 \\
+1 & 1 &1 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0
+\end{bmatrix} $ \\
+\noindent
+(b) $P_{\mathfrak{D} \rightarrow \mathfrak{E}} =
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+1 & 2 & 0 & 0 \\
+0 & 0 & 3 & 4 \\
+0 & 0 & 2 & 3
+\end{bmatrix} $ \\
+\noindent
+(c) $P_{\mathfrak{E} \rightarrow \mathfrak{B}} =
+\begin{bmatrix}
+1 & 1 & 1 & 1 \\
+1 & 1 &1 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0
+\end{bmatrix} ^{-1}$
+\begin{align*}
+	&\left[\begin{array}{cccc|cccc}
+		1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 \\
+		1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+		1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& \begin{aligned} & R_1 \leftrightarrow R_4 \\ & R_2 \leftrightarrow R_3 \end{aligned}
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+		1 & 1 & 1 & 1 & 1 & 0 & 0 & 0
+	\end{array}\right]
+	&& R_4 - R_3 \rightarrow R_4 \\
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 1 & -1 & 0 & 0
+	\end{array}\right]
+	&& R_3 - R_2 \rightarrow R_3
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 1 & 0 & 0 & 1 & -1 & 0 \\
+		0 & 0 & 0 & 1 & 1 & -1 & 0 & 0
+	\end{array}\right]
+	&& R_2 - R_1 \rightarrow R_2 \\
+\end{align*}
+\[
+	\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		0 & 1 & 0 & 0 & 0 & 0 & 1 & -1 \\
+		0 & 0 & 1 & 0 & 0 & 1 & -1 & 0 \\
+		0 & 0 & 0 & 1 & 1 & -1 & 0 & 0
+	\end{array}\right]
+	\implies P_{\mathfrak{E}\rightarrow\mathfrak{B}} = \begin{bmatrix} 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & -1 \\ 0 & 1 & -1 & 0 \\ 1 & -1 & 0 & 0\end{bmatrix}
+\]\\
+\noindent
+(d) $P_{\mathfrak{E}\rightarrow\mathfrak{D}} =
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+1 & 2 & 0 & 0 \\
+0 & 0 & 3 & 4 \\
+0 & 0 & 2 & 3
+\end{bmatrix} ^{-1}$
+\begin{align*}
+	&\left[\begin{array}{cccc|cccc}
+		2 & 3 & 0 & 0 & 1 & 0 & 0 & 0 \\
+		1 & 2 & 0 & 0 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 3 & 4 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 2 & 3 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& R_1 \leftrightarrow R_2
+	&\left[\begin{array}{cccc|cccc}
+		1 & 2 & 0 & 0 & 0 & 1 & 0 & 0 \\
+		2 & 3 & 0 & 0 & 1 & 0 & 0 & 0 \\
+		0 & 0 & 3 & 4 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 2 & 3 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& R_2 - 2R_1 \rightarrow R_2 \\
+	&\left[\begin{array}{cccc|cccc}
+		1 & 2 & 0 & 0 & 0 & 1 & 0 & 0 \\
+		0 & -1 & 0 & 0 & 1 & -2 & 0 & 0 \\
+		0 & 0 & 3 & 4 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 2 & 3 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& R_1 + 2R_2 \rightarrow R_1
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 2 & -3 & 0 & 0 \\
+		0 & -1 & 0 & 0 & 1 & -2 & 0 & 0 \\
+		0 & 0 & 3 & 4 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 2 & 3 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& -R_2 \rightarrow R_2 \\
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 2 & -3 & 0 & 0 \\
+		0 & 1 & 0 & 0 & -1 & 2 & 0 & 0 \\
+		0 & 0 & 3 & 4 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 2 & 3 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& \frac{1}{3}R_3\rightarrow R_3
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 2 & -3 & 0 & 0 \\
+		0 & 1 & 0 & 0 & -1 & 2 & 0 & 0 \\
+		0 & 0 & 1 & \frac{4}{3} & 0 & 0 & \frac{1}{3} & 0 \\
+		0 & 0 & 2 & 3 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& R_4 - 2R_3 \rightarrow R_4 \\
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 2 & -3 & 0 & 0 \\
+		0 & 1 & 0 & 0 & -1 & 2 & 0 & 0 \\
+		0 & 0 & 1 & \frac{4}{3} & 0 & 0 & \frac{1}{3} & 0 \\
+		0 & 0 & 0 & \frac{1}{3} & 0 & 0 & -\frac{2}{3} & 1
+	\end{array}\right]
+	&& R_3 - 4R_4 \rightarrow R_3
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 2 & -3 & 0 & 0 \\
+		0 & 1 & 0 & 0 & -1 & 2 & 0 & 0 \\
+		0 & 0 & 1 & 0 & 0 & 0 & 3 & -4 \\
+		0 & 0 & 0 & \frac{1}{3} & 0 & 0 & -\frac{2}{3} & 1
+	\end{array}\right]
+	&& 3R_4 \rightarrow R_4
+\end{align*}
+\[
+	\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 2 & -3 & 0 & 0 \\
+		0 & 1 & 0 & 0 & -1 & 2 & 0 & 0 \\
+		0 & 0 & 1 & 0 & 0 & 0 & 3 & -4 \\
+		0 & 0 & 0 & 1 & 0 & 0 & -2 & 3
+	\end{array}\right]
+	\implies P_{\mathfrak{E}\rightarrow\mathfrak{D}} = \begin{bmatrix}  2 & -3 & 0 & 0 \\ -1 & 2 & 0 & 0 \\ 0 & 0 & 3 & -4 \\ 0 & 0 & -2 & 3 \end{bmatrix}
+\]
+(e) $P_{\mathfrak{B}\rightarrow\mathfrak{D}} = P_{\mathfrak{E}\rightarrow\mathfrak{D}}P_{\mathfrak{B}\rightarrow\mathfrak{E}} =
+\begin{bmatrix}  
+2 & -3 & 0 & 0 \\
+-1 & 2 & 0 & 0 \\
+0 & 0 & 3 & -4 \\
+0 & 0 & -2 & 3
+\end{bmatrix}
+\begin{bmatrix}
+1 & 1 & 1 & 1 \\
+1 & 1 &1 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0
+\end{bmatrix} =
+\begin{bmatrix}
+-1 & -1 & -1 & 2 \\
+1 & 1 & 1 & -1 \\
+-1 & 3 & 0 & 0 \\
+1 & -2 & 0 & 0
+\end{bmatrix}
+$ \\
+(f) $P_{\mathfrak{D}\rightarrow\mathfrak{B}} = P_{\mathfrak{E}\rightarrow\mathfrak{B}}P_{\mathfrak{D}\rightarrow\mathfrak{E}} =
+ \begin{bmatrix} 
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & -1 \\
+0 & 1 & -1 & 0 \\
+1 & -1 & 0 & 0\end{bmatrix}
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+1 & 2 & 0 & 0 \\
+0 & 0 & 3 & 4 \\
+0 & 0 & 2 & 3
+\end{bmatrix} =
+\begin{bmatrix}
+0 & 0 & 2 & 3 \\
+0 & 0 & 1 & 1 \\
+1 & 2 & -3 & -4 \\
+1 & 1 & 0 & 0
+\end{bmatrix}
+$
+
+
+\qs{}{The point of this problem is to see the effect of changing the order of the basis and the effect on the coordinate vectors. Let $\mathfrak{D}$ and $\mathfrak{E}$ be as in problem 1 and let
+$$
+\mathfrak{F}=\left\langle\left[\begin{array}{l}
+0 \\
+0 \\
+3 \\
+2
+\end{array}\right],\left[\begin{array}{l}
+3 \\
+2 \\
+0 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+0 \\
+4 \\
+3
+\end{array}\right],\left[\begin{array}{l}
+2 \\
+1 \\
+0 \\
+0
+\end{array}\right]\right\rangle .
+$$
+(a) What are $P_{\mathfrak{E} \rightarrow \mathfrak{F}}$ and $P_{\mathfrak{D} \rightarrow \mathfrak{F}}$ ? (note you have $P_{\mathfrak{D} \rightarrow \mathfrak{E}}$ from problem 1) \\
+(b) Suppose $\vec{x} \in \mathbb{R}^4$ had
+$$
+[\vec{x}]_{\mathfrak{D}}=\left[\begin{array}{l}
+a \\
+b \\
+c \\
+d
+\end{array}\right]
+$$
+
+Use $P_{\mathfrak{D} \rightarrow \mathfrak{F}}$ to find $[\vec{x}]_{\mathfrak{F}}$.}
+\sol \\
+(a) $P_{\mathfrak{E}\rightarrow\mathfrak{F}} = 
+\begin{bmatrix} 
+0 & 3 & 0 & 2 \\ 
+0 & 2 & 0 & 1 \\
+3 & 0 & 4 & 0 \\ 
+2 & 0 & 3 & 0 \end{bmatrix}^{-1}$
+\begin{align*}
+	&\left[\begin{array}{cccc|cccc}
+		0 & 3 & 0 & 2 & 1 & 0 & 0 & 0 \\
+		0 & 2 & 0 & 1 & 0 & 1 & 0 & 0 \\
+		3 & 0 & 4 & 0 & 0 & 0 & 1 & 0 \\
+		2 & 0 & 3 & 0 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& R_1 \leftrightarrow R_4
+	&\left[\begin{array}{cccc|cccc}
+		2 & 0 & 3 & 0 & 0 & 0 & 0 & 1 \\
+		0 & 2 & 0 & 1 & 0 & 1 & 0 & 0 \\
+		3 & 0 & 4 & 0 & 0 & 0 & 1 & 0 \\
+		0 & 3 & 0 & 2 & 1 & 0 & 0 & 0
+	\end{array}\right]
+	&& \begin{aligned} & R_3 - R_1 \rightarrow R_3 \\ & R_4 - R_2 \rightarrow R_4 \end{aligned} \\
+	&\left[\begin{array}{cccc|cccc}
+		2 & 0 & 3 & 0 & 0 & 0 & 0 & 1 \\
+		0 & 2 & 0 & 1 & 0 & 1 & 0 & 0 \\
+		1 & 0 & 1 & 0 & 0 & 0 & 1 & -1 \\
+		0 & 1 & 0 & 1 & 1 & -1 & 0 & 0
+	\end{array}\right]
+	&& \begin{aligned} & R_1 - 2R_3 \rightarrow R_1 \\ & R_2 - R_4 \rightarrow R_2 \end{aligned}
+	&\left[\begin{array}{cccc|cccc}
+		0 & 0 & 1 & 0 & 0 & 0 & -2 & 3 \\
+		0 & 1 & 0 & 0 & -1 & 2 & 0 & 0 \\
+		1 & 0 & 1 & 0 & 0 & 0 & 1 & -1 \\
+		0 & 1 & 0 & 1 & 1 & -1 & 0 & 0
+	\end{array}\right]
+	&& \begin{aligned} & R_4 - R_2 \rightarrow R_4 \\ & R_3 - R_1 \rightarrow R_3 \end{aligned} \\
+	&\left[\begin{array}{cccc|cccc}
+		0 & 0 & 1 & 0 & 0 & 0 & -2 & 3 \\
+		0 & 1 & 0 & 0 & -1 & 2 & 0 & 0 \\
+		1 & 0 & 0 & 0 & 0 & 0 & 3 & -4 \\
+		0 & 0 & 0 & 1 & 2 & -3 & 0 & 0
+	\end{array}\right]
+	&& R_1 \leftrightarrow R_3
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 3 & -4 \\
+		0 & 1 & 0 & 0 & -1 & 2 & 0 & 0 \\
+		0 & 0 & 1 & 0 & 0 & 0 & -2 & 3 \\
+		0 & 0 & 0 & 1 & 2 & -3 & 0 & 0
+	\end{array}\right]
+\end{align*}
+\[
+P_{\mathfrak{E}\rightarrow\mathfrak{F}} = 
+\begin{bmatrix} 
+0 & 0 & 3 & -4 \\
+-1 & 2 & 0 & 0 \\
+0 & 0 & -2 & 3 \\
+2 & -3 & 0 & 0
+\end{bmatrix} \text{ and } P_{\mathfrak{D}\rightarrow\mathfrak{F}} = P_{\mathfrak{E}\rightarrow\mathfrak{F}}P_{\mathfrak{D}\rightarrow\mathfrak{E}}
+\]
+So then, $P_{\mathfrak{D}\rightarrow\mathfrak{F}} =
+\begin{bmatrix} 
+0 & 0 & 3 & -4 \\
+-1 & 2 & 0 & 0 \\
+0 & 0 & -2 & 3 \\
+2 & -3 & 0 & 0
+\end{bmatrix} \begin{bmatrix}
+2 & 3 & 0 & 0 \\
+1 & 2 & 0 & 0 \\
+0 & 0 & 3 & 4 \\
+0 & 0 & 2 & 3
+\end{bmatrix} = \begin{bmatrix}
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0
+\end{bmatrix}$ \\
+\\
+\noindent
+(b) To find $[\vec{x}]_{\mathfrak{F}}$, then we we must find $P_{\mathfrak{E}\rightarrow\mathfrak{F}}P_{\mathfrak{D}\rightarrow\mathfrak{E}}[\vec{x}]_{\mathfrak{D}}$
+\[
+\begin{aligned}
+[\vec{x}]_{\mathfrak{F}} & = P_{\mathfrak{E}\rightarrow\mathfrak{F}}P_{\mathfrak{D}\rightarrow\mathfrak{E}}[\vec{x}]_{\mathfrak{D}} \\
+& = \begin{bmatrix} 
+0 & 0 & 3 & -4 \\
+-1 & 2 & 0 & 0 \\
+0 & 0 & -2 & 3 \\
+2 & -3 & 0 & 0
+\end{bmatrix} \begin{bmatrix}
+2 & 3 & 0 & 0 \\
+1 & 2 & 0 & 0 \\
+0 & 0 & 3 & 4 \\
+0 & 0 & 2 & 3
+\end{bmatrix} \begin{bmatrix}
+a \\ b \\ c \\ d
+\end{bmatrix} \\
+& = \begin{bmatrix}
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 \\
+1 & 0 & 0 & 0
+\end{bmatrix} \begin{bmatrix}
+a \\ b \\ c \\ d
+\end{bmatrix} \\
+[\vec{x}]_{\mathfrak{F}} & = \begin{bmatrix}
+c \\ b \\ d \\ a
+\end{bmatrix}
+\end{aligned}
+\]
+\qs{}{
+In $\mathbb{R}^3$, let
+$$
+\vec{e}_1=\left[\begin{array}{l}
+1 \\
+0 \\
+0
+\end{array}\right] \quad \text { and } \quad \vec{e}_2=\left[\begin{array}{l}
+0 \\
+1 \\
+0
+\end{array}\right]
+$$
+and let $W=\operatorname{span}\left(\vec{e}_1, \vec{e}_2\right)$. Let $T: \mathbb{R}^2 \rightarrow W$ be defined by
+$$
+T\left(\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]\right)=\left[\begin{array}{l}
+x \\
+y \\
+0
+\end{array}\right] .
+$$
+(a) What is $\operatorname{dim}(W)$ ? \\
+(b) What is $\operatorname{ker}(T)$ ? and what is $\operatorname{ran}(T)$ ? \\
+(c) Is $T$ an isomorphism? (Recall that $T$ is an isomorphism if and only if $\operatorname{ker}(T)=\{\overrightarrow{0}\}$ and $\operatorname{ran}(T)=W$. \\
+(d) Find a matrix $A \in \mathbb{R}^{2 \times 2}$ so that
+$$
+[T(\vec{x})]_{\mathfrak{B}}=A \vec{x}
+$$
+where $\mathfrak{B}=\left\langle\vec{e}_1, \vec{e}_2\right\rangle$ is the natural basis for $W$}
+\sol \\
+(a) The $\operatorname{dim}(W)$ is the number of linearly independent vectors that also span $W$. That is to say the dimension of $W$ is the number of vectors in a basis for $W$. Since $\vec{e_1}$ and $\vec{e_2}$ are linearly independent, and they span $W$, then they also form a basis for $W$, so by definition of dimension, it must be 2. \\
+\\
+\noindent (b) The $\operatorname{ker}(T)$ consists of the vectors from $\mathbb{R}^2$ that map to the zero vector of $W$ which is the same as $\mathbb{R}^3$. If we set $$
+T(\begin{bmatrix} x \\ y \end{bmatrix}) = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}
+$$ we can see that the only solution which results in the zero vector is when $x = y = 0$. This means that $$\operatorname{ker}(T) = \left\{\begin{bmatrix} 0 \\ 0 \end{bmatrix}\right\} = \left\{\vec{0}\right\}$$
+The $\operatorname{ran}(T)$ consists of all possible outputs of the linear transformation. The linear transformation $T$ serves to map vectors from $\mathbb{R}^2$ to $W$. Since $W$ is a subspace generated by taking the span of $\vec{e_1}$ and $\vec{e_2}$, then it is sufficient to say that the range of $T$ covers all vectors from $W$. Thus we can say that $\operatorname{ran}(T) = W$. \\
+\\
+\noindent (c) As discovered in (b), We can say that T is an isomorphism, since it meets the biconditional statement. \\
+\\
+\noindent (d) To find the matrix $A\in\mathbb{R}^{2\times2}$, we can use some principles. Since the ordered basis we will be using in this example is standardized, then a useful property can be used, that is that $[\vec{x}]_{\mathfrak{E}} = \vec{x}$. Thus we can express our equation as $[T(\vec{x})]_{\mathfrak{B}} = A[\vec{x}]_{\mathfrak{B}}$ since $\mathfrak{B}$ is effectively the standard basis. We can find the matrix by taking the columns as the $\mathfrak{B}$-coordinate vectors of the calculated values from T so that we have
+$$
+A = \left[
+  \begin{array}{cc}
+    \vrule & \vrule \\
+    \left[T(e_{1})\right]_{\mathfrak{B}} & \left[T(e_{2})\right]_{\mathfrak{B}}\\
+    \vrule & \vrule 
+  \end{array}
+\right] = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}
+$$
+
+\qs{}{ Let
+$$
+\mathfrak{B}=\left\langle\left[\begin{array}{l}
+2 \\
+2 \\
+0 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+3 \\
+1 \\
+0 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+0 \\
+1 \\
+2
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+0 \\
+1 \\
+1
+\end{array}\right]\right\rangle
+$$
+and $T: \mathbb{R}^4 \rightarrow \mathbb{R}^4$ be given by
+$$
+T(\vec{x})=\left[\begin{array}{cccc}
+5 / 2 & 3 / 2 & 0 & 0 \\
+-1 & 1 / 2 & 0 & 0 \\
+0 & 0 & 5 / 4 & 1 / 4 \\
+0 & 0 & -1 / 2 & 1 / 2
+\end{array}\right] \vec{x} .
+$$
+
+Find the $\mathfrak{B}$-matrix of $T$, that is, find a matrix $A \in \mathbb{R}^{4 \times 4}$ so that
+$$
+[T(\vec{x})]_{\mathfrak{B}}=A[\vec{x}]_{\mathfrak{B}}
+$$
+for all $\vec{x} \in \mathbb{R}^4$. }
+\sol Since $T$ is a linear transformation from $\mathbb{R}^4\rightarrow\mathbb{R}^4$, then there exists some $A\in\mathbb{R}^{4\times4}$ so that $[T(\vec{x})]_{\mathfrak{B}}=A[\vec{x}]_{\mathfrak{B}}$. This matrix $A$ can be found by taking $P_{\mathfrak{E}\rightarrow\mathfrak{B}}MP_{\mathfrak{B}\rightarrow\mathfrak{E}}$, where $M$ is the matrix where $T(\vec{x})=M\vec{x}$. So $P_{\mathfrak{B}\rightarrow\mathfrak{E}}$ and $P_{\mathfrak{E}\rightarrow\mathfrak{B}}$ must be found.
+$$
+P_{\mathfrak{B}\rightarrow\mathfrak{E}} = 
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+2 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 2 & 1
+\end{bmatrix} \text{ and }
+P_{\mathfrak{B}\rightarrow\mathfrak{E}} = 
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+2 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 2 & 1
+\end{bmatrix}^{-1}
+$$
+So then we must find $P_{\mathfrak{B}\rightarrow\mathfrak{E}}$ by inverting $P_{\mathfrak{B}\rightarrow\mathfrak{E}}$.
+\begin{align*}
+	&\left[\begin{array}{cccc|cccc}
+		2 & 3 & 0 & 0 & 1 & 0 & 0 & 0 \\
+		2 & 1 & 0 & 0 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 1 & 1 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 2 & 1 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& \begin{aligned} & R_2 - R_1 \rightarrow R_2 \\ & R_3 - R_4 \rightarrow R_3 \end{aligned}
+	&\left[\begin{array}{cccc|cccc}
+		2 & 3 & 0 & 0 & 1 & 0 & 0 & 0 \\
+		0 & -1 & 0 & 0 & -1 & 1 & 0 & 0 \\
+		0 & 0 & -1 & 0 & 0 & 0 & 1 & -1 \\
+		0 & 0 & 2 & 1 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& \begin{aligned} & \frac{1}{2}R_1 \rightarrow R_1 \\ & -\frac{1}{2}R_2 \rightarrow R_2 \\ & R_4 + 2R_3 \rightarrow R_3 \end{aligned} \\
+	&\left[\begin{array}{cccc|cccc}
+		1 & \frac{3}{2} & 0 & 0 & \frac{1}{2} & 0 & 0 & 0 \\
+		0 & 1 & 0 & 0 & \frac{1}{2} & -\frac{1}{2} & 0 & 0 \\
+		0 & 0 & -1 & 0 & 0 & 0 & 1 & -1 \\
+		0 & 0 & 0 & 1 & 0 & 0 & 2 & -1
+	\end{array}\right]
+	&& \begin{aligned} &R_1 - \frac{3}{2}R_2 \rightarrow R_1 \\ & -R_3 \rightarrow R_3 \end{aligned}
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & -\frac{1}{4} & \frac{3}{4} & 0 & 0 \\
+		0 & 1 & 0 & 0 & \frac{1}{2} & -\frac{1}{2} & 0 & 0 \\
+		0 & 0 & 1 & 0 & 0 & 0 & -1 & 1 \\
+		0 & 0 & 0 & 1 & 0 & 0 & 2 & -1
+	\end{array}\right]
+\end{align*}
+So now, we can find A by using the formula from before.
+$$
+\begin{aligned}
+A = P_{\mathfrak{E}\rightarrow\mathfrak{B}}MP_{\mathfrak{B}\rightarrow\mathfrak{E}} & = 
+\begin{bmatrix}
+-1/4 & 3/4 & 0 & 0 \\
+1/2 & -1/2 & 0 & 0 \\
+0 & 0 & -1 & 1 \\
+0 & 0 & 2 & -1
+\end{bmatrix}
+\begin{bmatrix}
+5 / 2 & 3 / 2 & 0 & 0 \\
+-1 & 1 / 2 & 0 & 0 \\
+0 & 0 & 5 / 4 & 1 / 4 \\
+0 & 0 & -1 / 2 & 1 / 2
+\end{bmatrix}
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+2 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 2 & 1
+\end{bmatrix} \\
+& =
+\begin{bmatrix}
+-11/8 & 0 & 0 & 0 \\
+7/4 & 1/2 & 0 & 0 \\
+0 & 0 & -7/4 & 1/4 \\
+0 & 0 & 3 & 0
+\end{bmatrix}
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+2 & 1 & 0 & 0 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 2 & 1
+\end{bmatrix} \\
+A & =
+\begin{bmatrix}
+-11/4 & -33/8 & 0 & 0 \\
+9/2 & 23/4 & 0 & 0 \\
+0 & 0 & -5/4 & -3/2 \\
+0 & 0 & 3 & 3
+\end{bmatrix}
+\end{aligned}
+$$
+\qs{}{Let $T: \mathbb{P}_3 \rightarrow \mathbb{R}^{2 \times 2}$ be defined by
+$$
+T\left(a+b x+c x^2\right)=\left[\begin{array}{cc}
+b & 2 a \\
+2 c & b
+\end{array}\right]
+$$
+and let $\mathfrak{B}$ be the basis for $\mathbb{P}_3$ and $\mathfrak{D}$ the basis for $\mathbb{R}^{2 \times 2}$ :
+$$
+\mathfrak{B}=\left\langle 1, x, x^2\right\rangle \quad \text { and } \quad \mathfrak{D}=\left\langle\left[\begin{array}{ll}
+1 & 0 \\
+0 & 0
+\end{array}\right],\left[\begin{array}{ll}
+0 & 1 \\
+0 & 0
+\end{array}\right],\left[\begin{array}{ll}
+0 & 0 \\
+1 & 0
+\end{array}\right],\left[\begin{array}{ll}
+0 & 0 \\
+0 & 1
+\end{array}\right]\right\rangle .
+$$
+
+Find a matrix $A$ so that
+$$
+[T(p)]_{\mathfrak{D}}=A[p]_{\mathfrak{B}}
+$$
+for all $p \in \mathbb{P}_3$. }
+\sol Since $T$ is a linear transformation from $\mathbb{P}_3\rightarrow\mathbb{R}^{2\times2}$, and we are given a basis $\mathfrak{B}$ for $\mathbb{P}_3$ and $\mathfrak{D} for \mathbb{R}^{2\times2}$, then there exists some matrix A such that $[T(p)]_{\mathfrak{D}}=A[p]_{\mathfrak{B}}$. The matrix can be constructed, first by computing the transformed elements in the ordered basis $\mathfrak{B}$, see:
+$$
+\begin{aligned}
+T(1) & = \begin{bmatrix} 0 & 0 \\ 2 & 0 \end{bmatrix} \implies \left[\begin{bmatrix} 0 & 0 \\ 2 & 0 \end{bmatrix}\right]_{\mathfrak{D}} = \begin{bmatrix} 0 \\ 0 \\ 2 \\ 0 \end{bmatrix}\\ 
+T(x) & = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \implies \left[\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}\right]_{\mathfrak{D}} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ 1 \end{bmatrix}\\
+T(x^2) & = \begin{bmatrix} 0 & 2 \\ 0 & 0 \end{bmatrix} \implies \left[\begin{bmatrix} 0 & 2 \\ 0 & 0 \end{bmatrix}\right]_{\mathfrak{D}} = \begin{bmatrix} 0 \\ 2 \\ 0 \\ 0 \end{bmatrix}
+\end{aligned}
+$$
+The matrix can now be constructed taking the $\mathfrak{D}$-coordinate vectors that have been calculated as the columns to build a matrix so thus we have
+$$
+A = \left[
+  \begin{array}{cccc}
+    \vrule & \vrule & & \vrule\\
+    \left[T(b_{1})\right]_{\mathfrak{D}} & \left[T(b_{2})\right]_{\mathfrak{D}} & \ldots & \left[T(b_{n})\right]_{\mathfrak{D}} \\
+    \vrule & \vrule & & \vrule 
+  \end{array}
+\right] =
+\begin{bmatrix}
+0 & 1 & 0 \\
+0 & 0 & 2 \\
+2 & 0 & 0 \\
+0 & 1 & 0
+\end{bmatrix}
+$$
+\qs{}{
+Let $T: \mathbb{R}^3 \rightarrow \mathbb{R}^3$ be given by
+$$
+T(\vec{x})=\left[\begin{array}{lll}
+1 & 0 & 1 \\
+1 & 1 & 2 \\
+0 & 1 & 1
+\end{array}\right] \vec{x}
+$$
+and $\mathfrak{E}=\left\langle\vec{e}_1, \vec{e}_2, \vec{e}_3\right\rangle$ be the standard basis for $\mathbb{R}^3$. Let
+$$
+\mathfrak{B}=\left\langle T\left(\vec{e}_1\right), T\left(\vec{e}_2\right), \vec{e}_2\right\rangle
+$$
+
+Find a matrix $A \in \mathbb{R}^{3 \times 3}$ so that
+$$
+[T(\vec{x})]_{\mathfrak{B}}=A[\vec{x}]_{\mathfrak{E}} .
+$$
+}
+\sol To find the matrix $A$, firstly we can substitute some arbitrary vector into the fuction, take $\vec{v} = \begin{bmatrix}v_1 \\ v_2 \\ v_3\end{bmatrix}$. Firstly we must find
+$$
+T(\vec{v}) = 
+\begin{bmatrix}
+1 & 0 & 1 \\ 
+1 & 1 & 2 \\ 
+0 & 1 & 1 
+\end{bmatrix}
+\begin{bmatrix}
+v_1 \\ v_2 \\ v_3
+\end{bmatrix} =
+\begin{bmatrix}
+v_1 + v_3 \\ v_1 + v_2 + 2v_3 \\ v_2 + v_3
+\end{bmatrix}
+$$
+Then when expressing this as the $\mathfrak{B}$-coordinate of the calculated vector, we find that
+$$
+\left[\begin{bmatrix}
+v_1 + v_3 \\ v_1 + v_2 + 2v_3 \\ v_2 + v_3
+\end{bmatrix}\right]_{\mathfrak{B}} = \begin{bmatrix} v_1 + v_3 \\ v_2 + v_3 \\ 0 \end{bmatrix}
+$$
+We can conclude this because of the vectors contained in the orded basis. The result of the linear transformation suggests that we need at least $v_1 + v_3$ of the first element from the ordered basis. Further, we need $v_2 + v_3$ of the second element in the ordered basis because it is the only element which contains a value in the third component of the vector. Since we know what form the $\mathfrak{B}$-coordinates of the output of $T$ will look like, we can generate a matrix.
+$$
+A\begin{bmatrix}v_1 + v_2 \\ v_2 + v_3 \\ 0\end{bmatrix} \implies A = \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 0 \end{bmatrix}
+$$
+\end{document}
