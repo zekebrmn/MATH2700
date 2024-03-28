@@ -1,0 +1,631 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700.009}\\Problem Set 09}
+\author{\huge{Ezekiel Berumen}}
+\date{28 March 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\qs{}{
+Let
+$$
+A=\left[\begin{array}{ccccc}
+1 & 0 & 1 & 2 & 0 \\
+1 & -1 & 0 & 3 & 0 \\
+0 & 1 & 1 & -1 & 2 \\
+1 & 0 & 1 & 2 & 0
+\end{array}\right]
+$$
+(a) Find an ordered basis for $\operatorname{ran}(A)$, what is $\operatorname{dim}(\operatorname{ran}(A))$ ? \\
+(b) $A$ defines a linear transformation $T: \mathbb{R}^n \rightarrow \mathbb{R}^k$ by $T(\vec{x})=A \vec{x}$. What are $n$ and $k$ ? \\
+(c) Use the Rank-Nullity theorem to find $\operatorname{dim}(\operatorname{ker}(A))$. Then, find a basis for $\operatorname{ker}(A)$. \\
+(d) Add vectors to the ordered basis for $\operatorname{ran}(A)$ you found in (a) to get an ordered basis $\mathfrak{B}$ for $\mathbb{R}^k$ where $k$ is as in (b) \\
+(e) Let $\mathfrak{E}$ be the standard basis for $\mathbb{R}^k$. Find $P_{\mathfrak{E} \rightarrow \mathfrak{B}}$. \\
+(f) For each of the following, find the set of solutions if there are any, if there is no solutions, explain why. \\
+$$
+A \vec{x}=\left[\begin{array}{l}
+4 \\
+3 \\
+3 \\
+3
+\end{array}\right] \quad A \vec{y}=\left[\begin{array}{c}
+3 / 2 \\
+2 \\
+-1 / 2 \\
+3 / 2
+\end{array}\right] \quad A \vec{z}=\left[\begin{array}{l}
+1 \\
+0 \\
+0 \\
+2
+\end{array}\right]
+$$}
+\sol \\
+(a) For this purpose of finding the basis for the $\operatorname{ran}(A)$, we can represent matrix $A$ as follows:
+$$
+A = \left[
+  \begin{array}{ccccc}
+    \vrule & \vrule & \vrule & \vrule & \vrule \\
+    \vec{a_1} & \vec{a_2} & \vec{a_3} & \vec{a_4} & \vec{a_5} \\
+    \vrule & \vrule & \vrule & \vrule & \vrule
+  \end{array}
+\right]
+$$
+In doing so we can provide a means to describe which columns are linearly dependent, in particular we can see that
+$$
+\begin{aligned}
+\vec{a_3} & = 1\vec{a_1} + 1\vec{a_2} + 0\vec{a_4} + 0\vec{a_5} \\
+\vec{a_4} & = 2\vec{a_1} - 1\vec{a_2} + 0\vec{a_3} + 0\vec{a_5}
+\end{aligned}
+$$
+Since $\vec{a_3}$ and $\vec{a_4}$ are the only linearly dependent vectors in $A$, then it is sufficient to say that an ordered basis for the range of $A$ is
+$$
+\left\langle \vec{a_1}, \vec{a_2}, \vec{a_5} \right\rangle
+$$
+And thus since there are 3 elements in a basis for the $\operatorname{ran}(A)$, then the dimension of the range is 3. \\
+\\
+\noindent (b) Because $A\in\mathbb{R}^{4\times5}$, this implies that there are 5 columns in $A$. This necessitates that $\vec{x}\in\mathbb{R}^5$ for the multiplication of $A\vec{x}$ to be defined so thus $n = 5$. The resulting vector of this multiplication will be in $\mathbb{R}^4$, which indicates that $k=4$. \\
+\\
+\noindent (c) The Rank-Nullity theorem tells us that the number columns of $A$ is equal to $\operatorname{dim}(\operatorname{ker}(A))+\operatorname{dim}(\operatorname{ran}(A))$. In part (a), we found $\operatorname{dim}(\operatorname{ran}(A)) = 3$, So we then we can see that
+$$
+\begin{aligned}
+5 & = \operatorname{dim}(\operatorname{ker}(A)) + 3 \\
+5 - 3 & = \operatorname{dim}(\operatorname{ker}(A))\\
+2 & = \operatorname{dim}(\operatorname{ker}(A))
+\end{aligned}
+$$
+This is consistent with the findings in part (a), because there is two linearly dependent vectors. These vectors will serve to help us form a basis for the $\operatorname{ker}(A)$. Using the equations we found in (a), we can see that
+$$
+\begin{aligned}
+\vec{0} & = 1\vec{a_1} + 1\vec{a_2} - 1\vec{a_3} + 0\vec{a_4} + 0\vec{a_5} \\
+\vec{0} & = 2\vec{a_1} - 1\vec{a_2} + 0\vec{a_3} - 1\vec{a_4} + 0\vec{a_5}
+\end{aligned}
+$$
+Since we now know what will map to the zero vector, we can use these coefficients to construct two vectors that will form a basis for the $\operatorname{ker}(A)$
+$$
+\left\{
+\begin{bmatrix} 1 \\ 1 \\ -1 \\ 0 \\ 0 \end{bmatrix},
+\begin{bmatrix} 2 \\ -1 \\ 0 \\ -1 \\ 0 \end{bmatrix}
+\right\}
+$$
+\\
+\\
+\noindent (d) In part (a), we found an ordered basis for the $ran(A)$ to be
+$$
+\left\langle 
+\begin{bmatrix} 1 \\ 1 \\ 0 \\ 1 \end{bmatrix},
+\begin{bmatrix} 0 \\ -1 \\ 1 \\ 0 \end{bmatrix},
+\begin{bmatrix} 0 \\ 0 \\ 2 \\ 0 \end{bmatrix}
+\right\rangle
+$$
+In order to turn this into an ordered basis for $\mathbb{R}^4$, we must add a vector that is not in the span of the given vectors, while also maintaining linear independence. An obvious candidate is to select one from the standard basis of $\mathbb{R}^4$. We can row reduce the matrix constructed by "glueing" these vectors to gether to see which standard basis vector to add to the set.
+\begin{align*}
+	& \begin{bmatrix}
+	1 & 0 & 0 \\
+	1 & -1 & 0 \\
+	0 & 1 & 2 \\	
+	1 & 0 & 0
+	\end{bmatrix}
+	&& \begin{aligned} & R_2 - R_1 \rightarrow R_2 \\ & R_4 - R_1 \rightarrow R_4 \end{aligned}
+	& \begin{bmatrix}
+	1 & 0 & 0 \\
+	0 & -1 & 0 \\
+	0 & 1 & 2 \\
+	0 & 0 & 0 
+	\end{bmatrix}
+	&& R_3 + R_2 \rightarrow R_3 \\
+	& \begin{bmatrix}
+	1 & 0 & 0 \\
+	0 & -1 & 0 \\
+	0 & 0 & 2 \\
+	0 & 0 & 0
+	\end{bmatrix}
+	&& \begin{aligned} \frac{1}{2}R_3 \rightarrow R_3 \\ -R_2 \rightarrow R_2 \end{aligned}
+	& \begin{bmatrix}
+	1 & 0 & 0 \\
+	0 & 1 & 0 \\
+	0 & 0 & 1 \\
+	0 & 0 & 0
+	\end{bmatrix}
+\end{align*}
+The result of this row reduction implies that the set does not fully span $\mathbb{R}^4$ and further, also implies that the addition of the standard basis vector $\vec{e_4}$ will allow the set of vectors to span $\mathbb{R}^4$. Therefore, we can say that an ordered basis $\mathfrak{B}$ for $\mathbb{R}^4$ is
+$$
+\mathfrak{B} = \left\langle
+\begin{bmatrix} 1 \\ 1 \\ 0 \\ 1 \end{bmatrix},
+\begin{bmatrix} 0 \\ -1 \\ 1 \\ 0 \end{bmatrix},
+\begin{bmatrix} 0 \\ 0 \\ 2 \\ 0 \end{bmatrix},
+\begin{bmatrix} 0 \\ 0 \\ 0 \\ 1 \end{bmatrix}
+\right\rangle
+$$
+\\
+\\
+\noindent(d) With $\mathfrak{E}$ begin the standard basis for $\mathbb{R}^4$, we can find $P_{\mathfrak{E}\rightarrow\mathfrak{B}}$ by taking $(P_{\mathfrak{B}\rightarrow\mathfrak{E}})^{-1}$, Firstly
+$$
+P_{\mathfrak{B}\rightarrow\mathfrak{E}} =
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+1 & -1 & 0 & 0 \\
+0 & 1 & 2 & 0 \\
+1 & 0 & 0 & 1
+\end{bmatrix}
+$$
+Since we now know $P_{\mathfrak{B}\rightarrow\mathfrak{E}}$, we can find its inverse, which will be relatively straightforward since we have already row reduced a similar matrix in (c).
+\begin{align*}
+	&\begin{array}{cccc|cccc}
+	1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+	1 & -1 & 0 & 0 & 0 & 1 & 0 & 0 \\
+	0 & 1 & 2 & 0 & 0 & 0 & 1 & 0 \\	
+	1 & 0 & 0 & 1 & 0 & 0 & 0 & 1
+	\end{array}
+	&& \begin{aligned} & R_2 - R_1 \rightarrow R_2 \\ & R_4 - R_1 \rightarrow R_4 \end{aligned}
+	&\begin{array}{cccc|cccc}
+	1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+	0 & -1 & 0 & 0 & -1 & 1 & 0 & 0 \\
+	0 & 1 & 2 & 0 & 0 & 0 & 1 & 0 \\	
+	0 & 0 & 0 & 1 & -1 & 0 & 0 & 1
+	\end{array}
+	&& R_3 + R_2 \rightarrow R_3 \\
+	&\begin{array}{cccc|cccc}
+	1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+	0 & -1 & 0 & 0 & -1 & 1 & 0 & 0 \\
+	0 & 0 & 2 & 0 & 1 & -1 & 1 & 0 \\	
+	0 & 0 & 0 & 1 & -1 & 0 & 0 & 1
+	\end{array}
+	&& \begin{aligned} \frac{1}{2}R_3 \rightarrow R_3 \\ -R_2 \rightarrow R_2 \end{aligned}
+	&\begin{array}{cccc|cccc}
+	1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\
+	0 & 1 & 0 & 0 & 1 & -1 & 0 & 0 \\
+	0 & 0 & 1 & 0 & \frac{1}{2} & -\frac{1}{2} & \frac{1}{2} & 0 \\	
+	0 & 0 & 0 & 1 & -1 & 0 & 0 & 1
+	\end{array}
+\end{align*}
+So thus we have found $P_{\mathfrak{E}\rightarrow\mathfrak{B}} =
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+1 & -1 & 0 & 0 \\
+\frac{1}{2} & -\frac{1}{2} & \frac{1}{2} & 0 \\	
+-1 & 0 & 0 & 1
+\end{bmatrix}
+$
+(f) For the first and the third, there are no solutions. We can see this because if we are to perform row operations, then the fourth row will be reduced to $\begin{bmatrix} 0 & 0 & 0 & 0 & 0 \end{bmatrix}$, however this would mean that
+$$
+\begin{aligned}
+0x_1 + 0x_2 + 0x_3 + 0x_4 + 0x_5 & = -1 \\
+0x_1 + 0x_2 + 0x_3 + 0x_4 + 0x_5 & = 1 \\
+\end{aligned}
+$$
+For the first and third equations respectively. This does not show that the second equation does not have a solution however. The second equation has infinitely many solutions because when row reduced, the resultant matrix is
+$$
+\left[
+\begin{array}{ccccc|c}
+1 & 0 & 1 & 2 & 0 & 3/2 \\
+0 & 1 & 1 & -1 & 0 & -1/2 \\
+0 & 0 & 0 & 0 & 2 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0
+\end{array}
+\right]
+$$
+This suggests that there are infinitely many solutions since we can see that
+$$
+\begin{aligned}
+x_1 & = 3/2 - x_3 - 2x_4 \\
+x_2 & = -1/2 - x_3 + x_4 \\
+x_5 & = 0
+\end{aligned}
+$$
+So the full set of solutions would be represented by
+$$
+\left\{
+\begin{bmatrix} 
+3/2 - x_3 - 2x_4 \\
+-1/2 - x_3 + x_4 \\
+x_3 \\
+x_4 \\
+0
+\end{bmatrix}
++
+c_1
+\begin{bmatrix}
+1 \\ 1 \\ -1 \\ 0 \\ 0
+\end{bmatrix} 
++
+c_2
+\begin{bmatrix}
+2 \\ -1 \\ 0 \\ -1 \\ 0
+\end{bmatrix}
+:
+x_3,x_4,c_1,c_2\in\mathbb{R}
+\right\}
+$$
+\qs{}{Let $W=\operatorname{span}\left(1, x, x^2, \sin (x), \cos (x), \mathrm{e}^x\right)$ and $T: W \rightarrow W$ be defined by
+$$
+T(f)=\frac{\mathrm{d}^2}{\mathrm{~d} x^2} f(x)-2 \frac{\mathrm{d}}{\mathrm{d} x} f(x) .
+$$
+and let $\mathfrak{B}=\left\langle 1, x, x^2, \sin (x), \cos (x), \mathrm{e}^x\right\rangle$. \\
+(a) Find a matrix $A \in \mathbb{R}^{6 \times 6}$ so that
+$$
+[T(f)]_{\mathfrak{B}}=A[f]_{\mathfrak{B}}
+$$
+for all $f \in W$. \\
+(b) Find a basis for $\operatorname{ran}(A)$ and $\operatorname{ker}(A)$\\
+(c) Find one solution to
+$$
+A \vec{x}=\left[\begin{array}{c}
+2 \\
+0 \\
+0 \\
+-1 \\
+2 \\
+0
+\end{array}\right]
+$$
+(d) Notice that $T(f)=2-\sin (x)+2 \cos (x)$ exactly when $A[f]_{\mathfrak{B}}=(2,0,0,-1,2,0)^{\top}$. Find all solutions in $W$ to
+$$
+\frac{\mathrm{d}^2}{\mathrm{~d} x^2} f(x)-2 \frac{\mathrm{d}}{\mathrm{d} x} f(x)=2-\sin (x)+2 \cos (x),
+$$
+that is, find the set
+$$
+\{f \in W: T(f)=2-\sin (x)+2 \cos (x)\} .
+$$}
+\sol \\
+(a) In order to find the matrix $A$ such that $[T(f)]_\mathfrak{B} = A[f]_\mathfrak{B}$, We must find the values of $T(b_1), T(b_2), \ldots, T(b_6)$, as well as there $\mathfrak{B}$-coordinate representations, and then we can construct a matrix of the form
+$$
+A = \begin{bmatrix}
+\vrule & \vrule & & \vrule \\
+\left[T(b_1)\right]_\mathfrak{B} & \left[T(b_2)\right]_\mathfrak{B} & \ldots & \left[T(b_6)\right]_\mathfrak{B} \\
+\vrule & \vrule & & \vrule
+\end{bmatrix}
+$$
+So then, we must find compute the values, and the subsequent $\mathfrak{B}$-coordinates.
+$$
+\begin{aligned}
+T(1) = \frac{\mathrm{d}^2}{\mathrm{d} x^2}1 - \frac{\mathrm{d}}{\mathrm{d} x}1 = 0 - 2(0) = 0 & \implies \left[T(1)\right]_\mathfrak{B} = \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}^{\top}\\
+T(x) = \frac{\mathrm{d}^2}{\mathrm{d} x^2}x - \frac{\mathrm{d}}{\mathrm{d} x}x = 0 - 2(1) = -2 & \implies \left[T(x)\right]_\mathfrak{B} = \begin{bmatrix} -2 & 0 & 0 & 0 & 0 & 0 \end{bmatrix}^{\top}\\
+T(x^2) = \frac{\mathrm{d}^2}{\mathrm{d} x^2}x^2 - \frac{\mathrm{d}}{\mathrm{d} x}x^2 = 2 - 2(2x) = 2 - 4x & \implies \left[T(x^2)\right]_\mathfrak{B} = \begin{bmatrix} 2 & -4 & 0 & 0 & 0 & 0 \end{bmatrix}^{\top} \\
+T(\sin(x)) = \frac{\mathrm{d}^2}{\mathrm{d} x^2}\sin(x) - \frac{\mathrm{d}}{\mathrm{d} x}\sin(x) = -\sin(x) - 2\cos(x) & \implies \left[T(\sin(x))\right]_\mathfrak{B} = \begin{bmatrix} 0 & 0 & 0 & -1 & -2 & 0 \end{bmatrix}^{\top} \\
+T(\cos(x)) = \frac{\mathrm{d}^2}{\mathrm{d} x^2}\cos(x) - \frac{\mathrm{d}}{\mathrm{d} x}\cos(x) = -\cos(x) + 2\sin(x) & \implies \left[T(\cos(x))\right]_\mathfrak{B} = \begin{bmatrix} 0 & 0 & 0 & 2 & -1 & 0 \end{bmatrix}^{\top} \\
+T(e^x) = \frac{\mathrm{d}^2}{\mathrm{d} x^2}e^x - \frac{\mathrm{d}}{\mathrm{d} x}e^x = e^x - 2e^x = -e^x & \implies \left[T(e^x)\right]_\mathfrak{B} = \begin{bmatrix} 0 & 0 & 0 & 0 & 0 & -1 \end{bmatrix}^{\top} \\
+\end{aligned}
+$$
+Now that the $\mathfrak{B}$-coordinates have been computed, the matrix $A$ can be constructed.
+$$
+A = \begin{bmatrix}
+0 & -2 & 2 & 0 & 0 & 0 \\
+0 & 0 & 4 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 2 & 0 \\
+0 & 0 & 0 & -2 & -1 & 0 \\
+0 & 0 & 0 & 0 & 0 & -1
+\end{bmatrix}
+$$
+(b) Since the last 5 columns of the matrix A are linearly independent, we can take the columns as vectors to form a basis for the range of A. That is to say that a basis for the $\operatorname{ran}(A)$ is
+$$
+\left\{
+\begin{bmatrix} -2 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix},
+\begin{bmatrix}  2 \\ 4 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix},
+\begin{bmatrix} 0 \\ 0 \\ 0 \\ -1 \\ -2 \\ 0 \end{bmatrix},
+\begin{bmatrix} 0 \\ 0 \\ 0 \\ 2 \\ -1 \\ 0 \end{bmatrix},
+\begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ -1 \end{bmatrix}
+\right\}
+$$
+Since the kernel of $A$ will contain only scalar multiples of vectors which, when multipled by $A$ result in the zero vector, then it follows that the kernel will contain only scalar multiples of the vector
+$$
+\begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+$$
+So thus it is sufficient to say that a basis for the kernel of A is
+$$
+\left\{\begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{bmatrix}\right\}
+$$
+(c) To find a solution to the given equation, we can construct a system of equations by taking the values of the matrix as coefficients, in particular we can see that
+$$
+\left\{
+\begin{aligned}
+-2x_2 + 2x_3 & = 2 \\
+4x_3 & = 0 \\
+-x_4 + 2x_5 & = -1 \\
+-2x_4 - x_5 & = 2
+\end{aligned}
+\right.
+$$
+Notice that some trivial lines are removed since they are not important for this calculation. From the first two equations we can see that $x_3 = 0$, and thus $x_2 = -1$. The system also allows us to find the value of $x_4$ and $x_5$.
+$$
+\begin{aligned}
+x_5 = -2x_4 - 2 \\
+\\
+-x_4 - 4x_4 -4 & = -1 \\
+-5x_4 & = 3 \\
+x_4 & = -\frac{3}{5}
+\end{aligned}
+$$
+And from this we can see that $x_5 = -\frac{8}{10}$. Now that these values have been found we can reconstruct the vector $\vec{x}$ which satisfies the equation, so then we can say that
+$$
+\vec{x} = \begin{bmatrix} 0 \\ -1 \\ 0 \\ -3/5 \\ -8/10 \\ 0 \end{bmatrix}
+$$
+(d) In the previous part we found a single solution to the equation, but a general set of solutions could be constructed by saying
+$$
+\left\{
+\begin{bmatrix} 0 \\ -1 \\ 0 \\ -3/5 \\ -8/10 \\ 0 \end{bmatrix} + c_1 \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \end{bmatrix} : c_1 \in \mathbb{R}
+\right\}
+$$
+To put it into words, this means that $x_1$ could take any value without changing the result, in particular we can say that the set of functions in $W$ which after being transformed results in $2 - \sin(x) + 2\cos(x)$ can be represented by
+$$
+\left\{
+r -x -\frac{3}{5}\sin(x) -\frac{8}{10}\cos(x) : r \in \mathbb{R}
+\right\}
+$$
+\qs{}{
+Suppose $f: \mathbb{R}^2 \times \mathbb{R}^2 \times \mathbb{R}^2 \rightarrow \mathbb{R}$ was a 3-linear form on $\mathbb{R}^2$ such that
+$$
+\begin{aligned}
+& f\left(\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}\right)=0, \qquad  f\left(\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}\right)=1 \\
+& f\left(\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}\right)=-1, \qquad  f\left(\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}\right)=1 \\
+& f\left(\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}\right)=2, \qquad f\left(\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}\right)=2 \\
+& f\left(\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}\right)=-3, \qquad f\left(\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}\right)=1.
+\end{aligned}
+$$
+
+Compute
+$$
+f\left(\begin{bmatrix}
+1 \\
+2
+\end{bmatrix},\begin{bmatrix}
+3 \\
+4
+\end{bmatrix},\begin{bmatrix}
+0 \\
+-1
+\end{bmatrix}\right) .
+$$}
+\sol To compute the value we can apply linearity properties of $f$, in particular, addition and scalar properties. Firstly
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) & =
+f\left(\begin{bmatrix} 1 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = f\left(\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) +
+f\left(\begin{bmatrix} 0 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = f\left(\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) +
+2f\left(\begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = -1 + 2(-3) = -7
+\end{aligned}
+$$
+We can use this calculated value for subsequent computations, next to modify the final $\mathbb{R}^2$ vector since it will take only one operation we can see that
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & = 
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, -1\begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = -f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = 7
+\end{aligned}
+$$
+And then lastly the middle vector:
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 3 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & =
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, 3\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = 3f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = 21
+\end{aligned}
+$$
+However you may notice that this requires the calculation of another value of $f$ to continue, in particular we must find
+$$
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right)
+$$
+To do so lets repeat similar steps
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) & =
+f\left(\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) + 2f\left(\begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = 1 + 2(1) = 3
+\end{aligned}
+$$
+Similar to before we must also find that
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & = 
+-f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = -3
+\end{aligned}
+$$
+And furthermore we must compute
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & =
+4f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = -12
+\end{aligned}
+$$
+Since we now have all required pieces, we can put them together to compute the final unknown value and we see that
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 3 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & =
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 3 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 3 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) +
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = 21 - 12 = 9
+\end{aligned}
+$$
+\qs{}{Let $f: \mathbb{R}^n \times \mathbb{R}^n \rightarrow \mathbb{R}$ be defined by $f(\vec{x}, \vec{y})=\vec{x}^{\top} \vec{y}$. Verify that $f$ is a bilinear(2-linear) form on $\mathbb{R}^n$. That is, verify the following equalities: \\
+(a) For vectors $\vec{x}, \vec{y} \in \mathbb{R}^n$ and scalars $c \in \mathbb{R}, f(c \vec{x}, \vec{y})=c f(\vec{x}, \vec{y})$ \\
+(b) For vectors $\vec{x}, \vec{y} \in \mathbb{R}^n$ and scalars $c \in \mathbb{R}, f(\vec{x}, c \vec{y})=c f(\vec{x}, \vec{y})$ \\
+(c) For vectors $\vec{x}, \vec{y}, \vec{z} \in \mathbb{R}^n, f(\vec{x}+\vec{z}, \vec{y})=f(\vec{x}, \vec{y})+f(\vec{z}, \vec{y})$ \\
+(d) For vectors $\vec{x}, \vec{y}, \vec{z} \in \mathbb{R}^n, f(\vec{x}, \vec{y}+\vec{z})=f(\vec{x}, \vec{y})+f(\vec{x}, \vec{z})$}
+\sol \\
+(a) $f(c\vec{x}, \vec{y}) = c\vec{x}^{\top}\vec{y} = cf(\vec{x},\vec{y})$ \\
+(b) $f(\vec{x}, c\vec{y}) = \vec{x}^{\top}c\vec{y} = c\vec{x}^{\top}\vec{y} = cf(\vec{x},\vec{y})$ \\
+(c) $f(\vec{x} + \vec{z}, \vec{y}) = (\vec{x} + \vec{z})^{\top}\vec{y} = \vec{x}^{\top}\vec{y} + \vec{z}^{\top}\vec{y} = f(\vec{x},\vec{y}) + f(\vec{z},\vec{y})$ \\
+(d) $f(\vec{x} ,\vec{y}, \vec{z}) = \vec{x}^{\top}(\vec{y} + \vec{z}) = \vec{x}^{\top}\vec{y} + \vec{x}^{\top}\vec{z} = f(\vec{x},\vec{y}) + f(\vec{x},\vec{z})$
+\qs{}{
+Compute the determinant of
+$$
+\begin{bmatrix}
+0 & 1 & 0 \\
+1 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$}
+\begin{note}
+$\operatorname{det}(A) = \sum_{k=1}^n (A)_{kj}(-1)^{k+j} \operatorname{det}(A_{kj})$
+\end{note}
+\sol \\
+$$
+\operatorname{det}\begin{bmatrix} 0 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix} j=3
+$$
+$$
+\begin{aligned}
+& = 0\operatorname{det}\begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix} - 0\operatorname{det}\begin{bmatrix} 0 & 1 \\ 0 & 0\end{bmatrix} + 1\operatorname{det}\begin{bmatrix} 0 & 1 \\ 1 & 1\end{bmatrix} \\
+& = 1(0(1) - 1(1)) \\
+& = -1
+\end{aligned}
+$$
+\qs{}{Compute the determinant of
+$$
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+1 & 2 & 0 & 0 \\
+0 & 0 & 3 & 4 \\
+0 & 0 & 2 & 3
+\end{bmatrix}
+$$}
+\begin{note}
+The determinant of a block diagonal matrix composed of non-zero matrices $A$ and $D$ in the diagonal blocks, with off-diagonal blocks $B$ and $C$ consisting solely of zeroes, is the product of the determinants of $A$ and $D$, in particular we see that
+$$
+\operatorname{det}\begin{bmatrix} A & B \\ C & D \end{bmatrix} = \operatorname{det}(A)\operatorname{det}(D)
+$$
+\end{note}
+$$
+\begin{aligned}
+\operatorname{det}
+\begin{bmatrix}
+2 & 3 & 0 & 0 \\
+1 & 2 & 0 & 0 \\
+0 & 0 & 3 & 4 \\
+0 & 0 & 2 & 3
+\end{bmatrix} & =
+\operatorname{det}\begin{bmatrix} 2 & 3 \\ 1 & 2 \end{bmatrix}\operatorname{det}\begin{bmatrix} 3 & 4 \\ 2 & 3 \end{bmatrix} \\
+& = (4 - 3)(9-8) \\
+& = (1)(1) \\
+& = 1
+\end{aligned}
+$$
+\qs{}{Suppose $A$ was a $10^{100} \times 10^{100}$ matrix with a column of all zeros. Can you find the determinant of the matrix from this information alone? If so, what is it? Briefly explain.}
+\sol Yes it is possible to find the determinant of this matrix with this information alone, and the result will always be 0. This is verifiable by considering the cofactor expansion, in particular the $k$-$j$ cofactor expansion of $A$. Using the cofactor expansion to compute the determinant will always result in the same value, regardless of which row or column in this case is picked. Since this is the case, we can use this zero column to prove that the determinant will always be zero. We know the $k$-$j$ cofactor expansion of $A$ to be of the form
+$$
+\sum_{k=1}^n (A)_{kj}(-1)^{k+j}\operatorname{det}(A_{kj})
+$$
+In other words, the determinant can be computed using the formula by taking an alternating sum of smaller determinants with the coefficient being the given entry of the selected column. In this case since the column consists of only zeroes, then every coefficient in the sum will also be zero, and thus the determinant must be zero. Since this cofactor expansion method to find the determinant will produce the same result for any row or column selected, it is sufficient to say that this is enough information to find the determinant of a matrix of any size, further if it were a row of all zeroes instead, the same would also be true.
+\qs{}{Let $A_n \in \mathbb{R}^{n \times n}$ be the $n \times n$ matrix with all zeros except along the reverse diagonal, where there are ones. What is the determinant of $A_n$ ? (Your answer will depend on if $n$ is even or odd) E.g.
+$$
+A_2=\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix} \quad A_3=\begin{bmatrix}
+0 & 0 & 1 \\
+0 & 1 & 0 \\
+1 & 0 & 0
+\end{bmatrix}
+$$}
+\sol The determinant of $A_n$ seemingly alternates every after every $2n$, starting with the determinant of $A_1=1$, following with $\operatorname{det}(A_2) = -1, \operatorname{det}(A_3) = -1, \operatorname{det}(A_4) = 1,\ldots$ and so on. I have attempted to explain this in more rigorous terms using mathematical induction
+\begin{myproof} By mathematical induction \\
+Let $\operatorname{P}(n)$ be the property that $\operatorname{det}(A_n)=(-1)^{n-1}\operatorname{det}(A_{n-1})$ for all $n\ge2$ where $n\in\mathbb{N}$ \\
+\\
+\noindent Base case $n=2$: \\
+\[
+\begin{aligned}
+\operatorname{det}(A_2) = \operatorname{det}\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} = (0-1) & = -1 \\
+& = (-1)^{2-1}\operatorname{det}\begin{bmatrix}1\end{bmatrix} = -1(1) \implies \;\operatorname{P}(2)\text{ is true}
+\end{aligned}
+\]
+Inductive Hypothesis: Assume $\operatorname{P}(m)$ to be true for some $m\ge2$ \\
+$m \rightarrow m+1$ \\
+$$
+\begin{aligned}
+\operatorname{det}(A_{m+1}) & = (-1)^{m+1-1}\cdot\operatorname{det}(A_{m+1-1}) \\
+& = (-1)^m \cdot \operatorname{det}(A_m) \\
+& = (-1)^m \cdot (-1)^{m-1} \cdot \operatorname{det}(A_{m-1}) \qquad\text{(By induction hypothesis)} \\
+& = (-1)^{2m-1}\cdot\operatorname{det}(A_{m-1})
+\end{aligned}
+$$
+So thus $\operatorname{P}(m+1)$ is true, so by principle of mathematical induction, $\operatorname{P}(n)$ is true for all $n\ge2$.
+\end{myproof}
+\noindent The proof showcases that $\operatorname{det}(A_{n+1})$ will be the opposite of $\operatorname{det}(A_{n-1})$, or in other words that the determinant of $A_n$ alternates every $2n$, which is what we set out to prove.
+\end{document}
