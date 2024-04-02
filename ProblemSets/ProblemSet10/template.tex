@@ -632,6 +632,432 @@ We can use the same principle as before to find the determinant of a block trian
 \item $\lambda_7=3$
 \end{minipage}
 \end{itemize}
-
-
+(c) To solve for the eigenvectors of the matrix $B$,  We must find the vector that when multiplied by the characteristic matrix results in the zero vector
+\begin{itemize}
+\item $\lambda = 4$
+$$
+\begin{bmatrix}
+2&-2&0&0&0&0&0&0\\
+-3&3&0&0&0&0&0&0\\
+0&0&3&1&-3&0&0&0\\
+0&0&1&3&0&0&0&0\\
+0&0&0&0&3&0&0&0\\
+0&0&0&0&0&-7&0&0\\
+0&0&0&0&0&0&0&1\\
+0&0&0&0&0&0&-1&2
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \\ x_6 \\ x_7 \\ x_8
+\end{bmatrix} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+We can construct a system of equations to find the values of each $x_i$.
+$$
+\left\{
+\begin{aligned}
+2x_1 - 2x_2 & = 0 \\
+3x_3+x_4-3x_5 & = 0 \\
+x_3 + x_4 & = 0 \\
+3x_5 & = 0 \\
+-7x_6 & = 0 \\
+x_8 & = 0 \\
+-x_7 + 2x_8 & = 0
+\end{aligned}
+\right.
+$$
+Immediately,  we can see that $x_5=x_6=x_7=x_8=0$.  What is not immediately evident,  that we can manipulate the third equation to see that $x_4 = -x_3$ and then plug that into the second equation to see that $3x_3 - x_3 = 0$.  We see from the first equation that $x_1 = x_2$,  and for the purpose of this calculation,  lets say $x_2 = a$,  for some $a\in\mathbb{R}$.  We can now determine the eigenvector when $\lambda = 4$,  Since nonzero scalar multiples of an eigenvector are equivalent to the original eigenvector for a given eigenvalue. 
+$$
+\begin{bmatrix}
+a \\ a \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} =
+a\begin{bmatrix}
+1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} \implies
+\vec{x} = \begin{bmatrix}
+1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+\item $\lambda = -1$
+$$
+\begin{bmatrix}
+-3&-2&0&0&0&0&0&0\\
+-3&-2&0&0&0&0&0&0\\
+0&0&-2&1&-3&0&0&0\\
+0&0&1&-2&0&0&0&0\\
+0&0&0&0&-2&0&0&0\\
+0&0&0&0&0&-12&0&0\\
+0&0&0&0&0&0&-5&1\\
+0&0&0&0&0&0&-1&-3
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \\ x_6 \\ x_7 \\ x_8
+\end{bmatrix} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+We can construct a system of equations to find the values of each $x_i$.
+$$
+\left\{
+\begin{aligned}
+-3x_1 - 2x_2 & = 0 \\
+-2x_3+x_4-3x_5 & = 0 \\
+x_3 - 2x_4 & = 0 \\
+-2x_5 & = 0 \\
+-12x_6 & = 0 \\
+-3x_7 + x_8 & = 0 \\
+-x_7 - 3x_8 & = 0
+\end{aligned}
+\right.
+$$
+We can see that $x_5 = x_6 = 0$ very clearly from this system.  We can also determine that $x_7 = x_ 8 = 0$ from the final two equations,  because if we manipulate them around a bit,  we can arrive at $10x_8 = 0$ which implies that $x_7 = 0$.  A similar manipulation can be done on equations 2 and 3 to arrive at $3x_4 = 0$,  which suggests that $x_4 = x_3 = 0$.  We are left with $-3x_1 = 2x_2$.  We can say that $x_1 = -3/2x_2$,  and if we say $x_2 = a$ where $a\in\mathbb{R}$,  we can solve for our original eigenvector,  in particular we see that
+$$
+\begin{bmatrix}
+-3/2a \\ a \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} =
+a\begin{bmatrix}
+-3/2 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} \implies
+\vec{x} = \begin{bmatrix}
+-3/2 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+\item $\lambda = 0$
+$$
+\begin{bmatrix}
+-2&-2&0&0&0&0&0&0\\
+-3&-1&0&0&0&0&0&0\\
+0&0&-1&1&-3&0&0&0\\
+0&0&1&-1&0&0&0&0\\
+0&0&0&0&-1&0&0&0\\
+0&0&0&0&0&-11&0&0\\
+0&0&0&0&0&0&-4&1\\
+0&0&0&0&0&0&-1&-2
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \\ x_6 \\ x_7 \\ x_8
+\end{bmatrix} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+We can construct a system of equations to find the values of each $x_i$.
+$$
+\left\{
+\begin{aligned}
+-2x_1 - 2x_2 & = 0 \\
+-3x_1 - x_2 & = 0 \\
+-x_3+x_4-3x_5 & = 0 \\
+x_3 - x_4 & = 0 \\
+-x_5 & = 0 \\
+-11x_6 & = 0 \\
+-4x_7 + x_8 & = 0 \\
+-x_7 - 2x_8 & = 0
+\end{aligned}
+\right.
+$$
+From just looking at the system,  we can see that $x_1 = x_2 = x_ 5 = x_6 = x_7 = x_8 = 0$.  We are tasked now with determining if $x_3$ and $x_4$ are nonzero.  Equation 4 tells us that $x_3 = x_4$,  and if we are to say $x_4 = a$ where $a\in\mathbb{R}$,  then we can solve for the original eigenvector,  in particular we see that
+$$
+\begin{bmatrix}
+0 \\ 0 \\ a \\ a \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} =
+a\begin{bmatrix}
+0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} \implies
+\vec{x} = \begin{bmatrix}
+0 \\ 0 \\ 1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$ 
+\item $\lambda = 2$
+$$
+\begin{bmatrix}
+0&-2&0&0&0&0&0&0\\
+-3&1&0&0&0&0&0&0\\
+0&0&1&1&-3&0&0&0\\
+0&0&1&1&0&0&0&0\\
+0&0&0&0&1&0&0&0\\
+0&0&0&0&0&-9&0&0\\
+0&0&0&0&0&0&-2&1\\
+0&0&0&0&0&0&-1&0
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \\ x_6 \\ x_7 \\ x_8
+\end{bmatrix} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+We can construct a system of equations to find the values of each $x_i$.
+$$
+\left\{
+\begin{aligned}
+-2x_2 & = 0 \\
+-3x_1 + x_2 & = 0 \\
+x_3+x_4-3x_5 & = 0 \\
+x_3 + x_4 & = 0 \\
+x_5 & = 0 \\
+-9x_6 & = 0 \\
+-2x_7 + x_8 & = 0 \\
+-x_7 & = 0
+\end{aligned}
+\right.
+$$
+From the system of equations,  we find that $x_1 = x_2 = x_5 = x_6 = x_7 = x_8 = 0$. This means that we are left needing to find the values of $x_3$ and $x_4$.  From equation 4,  we can see that $x_3 = -x_4$.  If we say $x_4=a$,  where $a\in\mathbb{R}$,  then we have all the information we need to solve for the original eigenvector when $\lambda = 2$.  In particular,  we see that
+$$
+\begin{bmatrix}
+0 \\ 0 \\ -a \\ a \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} =
+a\begin{bmatrix}
+0 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} \implies
+\vec{x} = \begin{bmatrix}
+0 \\ 0 \\ -1 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$ 
+\item $\lambda = 1$
+$$
+\begin{bmatrix}
+-1&-2&0&0&0&0&0&0\\
+-3&0&0&0&0&0&0&0\\
+0&0&0&1&-3&0&0&0\\
+0&0&1&0&0&0&0&0\\
+0&0&0&0&0&0&0&0\\
+0&0&0&0&0&-10&0&0\\
+0&0&0&0&0&0&-3&1\\
+0&0&0&0&0&0&-1&-1
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \\ x_6 \\ x_7 \\ x_8
+\end{bmatrix} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+We can construct a system of equations to find the values of each $x_i$.
+$$
+\left\{
+\begin{aligned}
+-x_1 - 2x_2 & = 0 \\
+-3x_1 + x_2 & = 0 \\
+x_4-3x_5 & = 0 \\
+x_3 & = 0 \\
+-10x_6 & = 0 \\
+-3x_7 + x_8 & = 0 \\
+-x_7 - x_8 & = 0
+\end{aligned}
+\right.
+$$
+The system of equations reveals that $x_1 = x_2 = x_3 = x_6 = x_7 = x_8 = 0$.  We can use the third equation in the system to determine the values of $x_4$ and $x_5$.  From the third equation,  we can arrive at $x_4 = 3x_5$,  and if we say that $x_5 = a$ where $a\in\mathbb{R}$ then we have all the information we need to be able to determine the original eigenvector when $\lambda = 1$.  In particular we see that
+$$
+\begin{bmatrix}
+0 \\ 0 \\ 0 \\ 3a \\ a \\ 0 \\ 0 \\ 0
+\end{bmatrix} =
+a\begin{bmatrix}
+0 \\ 0 \\ 0 \\ 3 \\ 1 \\ 0 \\ 0 \\ 0
+\end{bmatrix} \implies
+\vec{x} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 3 \\ 1 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$ 
+\item $\lambda = 11$
+$$
+\begin{bmatrix}
+9&-2&0&0&0&0&0&0\\
+-3&10&0&0&0&0&0&0\\
+0&0&10&1&-3&0&0&0\\
+0&0&1&10&0&0&0&0\\
+0&0&0&0&10&0&0&0\\
+0&0&0&0&0&0&0&0\\
+0&0&0&0&0&0&7&1\\
+0&0&0&0&0&0&-1&9
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \\ x_6 \\ x_7 \\ x_8
+\end{bmatrix} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+We can construct a system of equations to find the values of each $x_i$.
+$$
+\left\{
+\begin{aligned}
+9x_1 - 2x_2 & = 0 \\
+-3x_1 + 10x_2 & = 0 \\
+10x_3 + x_4-3x_5 & = 0 \\
+x_3 + 10x_4 & = 0 \\
+7x_7 + x_8 & = 0 \\
+-x_7 + 9x_8 & = 0
+\end{aligned}
+\right.
+$$
+From the system,  we can see that $x_1 = x_2 = x_3 = x_4 = x_ 5 = x_7 = x_8 = 0$.  The system does not account for the value of $x_6$,  so for the purpose of finding the eigenvector,  we can call $x_6 = a$,  where $a\in\mathbb{R}$.  With this,  we can solve for the original eigenvector and in particular we see that
+$$
+\begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ a \\ 0 \\ 0
+\end{bmatrix} =
+a\begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0
+\end{bmatrix} \implies
+\vec{x} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0
+\end{bmatrix}
+$$ 
+\item $\lambda = 3$
+$$
+\begin{bmatrix}
+1&-2&0&0&0&0&0&0\\
+-3&2&0&0&0&0&0&0\\
+0&0&2&1&-3&0&0&0\\
+0&0&1&2&0&0&0&0\\
+0&0&0&0&2&0&0&0\\
+0&0&0&0&0&-8&0&0\\
+0&0&0&0&0&0&-1&1\\
+0&0&0&0&0&0&-1&1
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3 \\ x_4 \\ x_5 \\ x_6 \\ x_7 \\ x_8
+\end{bmatrix} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+$$
+We can construct a system of equations to find the values of each $x_i$.
+$$
+\left\{
+\begin{aligned}
+x_1 - 2x_2 & = 0 \\
+-3x_1 + 2x_2 & = 0 \\
+2x_3 + x_4-3x_5 & = 0 \\
+x_3 + 2x_4 & = 0 \\
+-8x_6 & = 0 \\
+-x_7 + x_8 & = 0
+\end{aligned}
+\right.
+$$
+We can see from the system that $x_1 = x_2 = x_3 = x_4 = x_5 = x_6 = 0$.  The final equation reveals that $x_7 = x_8$.  If we take $x_8=a$ where $a\in\mathbb{R}$,  then we have the sufficient information to find the original eigenvector when $\lambda = 3$.  In particular we see that
+$$
+\begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ a \\ a
+\end{bmatrix} =
+a\begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1
+\end{bmatrix} \implies
+\vec{x} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 1
+\end{bmatrix}
+$$ 
+\end{itemize}
+\qs{}{
+Find the inverse and determinant of the following matrix:
+$$\begin{bmatrix} 
+2&2&0&0&0&0&0&0\\
+3&1&0&0&0&0&0&0\\
+0&0&2&1&3&0&0&0\\
+0&0&3&2&0&0&0&0\\
+0&0&0&0&1&0&0&0\\
+0&0&0&0&0&11&0&0\\
+0&0&0&0&0&0&4&7\\
+0&0&0&0&0&0&1&2
+\end{bmatrix}$$
+}
+\begin{note}
+If a matrix $A$ is invertible and block diagonal,  then the inverse can be computed by finding the inverse of its diagonal elements,  in particular we see that
+$$
+A^{-1} =
+\begin{bmatrix}
+A_1^{-1} & & & \\
+& A_2^{-1} & & \\
+& & \ddots & \\
+& & & A_n^{-1}
+\end{bmatrix}
+$$
+\end{note}
+To find the inverse,  we must find the inverse of the $3\times3$ block contained in the matrix.
+\begin{align*}
+&\begin{array}{ccc|ccc}
+2&1&3&1&0&0\\
+3&2&0&0&1&0\\
+0&0&1&0&0&1
+\end{array}
+&& R_1 - R_2 \rightarrow R_1
+&\begin{array}{ccc|ccc}
+-1&-1&3&1&-1&0\\
+3&2&0&0&1&0\\
+0&0&1&0&0&1
+\end{array}
+&& R_1 - 3R_3 \rightarrow R_1\\
+&\begin{array}{ccc|ccc}
+-1&-1&0&1&-1&-3\\
+3&2&0&0&1&0\\
+0&0&1&0&0&1
+\end{array}
+&& R_2 + 3R_1 \rightarrow R_2
+&\begin{array}{ccc|ccc}
+-1&-1&0&1&-1&-3\\
+0&-1&0&3&-2&-9\\
+0&0&1&0&0&1
+\end{array}
+&& \begin{aligned} &-R_1 \rightarrow R_1 \\ &-R_2 \rightarrow R_2 \end{aligned} \\
+&\begin{array}{ccc|ccc}
+1&1&0&-1&1&3\\
+0&1&0&-3&2&9\\
+0&0&1&0&0&1
+\end{array}
+&& R_1 - R_2 \rightarrow R_1
+&\begin{array}{ccc|ccc}
+1&0&0&2&-1&-6\\
+0&1&0&-3&2&9\\
+0&0&1&0&0&1
+\end{array}
+\end{align*}
+We can now commence with finding the inverse of the matrix
+$$
+\begin{aligned}
+\begin{bmatrix} 
+2&2&0&0&0&0&0&0\\
+3&1&0&0&0&0&0&0\\
+0&0&2&1&3&0&0&0\\
+0&0&3&2&0&0&0&0\\
+0&0&0&0&1&0&0&0\\
+0&0&0&0&0&11&0&0\\
+0&0&0&0&0&0&4&7\\
+0&0&0&0&0&0&1&2
+\end{bmatrix}^{-1} & = 
+\begin{bmatrix}
+\begin{bmatrix} 2 & 2 \\ 3 & 1 \end{bmatrix}^{-1} & & & \\
+& \begin{bmatrix} 2 & 1 & 3 \\ 3 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix}^{-1} & & \\
+& & \left[11\right]^{-1} & \\
+& & & \begin{bmatrix} 4 & 7 \\ 1 & 2 \end{bmatrix}^{-1}
+\end{bmatrix} \\
+& = \begin{bmatrix}
+-1/4\begin{bmatrix} 1 & -2 \\ -3 & 2 \end{bmatrix} & & & \\
+& \begin{bmatrix} 2 & -1 & -6 \\ -3 & 2 & 9 \\ 0 & 0 & 1 \end{bmatrix} & & \\
+& & 1/11 & \\
+& & & \begin{bmatrix} 2 & -7 \\ -1 & 4 \end{bmatrix}
+\end{bmatrix} \\
+& = \begin{bmatrix} 
+-1/4&1/2&0&0&0&0&0&0\\
+3/4&-1/2&0&0&0&0&0&0\\
+0&0&2&-1&-6&0&0&0\\
+0&0&-3&2&9&0&0&0\\
+0&0&0&0&1&0&0&0\\
+0&0&0&0&0&1/11&0&0\\
+0&0&0&0&0&0&2&-7\\
+0&0&0&0&0&0&-1&4
+\end{bmatrix}
+\end{aligned}
+$$
+To find the determinant of the matrix we can apply the same principle we used earlier for finding the determinant of block triangular matrices.  That is to find the determinant of the diagonal blocks and find the product of these determinants
+$$
+\begin{aligned}
+\det\begin{bmatrix} 
+2&2&0&0&0&0&0&0\\
+3&1&0&0&0&0&0&0\\
+0&0&2&1&3&0&0&0\\
+0&0&3&2&0&0&0&0\\
+0&0&0&0&1&0&0&0\\
+0&0&0&0&0&11&0&0\\
+0&0&0&0&0&0&4&7\\
+0&0&0&0&0&0&1&2
+\end{bmatrix} &= \det\begin{bmatrix} 2 & 2 \\ 3 & 1 \end{bmatrix}\det\begin{bmatrix}2&1 \\3&2\end{bmatrix}\det[1]\det[11]\det\begin{bmatrix}4&7\\1&2\end{bmatrix} \\
+& = -4 \cdot 1 \cdot 1 \cdot 11 \cdot 1 \\
+& = -44
+\end{aligned}
+$$
 \end{document}
