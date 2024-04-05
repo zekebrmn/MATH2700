@@ -1,0 +1,106 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700.009}\\Problem Set 11}
+\author{\huge{Ezekiel Berumen}}
+\date{11 April 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\qs{}{Let
+$$
+A=\begin{bmatrix}
+1 & 1 & 3 & 0 \\
+0 & -2 & 2 & 4 \\
+0 & 0 & -1 & 2 \\
+0 & 0 & 0 & -2
+\end{bmatrix}
+$$
+(a) Find the characteristic polynomial of $A$ \\
+(b) Find all eigenvalues of $A$ \\
+(c) For each eigenvalue $\lambda$ of $A$, what is the algebraic and geometric multiplicities of $\lambda$ ? \\
+(d) For each eigenvalue $\lambda$ of $A$, find a basis for the eigenspace $E_\lambda(A)$. \\
+(e) Is $A$ diagonalizable? If so, give an eigenbasis for $A$.
+}
+\begin{note}
+Recall:
+\begin{itemize}
+\item If $T: V \rightarrow V$ is a linear transformation with eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$, then set $d_i=\operatorname{dim}(E_{\lambda_{i}}(T))$. T is diagonalizable exactly when $d_1 + d_2 + \ldots + d_n = \operatorname{dim}(V)$
+\item An eigenvalues algebraic multiplicity is always $\ge$ geometric multiplicity
+\end{itemize}
+\end{note}
+\sol \\
+(a) To find the characteristic polynimal we must solve $\operatorname{det}(\lambda I_4 - A)$
+$$
+\det\left(\begin{bmatrix}
+\lambda&&&\\
+&\lambda&&\\
+&&\lambda&\\
+&&&\lambda
+\end{bmatrix} - \begin{bmatrix}
+1&1&3&0\\
+0&-2&2&4\\
+0&0&-1&2\\
+0&0&0&-2
+\end{bmatrix}
+\right) =
+\det\left(
+\begin{bmatrix}
+\lambda-1&-1&-3&0\\
+0&\lambda+2&-2&-4\\
+0&0&\lambda+1&2\\
+0&0&0&\lambda+2
+\end{bmatrix}
+\right)
+$$
+In the previous homework, we found a unique property of the determinant of triangular matricies. In particular we found that the determinant of a triangular matrix is the product of the diagonal elements. We can quickly solve for the characteristic polynomial using this method.
+$$
+\det\left(
+\begin{bmatrix}
+\lambda-1&-1&-3&0\\
+0&\lambda+2&-2&-4\\
+0&0&\lambda+1&2\\
+0&0&0&\lambda+2
+\end{bmatrix}
+\right) =
+(\lambda-1)(\lambda+1)(\lambda+2)^2
+$$
+(b) Solving for the roots, we quickly see that the eigenvalues for this matrix $A$ are: $\lambda = 1, \lambda = -1, \lambda = -2$. \\
+\\
+\noindent (c) The algebraic multiplicities of $\lambda = -1 \text{ and } \lambda = 1$ are both 1. This implies that geometric multiplicites for these eigenvalues is also 1.
+\qs{}{Let
+$$
+A=\begin{bmatrix}
+1 & -2 & 0 & 0 \\
+1 & 4 & 0 & 0 \\
+0 & 0 & 7 & -3 \\
+0 & 0 & 2 & 2
+\end{bmatrix}
+$$
+(a) Find the characteristic polynomial of $A$ and all eigenvalues of $A$. \\
+(b) What are the algebraic and geometric multiplicites of each eigenvalue. (Keep in mind the geometric multiplicity is always at least one and at most the algebraic multiplicity) \\
+(c) Is $A$ diagonalizable?
+}
+\qs{}{Let
+$$
+A=\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 2 & 0 & 0 & 0 & 0 \\
+0 & 0 & 3 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0
+\end{bmatrix}
+$$
+(a) Find the characteristic polynomial of $A$ and all eigenvalues of $A$. \\
+(b) What are the algebraic and geometric multiplicites of each eigenvalue. (Keep in mind the geometric multiplicity is always at least one and at most the algebraic multiplicity) \\
+(c) Is $A$ diagonalizable?
+}
+
+\end{document}
