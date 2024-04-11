@@ -32,8 +32,9 @@ $$
 Recall:
 \begin{itemize}
 \item If $T: V \rightarrow V$ is a linear transformation with eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$, then set $d_i=\operatorname{dim}(E_{\lambda_{i}}(T))$. T is diagonalizable exactly when $d_1 + d_2 + \ldots + d_n = \operatorname{dim}(V)$
-\item An eigenvalues algebraic multiplicity is always $\ge$ geometric multiplicity
-\item $\dim(E_\lambda(A) = \dim(\ker(\lambda I - A))$
+\item An eigenvalue's algebraic multiplicity is always $\ge$ geometric multiplicity
+\item $\dim(E_\lambda(A)) = \dim(\ker(\lambda I - A))$
+\item If we have $A\in\mathbb{R}^{n\times n}$ with eigenvalues $\lambda_1,  \lambda_2, \lambda_3$ and $\{v_1,\ldots,v_n\}$ as a basis for $E_{\lambda_1}(A)$,  $\{u_1,\ldots,u_k\}$ as a basis for $E_{\lambda_2}(A)$ and $\{w_1,\ldots,w_j\}$ as a basis for $E_{\lambda_3}(A)$,  then we find that $\{v_1,\ldots,v_n,u_1,\ldots,u_k,w_1,\ldots,w_j\}$ are linearly independent vectors.  In other words,  vectors from a basis of a particular eigenspace are linearly independent from the vectors that form a basis for another eigenspace.  This is particularly important because we can use this concept when determining whether a matrix or transformation is diagonalizable.
 \end{itemize}
 \end{note}
 \sol \\
@@ -104,7 +105,7 @@ $$
 \begin{bmatrix}-1\\3\\0\\0\end{bmatrix},\begin{bmatrix}0\\3\\-1\\\frac{1}{2}\end{bmatrix}
 \right\}
 $$
-So now we must find bases for eigenspaces $E_{-1}(A)$ and $E_{1}(A)$. 
+So now we must find bases for eigenspaces $E_{-1}(A)$ and $E_{1}(A)$.  We can do so by finding the null space of $\lambda I - A$
 $$
 I - A = \begin{bmatrix}
 0&1&-3&0\\
@@ -146,7 +147,7 @@ $$
 \begin{bmatrix}\frac{5}{2}\\-2\\-1\\0\end{bmatrix}
 \right\}
 $$
-(e) If $A$ is diagonalizable,  then that means there exists a basis for $\mathbb{R}^4$ consisting of only eigenvectors of $A$.  Let us check if the eigenvectors from the bases we have found are linearly independent. 
+(e) Since we know that the vectors that form a basis for the different eigenspaces of $A$ are all linearly independent from one another,  we can appeal to the definition of dimension.
 $$
 \left\{
 \begin{bmatrix}-1\\0\\0\\0\end{bmatrix},
@@ -155,9 +156,7 @@ $$
 \begin{bmatrix}0\\3\\-1\\\frac{1}{2}\end{bmatrix}
 \right\}
 $$
-The vectors are linearly independent and I will make a case for why that is true.  Vector 1 is linearly independent because if we were to construct it we would would require vector 2.  But since vector 2 has nonzero second component then we must also require vector 3 or 4.  If we use vector 4 then there is no method to remove the 4th nonzero component.  If we use vector 3,  similarly we must still use vector 4 to remove the nonzero 3rd component from vector three which will put us in the same position.  All this is to say that in showing that the first vector is linearly independent,  we can also see that the others are linearly independent.  \\
-\\
-Since we have 4 linearly independent vectors,  then we have a basis for $\mathbb{R}^4$.  Hence it is sufficient to say that $A$ is diagonalizable. 
+We can see that we have 4 eigenvectors,  which we found by taking a basis of each eigenspace.  For $A$ to be diagonalizable,  then we must be able to find a basis for $\mathbb{R}^4$ using only eigenvectors.  Hence we can conclude that $A$ is diagonalizable because the size of this set of vectors matches that of the dimension of $\mathbb{R}^4$,  so we call $A$ diagonalizable.  Further,  since this set of vectors forms a basis for $\mathbb{R}^4$,  and since it consisting of only eigenvectors,  then we can call it an eigenbasis.
 \qs{}{Let
 $$
 A=\begin{bmatrix}
@@ -191,6 +190,7 @@ $A$ has eigenvalues $\lambda_1 = 2,  \lambda_2=3,\lambda_3=4,\lambda_4=5$.  \\
 \noindent (b) Each eigenvalue has an algebraic multiplicity of one.  Because of this we can also conclude that each eigenvalue has a geometric multiplicity of one also.  We can conclude this because the geometric multiplicity $\le$ algebraic multiplicity and always $\ge$ one.  \\
 \\
 \noindent (c) Since the sum of the dimension of each eigenspace equals the sum of $\mathbb{R}^4$ we can say that $A$ is diagonalizable.  We know that the sum of the dimension of $A$'s eigenspaces is equal to the dimension of $\mathbb{R}^4$ because each of the four eigenvalues has a geometric multiplicity of one. 
+\pagebreak
 \qs{}{Let
 $$
 A=\begin{bmatrix}
