@@ -33,6 +33,7 @@ Recall:
 \begin{itemize}
 \item If $T: V \rightarrow V$ is a linear transformation with eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$, then set $d_i=\operatorname{dim}(E_{\lambda_{i}}(T))$. T is diagonalizable exactly when $d_1 + d_2 + \ldots + d_n = \operatorname{dim}(V)$
 \item An eigenvalues algebraic multiplicity is always $\ge$ geometric multiplicity
+\item $\dim(E_\lambda(A) = \dim(\ker(\lambda I - A))$
 \end{itemize}
 \end{note}
 \sol \\
@@ -73,7 +74,90 @@ $$
 $$
 (b) Solving for the roots, we quickly see that the eigenvalues for this matrix $A$ are: $\lambda = 1, \lambda = -1, \lambda = -2$. \\
 \\
-\noindent (c) The algebraic multiplicities of $\lambda = -1 \text{ and } \lambda = 1$ are both 1. This implies that geometric multiplicites for these eigenvalues is also 1.
+\noindent (c) The algebraic multiplicities of $\lambda = -1 \text{ and } \lambda = 1$ are both 1. This implies that geometric multiplicites for these eigenvalues is also 1.  The alebraic multiciplity when $\lambda = -2$ doesn't immediately tell us the value,  but we do know that it will be either 1 or 2.  To find its geometric multiplicity we need to find a basis for the eigenspace $E_{-2}(A)$
+$$
+-2I - A = 
+\begin{bmatrix}
+-3&-1&-3&0\\
+0&0&-2&-4\\
+0&0&-1&2\\
+0&0&0&0\\
+\end{bmatrix}
+$$
+$$
+\begin{aligned}
+\vec{v}_1 = 3\vec{v}_2 + 0\vec{v}_3 + 0\vec{v}_4 &\implies \vec{0} = -\vec{v}_1 + 3\vec{v}_2 + 0\vec{v}_3 + 0\vec{v}_4  \\
+\vec{v}_3 = 0\vec{v}_1 + 3\vec{v}_2 + \frac{1}{2}\vec{v}_4 &\implies \vec{0} = 0\vec{v}_1 + 3\vec{v}_2 -\vec{v}_3+\frac{1}{2}\vec{v}_4
+\end{aligned}
+$$
+We can say that a basis for the kernel of $-2I-A$ is
+$$
+\left\{
+\begin{bmatrix}-1\\3\\0\\0\end{bmatrix},\begin{bmatrix}0\\3\\-1\\\frac{1}{2}\end{bmatrix}
+\right\}
+$$
+Since our basis contains two vectors,  so that means $\dim(E_{-2}(A)) = 2$.  Thus since we know the dimension of the eigenspace,  we know also that the geometric mutiplicity of -2 is 2. \\
+\\
+\noindent (d) In part (c) we already found an eigenbasis for $E_{-2}(A)$ to be
+$$
+\left\{
+\begin{bmatrix}-1\\3\\0\\0\end{bmatrix},\begin{bmatrix}0\\3\\-1\\\frac{1}{2}\end{bmatrix}
+\right\}
+$$
+So now we must find bases for eigenspaces $E_{-1}(A)$ and $E_{1}(A)$. 
+$$
+I - A = \begin{bmatrix}
+0&1&-3&0\\
+0&3&-2&-4\\
+0&0&2&-2\\
+0&0&0&3
+\end{bmatrix}
+$$
+$$
+\begin{aligned}
+\vec{v}_1 &= 0\vec{v}_2 + 0\vec{v}_3 + 0\vec{v}_4 \\
+\vec{0} &= -\vec{v}_1 + 0\vec{v}_2 + 0\vec{v}_3 + 0\vec{v}_4
+\end{aligned}
+$$
+So then an basis for $E_1(A)$ is
+$$
+\left\{
+\begin{bmatrix}-1\\0\\0\\0\end{bmatrix}
+\right\}
+$$
+Lastly we must find a basis for $E_{-1}(A)$
+$$
+-I - A = \begin{bmatrix}
+-2&-1&-3&0\\
+0&1&-2&-4\\
+0&0&0&-2\\
+0&0&0&1
+\end{bmatrix}
+$$
+$$
+\begin{aligned}
+\vec{v}_3 & = \frac{5}{2}\vec{v}_1 - 2 \vec{v}_2 + 0\vec{v}_4 \\
+\vec{0} & = \frac{5}{2}\vec{v}_1 - 2 \vec{v}_2 - \vec{v}_3 + 0\vec{v}_4
+\end{aligned}
+$$
+So we can see that a basis for the kernel of $E_{-1}(A)$ is
+$$
+\left\{
+\begin{bmatrix}\frac{5}{2}\\-2\\-1\\0\end{bmatrix}
+\right\}
+$$
+(e) If $A$ is diagonalizable,  then that means there exists a basis for $\mathbb{R}^4$ consisting of only eigenvectors of $A$.  Let us check if the eigenvectors from the bases we have found are linearly independent. 
+$$
+\left\{
+\begin{bmatrix}-1\\0\\0\\0\end{bmatrix},
+\begin{bmatrix}-1\\3\\0\\0\end{bmatrix},
+\begin{bmatrix}\frac{5}{2}\\-2\\-1\\0\end{bmatrix}, 
+\begin{bmatrix}0\\3\\-1\\\frac{1}{2}\end{bmatrix}
+\right\}
+$$
+The vectors are linearly independent and I will make a case for why that is true.  Vector 1 is linearly independent because if we were to construct it we would would require vector 2.  But since vector 2 has nonzero second component then we must also require vector 3 or 4.  If we use vector 4 then there is no method to remove the 4th nonzero component.  If we use vector 3,  similarly we must still use vector 4 to remove the nonzero 3rd component from vector three which will put us in the same position.  All this is to say that in showing that the first vector is linearly independent,  we can also see that the others are linearly independent.  \\
+\\
+Since we have 4 linearly independent vectors,  then we have a basis for $\mathbb{R}^4$.  Hence it is sufficient to say that $A$ is diagonalizable. 
 \qs{}{Let
 $$
 A=\begin{bmatrix}
@@ -87,6 +171,26 @@ $$
 (b) What are the algebraic and geometric multiplicites of each eigenvalue. (Keep in mind the geometric multiplicity is always at least one and at most the algebraic multiplicity) \\
 (c) Is $A$ diagonalizable?
 }
+\sol \\
+(a) 
+$$
+\begin{aligned}
+\det(\lambda I_4 - A) &= \det\begin{bmatrix}
+\lambda-1&2&0&0\\
+-1&\lambda-4&0&0\\
+0&0&\lambda-7&3\\
+0&0&-2&\lambda-2
+\end{bmatrix} \\
+&= ((\lambda-4)(\lambda-1)+2)((\lambda-7)(\lambda-2)+6) \\
+&= (\lambda^2-5\lambda+6)(\lambda^2-9\lambda+20)\\
+&= (\lambda-2)(\lambda-3)(\lambda-4)(\lambda-5)
+\end{aligned}
+$$
+$A$ has eigenvalues $\lambda_1 = 2,  \lambda_2=3,\lambda_3=4,\lambda_4=5$.  \\
+\\
+\noindent (b) Each eigenvalue has an algebraic multiplicity of one.  Because of this we can also conclude that each eigenvalue has a geometric multiplicity of one also.  We can conclude this because the geometric multiplicity $\le$ algebraic multiplicity and always $\ge$ one.  \\
+\\
+\noindent (c) Since the sum of the dimension of each eigenspace equals the sum of $\mathbb{R}^4$ we can say that $A$ is diagonalizable.  We know that the sum of the dimension of $A$'s eigenspaces is equal to the dimension of $\mathbb{R}^4$ because each of the four eigenvalues has a geometric multiplicity of one. 
 \qs{}{Let
 $$
 A=\begin{bmatrix}
@@ -102,5 +206,47 @@ $$
 (b) What are the algebraic and geometric multiplicites of each eigenvalue. (Keep in mind the geometric multiplicity is always at least one and at most the algebraic multiplicity) \\
 (c) Is $A$ diagonalizable?
 }
-
+\sol \\
+(a)
+$$
+\begin{aligned}
+\det(\lambda I_6 - A) &= \det\begin{bmatrix}
+\lambda-1& 0 & 0 & 0 & 0 & 0 \\
+0 & \lambda-2 & 0 & 0 & 0 & 0 \\
+0 & 0 & \lambda-3 & 0 & 0 & 0 \\
+0 & 0 & 0 & \lambda & 0 & 0 \\
+0 & 0 & 0 & -1 & \lambda & 0 \\
+0 & 0 & 0 & 0 & -1 & \lambda
+\end{bmatrix}\\
+&=(\lambda-1)(\lambda-2)(\lambda-3)(\lambda)^3
+\end{aligned}
+$$
+$A$ has eigenvalues $\lambda=1,\lambda=2,\lambda=3,\lambda=0$\\
+\\
+\noindent (b) $\lambda=1, \lambda=2,\lambda=3$ have algebraic and geometric multiplicity of 1.  $\lambda=0$ has an algebraic multiplicty of 3 but to find its geometric multiplicity we must find a basis for the eigenspace $E_0(A)$.
+$$
+\begin{bmatrix}
+-1& 0 & 0 & 0 & 0 & 0 \\
+0 & -2 & 0 & 0 & 0 & 0 \\
+0 & 0 & -3 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & -1 & 0
+\end{bmatrix}
+$$
+$$
+\begin{aligned}
+\vec{v}_6 &= 0\vec{v}_1 + 0\vec{v}_2 + 0\vec{v}_3 + 0\vec{v}_4 + 0\vec{v}_5\\
+\vec{0} &= 0\vec{v}_1 + 0\vec{v}_2 + 0\vec{v}_3 + 0\vec{v}_4 + 0\vec{v}_5 - \vec{v}_6
+\end{aligned}
+$$
+Thus a basis for the eigenspace $E_0(A)$ is
+$$
+\left\{
+\begin{bmatrix}0\\0\\0\\0\\0\\-1\end{bmatrix}
+\right\}
+$$
+So this makes the dimension of the eigenspace 1,  and further the geometric multiplicity is also 1.  \\
+\\
+\noindent (c) We know now the dimension of each eigenspace.  This tells us whether or not $A$ is diagonalizable,  in particular we see that the sum of the dimensions of each of the eigenspaces is equal to 4.  This means that $A$ is not diagonalizable since the sum would need to equal the dimension of $\mathbb{R}^6$ which it does not.
 \end{document}
