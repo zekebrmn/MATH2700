@@ -1,0 +1,414 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700.009}\\Problem Set 12}
+\author{\huge{Ezekiel Berumen}}
+\date{16 April 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\qs{}{The goal of this problem is to see the reasoning for the term "diagonalizable," and the two seemingly different common definitions. Let
+$$
+M=\begin{bmatrix}
+6 & 1 & 0 & 0 \\
+1 & 6 & 0 & 0 \\
+0 & 0 & 8 & 1 \\
+0 & 0 & -5 & 2
+\end{bmatrix}
+$$
+(a) Find the characteristic polynomial of $M$.  \\
+(b) Find all eigenvalues of $M$. \\
+(c) Find the algebraic and geometric multiplicities of each eigenvalue.  \\
+(d) $M$ is diagonalizable. Find an ordered eigenbasis, $\mathfrak{B}$, for $M$.  \\
+(e) Let $T: \mathbb{R}^4 \rightarrow \mathbb{R}^4$ be given by $T(\vec{x})=M \vec{x}$. For each vector $\vec{v}$ in the eigenbasis $\mathfrak{B}$ from (d), find $[T(\vec{v})]_{\mathfrak{B}}$. (Notice you can do this without doing any matrix algebra, since if $\vec{v}$ is an eigenvector of $M$ with eigenvalue $\lambda$, then $T(\vec{v})=\lambda \vec{v})$ \\
+(f) Use your work from (e) to find a matrix $A$ so that
+$$
+[T(\vec{x})]_{\mathfrak{B}}=A[\vec{x}]_{\mathfrak{B}} .
+$$
+(g) Let $\mathfrak{E}$ be the standard basis for $\mathbb{R}^4$, find $P_{\mathfrak{B} \rightarrow \mathfrak{E}}$ and $P_{\mathfrak{E} \rightarrow \mathfrak{B}}$.\\
+(h) Find a matrix $A$ so that
+$$
+[T(\vec{x})]_{\mathfrak{B}}=A[\vec{x}]_{\mathfrak{B}}
+$$
+by using the change of basis matrices from (g) and $M$.
+}
+\sol \\
+(a) We can find the characteristic polynomial of $M$ by taking the determinant of $(\lambda I_4 - M)$ and solving for the zeros.  Since $M$ is block-diagonal,  then we can take the determinants of each block along the diagonal and find the product.
+$$
+\begin{aligned}
+\det(\lambda I_4 - M) & = \det\begin{bmatrix}
+\lambda-6 & -1 & 0 & 0 \\
+-1 & \lambda-6 & 0 & 0 \\
+0 & 0 & \lambda-8 & -1 \\
+0 & 0 & 5 & \lambda-2
+\end{bmatrix} \\
+& = ((\lambda - 6)(\lambda - 6)-1)((\lambda-8)(\lambda-2)+5) \\
+& = (\lambda^2-12\lambda+35)(\lambda^2-10\lambda+21) \\
+& = (\lambda-5)(\lambda-7)(\lambda-7)(\lambda-3)
+\end{aligned}
+$$
+(b) The zeros of our characterstic polynomial will be eigenvalues of $M$.  If we solve for the roots of the polynomial we get $\lambda=5,\lambda=7,\lambda=3$\\
+\\
+\noindent (c) Since we know that the geometric multiplicity will be at most the algebraic multiplicity,  and at least one,  then this means that eigenvalues $\lambda=5$ and $\lambda=3$ and geometric multiplicities of one since their algebraic multiplicity is also one.  Since part (d) Will require us to find an eigenbasis and since $\lambda=7$ has algebraic multiplicity of two,  we will find a basis for each eigenspace regardless. \\
+\\
+To find the geometric multiplicity,  we can find the dimension of the eigenspace for a respective eigenvalue.
+$$
+7I_4 - M = \begin{bmatrix}
+1& -1 & 0 & 0 \\
+-1 &1 & 0 & 0 \\
+0 & 0 & -1& -1 \\
+0 & 0 & 5 &5
+\end{bmatrix}
+$$
+We can find the dimension of the eigenspace by finding a basis for the kernel of the matrix.
+$$
+\begin{aligned}
+\vec{v}_2 = -\vec{v}_1 + 0\vec{v}_3 + 0\vec{v}_4 &\implies \vec{0} = -\vec{v}_1 - \vec{v}_2 + 0\vec{v}_3 + 0\vec{v}_4 \\
+\vec{v}_4 = 0\vec{v}_1 + 0\vec{v}_2 + \vec{v}_3 &\implies \vec{0} = 0\vec{v}_1 + 0\vec{v}_2 + \vec{v}_3 - \vec{v}_4
+\end{aligned}
+$$
+Now we are able to construct a basis for the kernel using these linearly dependent columns,  so then we can say a basis for the eigenspace is
+$$
+\left\{
+\begin{bmatrix}-1\\-1\\0\\0\end{bmatrix},
+\begin{bmatrix}0\\0\\1\\-1\end{bmatrix}
+\right\}
+$$
+Hence we can conclude that the geometric mutliplicity of $\lambda=7$ is two,  since the dimension of the eigenspace for the respective value is 2.  We can replicate these steps for the remaining two eigenspaces so that we have the vectors necessary to form an eigenbasis.
+$$
+3I_4 - M = \begin{bmatrix}
+-3& -1 & 0 & 0 \\
+-1& -3 & 0 & 0 \\
+0 & 0 & -5 & -1 \\
+0 & 0 & 5 & 1
+\end{bmatrix}
+$$
+$$
+\begin{aligned}
+\vec{v}_4 &= 0\vec{v}_1 + 0\vec{v}_2 + \frac{1}{5}\vec{v}_3 \\
+\vec{0} &= 0\vec{v}_1 + 0\vec{v}_2 + \frac{1}{5}\vec{v}_3 - \vec{v}_4
+\end{aligned}
+$$
+We can say that a basis for this eigenspace is
+$$
+\left\{
+\begin{bmatrix}
+0\\0\\\frac{1}{5}\\-1
+\end{bmatrix}
+\right\}
+$$
+And then laslty we can find a basis for the eigenspace $E_5(M)$
+$$
+5I_4 - M = \begin{bmatrix}
+-1&-1&0&0\\
+-1&-1&0&0\\
+0&0&-3&-1\\
+0&0&5&3
+\end{bmatrix}
+$$
+$$
+\begin{aligned}
+\vec{v}_2 & = \vec{v}_1 + 0 \vec{v}_3 + 0\vec{v}_4 \\
+\vec{0} & = \vec{v}_1 - \vec{v}_2 + 0\vec{v}_3 + 0\vec{v}_4
+\end{aligned}
+$$
+Thus a basis for this eigenspace is
+$$
+\left\{
+\begin{bmatrix}1\\-1\\0\\0\end{bmatrix}
+\right\}
+$$
+(d) We found eigenvectors in part (c) for each eigenvalue,  so thus we can form an eigenbasis $\mathfrak{B}$.  All eigenvectors are linearly independent from the eigenvectors for another respective eigenvalue,  so we can use all the eigenvectors we found in forming a basis.
+$$
+\mathfrak{B} = \left\langle
+\begin{bmatrix}1\\-1\\0\\0\end{bmatrix},
+\begin{bmatrix}-1\\-1\\0\\0\end{bmatrix},
+\begin{bmatrix}0\\0\\1\\-1\end{bmatrix},
+\begin{bmatrix}0\\0\\\frac{1}{5}\\-1\end{bmatrix}
+\right\rangle
+$$
+(e) To find each $\mathfrak{B}$-coordinate we can compute the value of each $T(\vec{b})$ where $\vec{b}\in\mathfrak{B}$.  This is relatively easy since the basis contains only eigenvectors. 
+$$
+\begin{aligned}
+T(\vec{b}_1) & = 5\vec{b}_1 \\
+& =\begin{bmatrix}5\\-5\\0\\0\end{bmatrix} \implies \left[\begin{bmatrix}5\\-5\\0\\0\end{bmatrix}\right]_\mathfrak{B} = \begin{bmatrix}5\\0\\0\\0\end{bmatrix}
+\end{aligned}
+$$
+$$
+\begin{aligned}
+T(\vec{b}_2) &= 7\vec{b}_2\\
+&=\begin{bmatrix}-7\\-7\\0\\0\end{bmatrix}\implies
+\left[\begin{bmatrix}-7\\-7\\0\\0\end{bmatrix}\right]_\mathfrak{B}=\begin{bmatrix}0\\7\\0\\0\end{bmatrix}
+\end{aligned}
+$$
+$$
+\begin{aligned}
+T(\vec{b}_3) &= 7\vec{b}_3\\
+&=\begin{bmatrix}0\\0\\7\\-7\end{bmatrix}\implies
+\left[\begin{bmatrix}0\\0\\7\\-7\end{bmatrix}\right]_\mathfrak{B}=\begin{bmatrix}0\\0\\7\\0\end{bmatrix}
+\end{aligned}
+$$
+$$
+\begin{aligned}
+T(\vec{b}_4) &= 3\vec{b}_4\\
+&=\begin{bmatrix}0\\0\\\frac{3}{5}\\-3\end{bmatrix}\implies
+\left[\begin{bmatrix}0\\0\\\frac{3}{5}\\-3\end{bmatrix}\right]_\mathfrak{B}=\begin{bmatrix}0\\0\\0\\3\end{bmatrix}
+\end{aligned}
+$$
+(f) Using the coordinates computed in part (e),  we can define a matrix $A$ such that $[T(\vec{x})]_\mathfrak{B}=A[\vec{x}]_\mathfrak{B}$ by "glueing" the coordinates we found previously.
+$$
+A = \begin{bmatrix}
+5&0&0&0\\
+0&7&0&0\\
+0&0&7&0\\
+0&0&0&3
+\end{bmatrix}
+$$
+(g) We can find $P_{\mathfrak{B}\rightarrow\mathfrak{E}}$ by "glueing" the vectors from the ordered basis $\mathfrak{B}$ together
+$$
+P_{\mathfrak{B}\rightarrow\mathfrak{E}} = \begin{bmatrix}
+1&-1&0&0\\
+-1&-1&0&0\\
+0&0&1&\frac{1}{5}\\
+0&0&-1&-1
+\end{bmatrix}
+$$
+We can find the inverse by taking the inverse of the diagonal blocks
+$$
+\begin{aligned}
+P_{\mathfrak{E}\rightarrow\mathfrak{B}} &=\begin{bmatrix}
+1&-1&0&0\\
+-1&-1&0&0\\
+0&0&1&\frac{1}{5}\\
+0&0&-1&-1
+\end{bmatrix}^{-1} \\
+&=\begin{bmatrix}
+\begin{bmatrix}1&-1\\-1&-1\end{bmatrix}^{-1}&\\
+&\begin{bmatrix}1&\frac{1}{5}\\-1&-1\end{bmatrix}^{-1}
+\end{bmatrix}\\
+&=\begin{bmatrix}
+-\frac{1}{2}\begin{bmatrix}-1&1\\1&1\end{bmatrix}&\\
+&-\frac{5}{4}\begin{bmatrix}-1&-\frac{1}{5}\\1&1\end{bmatrix}
+\end{bmatrix}\\
+&=\begin{bmatrix}
+1/2&-1/2&0&0\\
+-1/2&-1/2&0&0\\
+0&0&5/4&1/4\\
+0&0&-5/4&-5/4
+\end{bmatrix}
+\end{aligned}
+$$
+(h) A = $P_{\mathfrak{E}\rightarrow\mathfrak{B}}MP_{\mathfrak{B}\rightarrow\mathfrak{E}}$
+$$
+\begin{aligned}
+A &= \begin{bmatrix}
+1/2&-1/2&0&0\\
+-1/2&-1/2&0&0\\
+0&0&5/4&1/4\\
+0&0&-5/4&-5/4
+\end{bmatrix}
+\begin{bmatrix}
+6 & 1 & 0 & 0 \\
+1 & 6 & 0 & 0 \\
+0 & 0 & 8 & 1 \\
+0 & 0 & -5 & 2
+\end{bmatrix}
+\begin{bmatrix}
+1&-1&0&0\\
+-1&-1&0&0\\
+0&0&1&1/5\\
+0&0&-1&-1
+\end{bmatrix} \\
+&=\begin{bmatrix}
+1/2&-1/2&0&0\\
+-1/2&-1/2&0&0\\
+0&0&5/4&1/4\\
+0&0&-5/4&-5/4
+\end{bmatrix}
+\begin{bmatrix}
+5&-7&0&0\\
+-5&-7&0&0\\
+0&0&7&3/5\\
+0&0&-7&-3
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+5&0&0&0\\
+0&7&0&0\\
+0&0&7&0\\
+0&0&0&3
+\end{bmatrix}
+\end{aligned}
+$$
+\qs{}{
+For each of the following pairs of vectors, find the inner-product in the specified inner-product space and determine if they are orthogonal.\\
+\\
+\noindent
+(a) $(1,-2,3)^{\top}$ and $(-1,1,1)^{\top}$ in $\mathbb{R}^3$ with the usual dot-product $\vec{x} \cdot \vec{y}=\vec{x}^{\top} \vec{y}$.\\
+(b) $(1,2,3)^{\top}$ and $(1,1,-2)^{\top}$ in $\mathbb{R}^3$ with the usual dot-product.\\
+(c) $\sin (x)$ and $\cos (x)$ in the $C([-\pi, \pi])$ with the inner-product
+$$
+\langle f \mid g\rangle=\frac{1}{2 \pi} \int_{-\pi}^\pi f(x) g(x) \mathrm{d} x .
+$$
+(d) $-\sin (x)$ and $\cos ^2(x)$ in $C([-\pi, \pi])$ with the inner-product from (c).\\
+(e) $(1,-2,3)^{\top}$ and $(-1,1,1)^{\top}$ in $\mathbb{R}^3$ with the inner-product $\langle\vec{x} \mid \vec{y}\rangle=\vec{x}^{\top} A \vec{y}$ where $A$ is as below.\\
+(f) $(1,2,3)^{\top}$ and $(1,1,-2)^{\top}$ in $\mathbb{R}^3$ with the the inner-product $\langle\vec{x} \mid \vec{y}\rangle=\vec{x}^{\top} A \vec{y}$ where $A$ is as below.
+$$
+A=\begin{bmatrix}
+6 & 1 & 0 \\
+1 & 6 & 0 \\
+0 & 0 & 8 / 3
+\end{bmatrix}
+$$
+}
+\begin{note}
+Recall:
+\begin{itemize}
+\item If $V$ is an inner-product space and $\vec{v},\vec{w}\in V$,  then $\vec{v}$ and $\vec{w}$ are orthogonal if $\langle \vec{v} \mid \vec{w} \rangle = 0$.
+\end{itemize}
+\end{note}
+\sol \\
+(a)
+$$\begin{bmatrix}1\\-2\\3\end{bmatrix}\cdot\begin{bmatrix}-1\\1\\1\end{bmatrix}=\begin{bmatrix}1&-2&3\end{bmatrix}\begin{bmatrix}-1\\1\\1\end{bmatrix}=(1)(-1)+(-2)(1)+(3)(1)=0
+$$
+Since the dot-product is equal to zero,  then the vectors are orthogonal.  \\
+\\
+\noindent(b)
+$$\begin{bmatrix}1\\2\\3\end{bmatrix}\cdot\begin{bmatrix}1\\1\\-2\end{bmatrix}=\begin{bmatrix}1&2&3\end{bmatrix}\begin{bmatrix}1\\1\\-2\end{bmatrix}=(1)(1)+(2)(1)+(3)(-2)=-3
+$$
+Since the dot-product does not equal zero,  then the vectors are not orthogonal.  \\
+\\
+\noindent(c)
+$$
+\begin{aligned}
+\langle \sin(x) \mid \cos(x) \rangle & = \frac{1}{2\pi}\int_{-\pi}^\pi \sin(x)\cos(x)\mathrm{d}x \qquad
+\left[
+\begin{aligned}
+u &= \sin(x)\\
+\mathrm{d}u &= \cos(x)\mathrm{d}x
+\end{aligned}
+\right]\\
+&= \frac{1}{2\pi}\int_{\sin(-\pi)}^{\sin(\pi)} u\mathrm{d}u\\
+&= \frac{u^2}{4\pi}\biggr\rvert_{u=0}^0\\
+&= \frac{0}{4\pi}-\frac{0}{4\pi}\\
+&= 0
+\end{aligned}
+$$
+The result of the inner-product is zero so $\sin(x)$ and $\cos(x)$ are orthogonal. \\
+\\
+\noindent(d)
+$$
+\begin{aligned}
+\langle -\sin(x) \mid \cos^2(x) \rangle &= \frac{1}{2\pi}\int_{-\pi}^\pi -\sin(x)\cos^2(x)\mathrm{d}x\qquad
+\left[
+\begin{aligned}
+u &= \cos(x)\\
+\mathrm{d}u &= -\sin(x)\mathrm{d}x
+\end{aligned}
+\right] \\
+&= \frac{1}{2\pi}\int_{\cos(-\pi)}^{\cos(\pi)}u^2\mathrm{d}u\\
+&=\frac{u^3}{6\pi}\biggr\rvert_{u=-1}^{-1}\\
+\end{aligned}
+$$
+Since we end up evaluating the integral from bounds that are equal,  then the result is zero,  which in this case implies that $-\sin(x)$ and $\cos^2(x)$ are orthogonal.\\
+\\
+\noindent (e)
+$$
+\begin{aligned}
+\left\langle
+\begin{bmatrix}1\\-2\\3\end{bmatrix}
+\mid
+\begin{bmatrix}-1\\1\\1\end{bmatrix}
+\right\rangle &=
+\begin{bmatrix}1&-2&3\end{bmatrix}\begin{bmatrix}
+6 & 1 & 0 \\
+1 & 6 & 0 \\
+0 & 0 & 8 / 3
+\end{bmatrix}\begin{bmatrix}-1\\1\\1\end{bmatrix} \\
+& =\begin{bmatrix}4&-11&8\end{bmatrix}\begin{bmatrix}-1\\1\\1\end{bmatrix}\\
+&=(4)(-1)+(-11)(1)+(8)(1)\\
+&=-7
+\end{aligned}
+$$
+In this case,  $\vec{x}$ and $\vec{y}$ are not orthogonal because the result of the inner-product is not zero.\\
+\\
+\noindent (f)
+$$
+\begin{aligned}
+\left\langle\begin{bmatrix}1\\2\\3\end{bmatrix}\mid\begin{bmatrix}1\\1\\-2\end{bmatrix}\right\rangle&=
+\begin{bmatrix}1&2&3\end{bmatrix}\begin{bmatrix}
+6 & 1 & 0 \\
+1 & 6 & 0 \\
+0 & 0 & 8 / 3
+\end{bmatrix}\begin{bmatrix}1\\1\\-2\end{bmatrix}\\
+&=\begin{bmatrix}8&13&8\end{bmatrix}\begin{bmatrix}1\\1\\-2\end{bmatrix}\\
+&=(8)(1)+(13)(1)+(8)(-2)\\
+&=5
+\end{aligned}
+$$
+As was the case in the previous part,  since the inner-product of $\vec{x}$ and $\vec{y}$ is not zero,  they are not orthogonal.
+\pagebreak
+\qs{}{
+For each of the following vectors, find their length in the given inner-product space. Say if they are unit vectors, and if they are not, normalize them.\\
+\\
+\noindent
+(a) $(1,2,0,2)^{\top}$ in $\mathbb{R}^4$ with the usual dot-product.\\
+(b) $\sin (x)$ in $C([-\pi, \pi])$ with the inner-product as in problem 2(c)\\
+(c) $(1 / \sqrt{58},-2 / \sqrt{58}, 3 / \sqrt{58})^{\top}$ in $\mathbb{R}^3$ with the inner-product $\langle\vec{x} \mid \vec{y}\rangle=\vec{x}^{\top} A \vec{y}$ with $A$ as in problem 2.
+}
+\begin{note}
+Recall:
+\begin{itemize}
+\item If $\vec{v}\in V$,  then the length of $\vec{v}$ is $\sqrt{\langle\vec{v}\mid\vec{v}\rangle} = ||\vec{v}||$
+\item $\vec{v}$ is a unit vector if $||\vec{v}||=1$
+\end{itemize}
+\end{note}
+\sol \\
+(a)
+$$
+\begin{aligned}
+\begin{bmatrix}1\\2\\0\\2\end{bmatrix}\cdot\begin{bmatrix}1\\2\\0\\2\end{bmatrix} & = \begin{bmatrix}1&2&0&2\end{bmatrix}\begin{bmatrix}1\\2\\0\\2\end{bmatrix}\\
+&=1(1)+2(2)+(0)(0)+(2)(2)\\
+&=9 \implies ||\vec{v}|| = 3
+\end{aligned}
+$$
+The vector is not a unit vector,  so we must normlize it by dividing each component by the length.  Our normalized vector becomes $(1/3, 2/3, 0, 2/3)^\top$\\
+\\
+\noindent (b)
+$$
+\begin{aligned}
+\langle \sin(x) \mid \sin(x) \rangle &= \frac{1}{2\pi} \int_{-\pi}^\pi \sin^2(x)\mathrm{d}x\\
+&=\frac{1}{2\pi}\int_{-\pi}^\pi \frac{1-\cos(2x)}{2}\mathrm{d}x \qquad \text{By half angle formula}\\
+&=\frac{1}{4\pi}\int_{-\pi}^\pi 1-cos(2x)\mathrm{dx}\\
+&=\frac{1}{4\pi}\int_{-\pi}^\pi1\mathrm{d}x-\frac{1}{4\pi}\int_{-\pi}^\pi\cos(2x)\mathrm{dx}\\
+&=\frac{x-\sin(2x)}{4\pi}\biggr\rvert_{x=-\pi}^\pi\\
+&=\left(\frac{\pi-\sin(2\pi)}{4\pi}\right)-\left(\frac{\sin(2\pi)-\pi}{4\pi}\right)\\
+&=\frac{2\pi}{4\pi} = 1/2 \implies ||\sin(x)|| = 1/\sqrt{2}
+\end{aligned}
+$$
+Since the $\sin(x)$ is not normalized,  we must divide it by its length,  and in doing so we find that when it is normalized it becomes $\sqrt{2}\sin(x)$\\
+\\
+\noindent(c)
+$$
+\begin{aligned}
+\left\langle
+\begin{bmatrix}\frac{1}{\sqrt{58}}\\-\frac{2}{\sqrt{58}}\\\frac{3}{\sqrt{58}}\end{bmatrix}
+\mid
+\begin{bmatrix}\frac{1}{\sqrt{58}}\\-\frac{2}{\sqrt{58}}\\\frac{3}{\sqrt{58}}\end{bmatrix}
+\right\rangle &= \begin{bmatrix}\frac{1}{\sqrt{58}}&-\frac{2}{\sqrt{58}}&\frac{3}{\sqrt{58}}\end{bmatrix}\begin{bmatrix}
+6 & 1 & 0 \\
+1 & 6 & 0 \\
+0 & 0 & 8 / 3
+\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{58}}\\-\frac{2}{\sqrt{58}}\\\frac{3}{\sqrt{58}}\end{bmatrix}\\
+&=\begin{bmatrix}\frac{2\sqrt{2}}{\sqrt{29}}&-\frac{11}{\sqrt{58}}&\frac{4\sqrt{2}}{\sqrt{29}}\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{58}}\\-\frac{2}{\sqrt{58}}\\\frac{3}{\sqrt{58}}\end{bmatrix}\\
+&=25/29 \implies ||\vec{v}|| = \frac{5}{\sqrt{29}}
+\end{aligned}
+$$
+We can see that it is not a unit vector since the length is $\frac{5}{\sqrt{29}}$,  so we must scale all the components by a factor of $\frac{\sqrt{29}}{5}$.  The normalized vector is $\begin{bmatrix}\frac{1}{5\sqrt{2}}&-\frac{\sqrt{2}}{5}&\frac{3}{5\sqrt{2}}\end{bmatrix}^\top$
+\end{document}
