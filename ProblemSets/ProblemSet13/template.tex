@@ -1,0 +1,563 @@
+\documentclass{report}
+\usepackage{nicematrix,tikz}
+\usetikzlibrary{arrows.meta,
+                matrix,
+                quotes}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\title{\Huge{Math 2700.009}\\Problem Set 13}
+\author{\huge{Ezekiel Berumen}}
+\date{23 April 2024}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\qs{}{Consider $C([-\pi, \pi])$ with the inner-product
+$$
+\langle f \mid g\rangle=\frac{1}{2 \pi} \int_{-\pi}^\pi f(x) g(x) \mathrm{d} x
+$$
+and $S \subseteq C([-\pi, \pi])$ be
+$$
+S=\{\sin (n x), \cos (m x): m, n>0\},
+$$
+verify that $S$ is an orthogonal set in $C([-\pi, \pi])$.}
+\begin{note}
+Recall:
+\begin{itemize}
+\item To show a set $S$ is an orthogonal set, we must show that for all $\vec{v},\vec{w}\in S$ the inner-product $\langle \vec{v} \mid \vec{w} \rangle=0$, with $\vec{0}\notin S$
+\end{itemize}
+\end{note}
+\sol Let us begin by finding the inner product $\langle \sin(nx) \mid \cos(mx) \rangle$ when $m \neq n$:
+$$
+\begin{aligned}
+\langle \sin(nx) \mid \cos(mx) \rangle &= \frac{1}{2\pi} \int_{-\pi}^{\pi} \sin(nx)\cos(mx)\mathrm{d}x \\
+&= \frac{1}{2\pi} \int_{-\pi}^{\pi} \frac{\sin(nx + mx)+\sin(nx-mx)}{2}\mathrm{d}x\\
+&=\frac{1}{4\pi} \left(\int_{-\pi}^{\pi}\sin(nx+mx)\mathrm{d}x + \int_{-\pi}^{\pi}\sin(nx-mx)\mathrm{d}x\right)\\
+&=\frac{1}{4\pi} \left(-\frac{1}{n+m}\cos(nx+mx)-\frac{1}{n-m}\cos(nx-mx)\right)\biggr\rvert_{x=-\pi}^\pi\\
+&=\begin{aligned}
+\frac{1}{4\pi} \left(-\frac{1}{n+m}\right.&\cos(n\pi+m\pi)-\frac{1}{n-m}\cos(n\pi-m\pi) \\
+&+\left.\frac{1}{n+m}\cos(n\pi+m\pi)+\frac{1}{n-m}\cos(n\pi-m\pi)\right)
+\end{aligned}\\
+&=\frac{1}{4\pi}(0)\\
+&=0
+\end{aligned}
+$$
+This "proof" only reveals if the vectors are orthogonal in instances where $m\neq n$, so let us review the case where $m = n$ by computing the inner-product $\langle \sin(nx) \mid \cos(nx) \rangle$
+$$
+\begin{aligned}
+\langle \sin(nx) \mid \cos(nx) \rangle &= \frac{1}{2\pi} \int_{-\pi}^{\pi} \sin(nx)\cos(nx)\mathrm{d}x \qquad \left[\begin{aligned}\
+\text{Let } u &= \sin(nx)\\
+\mathrm{d}u &= \frac{1}{n}\cos(nx)\mathrm{d}x
+\end{aligned}\right]\\
+&=\frac{1}{2\pi} \int_{-n\pi}^{n\pi} u \frac{\mathrm{d}u}{n} \\
+&=\frac{1}{2\pi n} \int_{-n\pi}^{n\pi} u \mathrm{d}u\\
+&=\frac{u^2}{4\pi n}\biggr\rvert_{u=-\pi n}^{\pi n}\\
+&=\frac{\pi^2 n^2}{4\pi n} - \frac{\pi^2 n^2}{4\pi n}\\
+&=0
+\end{aligned}
+$$
+Since we have shown that the inner product $\langle \sin(nx) \mid \cos(mx) \rangle$ is zero regardless of the value of $m$ and $n$, then we can say that $S$ is an orthogonal set.
+\qs{}{Let $V$ be an inner-product space with inner-product $\langle\cdot \mid \cdot\rangle$, and $\vec{u}_1, \ldots, \vec{u}_n \in V$. Define a function $T: V \rightarrow V$ by
+$$
+T(\vec{v})=\sum_{k=1}^n\left\langle\vec{v} \mid \vec{u}_k\right\rangle \vec{u}_k
+$$
+Verify that $T$ is a linear transformation.}
+\begin{note}
+Recall that if $T: V \rightarrow V$ is a linear transformation, two properties must be verifiable:
+\begin{itemize}
+\item Additivity: A function $T: V \rightarrow V$ is additive if for any $\vec{x},\vec{y}\in V$, $T(\vec{x} + \vec{y}) = T(\vec{x}) + T(\vec{y})$
+\item Homogeneity: A function $T: V \rightarrow V$ is homogeneous if for any $c\in\mathbb{R}$ and $\vec{x}\in V$, $T(c\vec{x}) = cT(\vec{x})$
+\end{itemize}
+\end{note}
+\sol \\
+\begin{itemize}
+\item Additivity: Let $\vec{w}\in V$
+$$
+\begin{aligned}
+T(\vec{v} + \vec{w}) &= \sum_{k=1}^n \left\langle\vec{v} + \vec{w} \mid \vec{u}_k\right\rangle \vec{u}_k\\
+&=\sum_{k=1}^n \left(\left\langle\vec{v} \mid \vec{u}_k \right\rangle + \left\langle\vec{w} \mid \vec{u}_k\right\rangle\right)\vec{u}_k\\
+&=\sum_{k=1}^n \left\langle\vec{v} \mid \vec{u}_k \right\rangle\vec{u}_k + \left\langle\vec{w} \mid \vec{u}_k\right\rangle\vec{u}_k\\
+&=\sum_{k=1}^n \left\langle\vec{v} \mid \vec{u}_k \right\rangle\vec{u}_k + \sum_{k=1}^n\left\langle\vec{w} \mid \vec{u}_k\right\rangle\vec{u}_k\\
+&=T(\vec{v}) + T(\vec{w})
+\end{aligned}
+$$
+Since $T$ is additive for any $\vec{v},\vec{w}\in V$, then it satisfies the first propery.
+\item Homogeneity: Let $c\in\mathbb{R}$
+$$
+\begin{aligned}
+T(c\vec{v}) &= \sum_{k=1}^n \left\langle c\vec{v} \mid \vec{u}_k \right\rangle \vec{u}_k\\
+&=\sum_{k=1}^n c\left\langle\vec{v}\mid\vec{u}_k\right\rangle\vec{u}_k\\
+&=c\sum_{k=1}^n\left\langle\vec{v}\mid\vec{u}_k\right\rangle\vec{u}_k\\
+&=cT(\vec{v})
+\end{aligned}
+$$
+\end{itemize}
+Because $T$ is both additive and homogeneous, then it is sufficient to say that it is a linear transformation.
+\pagebreak
+\qs{}{Let
+$$
+A=\left[\begin{array}{lll}
+1 & 1 & 2 \\
+1 & 0 & 1 \\
+0 & 2 & 2
+\end{array}\right]
+$$
+(a) Find an ordered basis for $\operatorname{ran}(A)$\\
+(b) Perform the Gram-Schmidt algorithm on the basis you got in (a) to get an orthonormal basis for $\operatorname{ran}(A)$\\
+(c) Find a basis for $\operatorname{ker}(A)$\\
+(d) Extend the basis you found in (a) to a basis $\mathfrak{B}$ for $\mathbb{R}^3$\\
+(e) Find $P_{\mathfrak{E} \rightarrow \mathfrak{B} \text {. }}$}
+\begin{note}
+Recall: \\
+\\
+\noindent Let $\langle \vec{x}_1, \ldots, \vec{x}_n \rangle$ be a basis for an $n$-dimensional inner-product space $V$. The Gram-Schmidt Algorithm:
+$$
+\vec{v}_i = \vec{x}_i - \sum_{k=1}^{i-1} \langle \vec{x}_{i} \mid \vec{y}_k \rangle \vec{y}_k, \qquad \vec{y}_i = \vec{v}_i/||\vec{v}_i||
+$$
+Is used to find an orthogonal basis for $V$ by subtracting all the pieces of $\vec{x}_i$ that are in the same direction as all of the $\vec{y}_k$, then renormalizing. This formula computes normalized vectors that are orthogonal to all other $\vec{y}_k$'s since the non-perpendicular pieces are removed.
+\end{note}
+\sol \\
+(a) We can see that $\vec{a}_1 = \vec{a}_3 - \vec{a}_2$ and thus $\vec{0} = -\vec{a}_1 - \vec{a}_2 + \vec{a}_3$. Since $\vec{a}_1$ is the only linearly dependent vector, then we can say that an ordered basis for the $\ran(A)$ is:
+$$
+\left\langle 
+\begin{bmatrix}1\\0\\2\end{bmatrix},
+\begin{bmatrix}2\\1\\2\end{bmatrix}
+\right\rangle
+$$
+(b) We will apply the Gram-Schmidt formula to find the orthonormal basis vectors
+$$
+\vec{b}_1 = \vec{x}_1 = \begin{bmatrix}1\\0\\2\end{bmatrix}
+$$
+$$
+||\vec{b}_1|| = \sqrt{\vec{b}_1\cdot\vec{b}_1} = \sqrt{1 + 0 + 4} = \sqrt{5} \implies \frac{1}{||\vec{b}_1||} = \frac{1}{\sqrt{5}}
+$$
+\[
+\vec{y}_1 = \frac{1}{\sqrt{5}}\begin{bmatrix}1\\0\\2\end{bmatrix} = \begin{bmatrix} 1/\sqrt{5} \\ 0 \\ 2/\sqrt{5} \end{bmatrix}
+\]
+\vspace{0.5em}
+\hrule
+\vspace{1em}
+\[
+\begin{aligned}
+\vec{b}_2 &= \vec{x}_2 - (\vec{y}_1 \cdot \vec{x}_2)\vec{y}_1\\
+&=\vec{x}_2 - (2/\sqrt{5} + 0 + 4/\sqrt{5})\vec{y}_1\\
+&=\begin{bmatrix}2\\1\\2\end{bmatrix}-6/\sqrt{5}\begin{bmatrix}1\sqrt{5}\\0\\2\sqrt{5}\end{bmatrix}\\
+&=\begin{bmatrix}2\\1\\2\end{bmatrix}-\begin{bmatrix}6/5\\0\\12/5\end{bmatrix} = \begin{bmatrix}4/5\\1\\-2/5\end{bmatrix}\\
+\end{aligned}
+\]
+\[
+||\vec{b}_2|| = \sqrt{\vec{b}_2\cdot\vec{b}_2} = \sqrt{16/25 + 1 + 4/25} = \sqrt{45/25} = \sqrt{9/5} = 3/\sqrt{5}
+\]
+\[
+\implies \frac{1}{||\vec{b}_2||}=\frac{\sqrt{5}}{3}
+\]
+\[
+\vec{y}_2 = \frac{\sqrt{5}}{3}\begin{bmatrix}4/5\\1\\-2/5\end{bmatrix} = \begin{bmatrix}4\sqrt{5}/15\\\sqrt{5}/3\\-2\sqrt{5}/15\end{bmatrix}
+\]
+\vspace{0.5em}
+\hrule
+\vspace{1em}
+\noindent The vectors we have found form an orthonormal basis for $\ran(A)$, which is
+$$
+\left\langle\begin{bmatrix} 1/\sqrt{5} \\ 0 \\ 2/\sqrt{5} \end{bmatrix},\begin{bmatrix}4\sqrt{5}/15\\\sqrt{5}/3\\-2\sqrt{5}/15\end{bmatrix}\right\rangle
+$$
+(c) To find a basis for the $\ker(A)$, we can use the linearly dependent vector we found in (a). In particular we see that $\vec{0} = -\vec{a}_1 - \vec{a}_2 + \vec{a}_3$. Rank-Nullity tells us that the dimension of the kernel will be one since the dimension of the range is 2. With this information we can say that a basis for $\ker(A)$ is
+$$
+\left\{\begin{bmatrix}-1\\-1\\1\end{bmatrix}\right\}
+$$
+(d) We can extend ordered basis we found in (a) to make a basis for $\mathbb{R}^3$ by using the standard basis vector $\vec{e}_3$. We find that
+$$
+\mathfrak{B} = \left\langle\begin{bmatrix}1\\0\\2\end{bmatrix},\begin{bmatrix}2\\1\\2\end{bmatrix},\begin{bmatrix}0\\0\\1\end{bmatrix}\right\rangle
+$$
+(e) In order to find $P_{\mathfrak{E}\rightarrow\mathfrak{B}}$ we need to find $P_{\mathfrak{B}\rightarrow\mathfrak{E}}$ and then find its inverse.
+$$
+P_{\mathfrak{B}\rightarrow\mathfrak{E}} = \begin{bmatrix}1&2&0\\0&1&0\\2&2&1\end{bmatrix}
+$$
+Now we can find $(P_{\mathfrak{B}\rightarrow\mathfrak{E}})^-1=P_{\mathfrak{E}\rightarrow\mathfrak{B}}$ by using the row reduction method
+$$
+\begin{aligned}
+&\begin{array}{ccc|ccc}
+1&2&0&1&0&0\\
+0&1&0&0&1&0\\
+2&2&1&0&0&1
+\end{array}
+&& R_1 - 2R_2 \rightarrow R_1
+\qquad
+&\begin{array}{ccc|ccc}
+1&0&0&1&-2&0\\
+0&1&0&0&1&0\\
+2&2&1&0&0&1
+\end{array}
+&& R_3 - 2R_1 \rightarrow R_3\\
+&\begin{array}{ccc|ccc}
+1&0&0&1&-2&0\\
+0&1&0&0&1&0\\
+0&2&1&-2&4&1\\
+\end{array}
+&& R_3 - 2R_2 \rightarrow R_3
+&\begin{array}{ccc|ccc}
+1&0&0&1&-2&0\\
+0&1&0&0&1&0\\
+0&0&1&-2&2&1
+\end{array}
+\end{aligned}
+$$
+$$
+\implies P_{\mathfrak{E}\rightarrow\mathfrak{B}} = \begin{bmatrix}1&-2&0\\0&1&0\\-2&2&1\end{bmatrix}
+$$
+\pagebreak
+\qs{}{Perform the Gram-Schmidt method on $\left\langle\sin (x), \cos (x), x, x^2\right\rangle$ in the inner product space $C([-\pi, \pi])$ with the inner-product from problem 1.}
+\sol
+$$
+\vec{b}_1 = \sin(x) \qquad ||\vec{b}_1|| = \sqrt{\langle \vec{b}_1 \mid \vec{b}_1 \rangle}
+$$
+\begin{align}
+\langle \sin(x) \mid \sin(x) \rangle &= \frac{1}{2\pi}\int_{-\pi}^{\pi} \sin^2(x)\mathrm{d}x\nonumber\\
+&=\frac{1}{2\pi}\int_{-\pi}^{\pi} \frac{1-\cos(2x)}{2}\mathrm{d}x\qquad\text{By half angle formula}\nonumber\\
+&=\frac{1}{2\pi}\left(\frac{1}{2}\int_{-\pi}^\pi1-\cos(2x)\mathrm{d}x\right)\nonumber\\
+&=\frac{1}{2\pi}\left[\frac{1}{2}\left(\int_{-\pi}^\pi1\mathrm{d}x-\int_{-\pi}^\pi\cos(2x)\mathrm{d}x\right)\right]\nonumber\\
+&=\frac{1}{2\pi}\left[\frac{1}{2}\left(x-\frac{1}{2}\sin(2x)\right)\right]\biggr\rvert_{x=-\pi}^\pi\nonumber\\
+&=\frac{1}{2\pi}\left[\frac{1}{2}\left(\pi-\frac{1}{2}\sin(2\pi)+\pi+\frac{1}{2}\sin(2\pi)\right)\right]\nonumber\\
+&=\frac{1}{2\pi}\left(\frac{1}{2}\left(2\pi\right)\right)\nonumber\\
+&=\frac{1}{2\pi}\left(\pi\right)\implies\int_{-\pi}^\pi\sin^2(x)\mathrm{d}x = \pi\\
+&=\frac{1}{2}\nonumber
+\end{align}
+We can say that $||\vec{b}_1|| = 1/\sqrt{2}$, so if we normalize $\sin(x)$ in this inner-product space we get $\sqrt{2}\sin(x)$. This will serve as the first orthonormal basis vector.
+\vspace{1em}
+\hrule
+\vspace{1em}
+$$
+\vec{b}_2 = \cos(x)-\langle \cos(x) \mid \sqrt{2}\sin(x) \rangle \sqrt{2}\sin(x)
+$$
+\begin{align}
+\langle \cos(x) \mid \sqrt{2}\sin(x) \rangle &= \frac{1}{2\pi} \int_{-\pi}^\pi \cos(x)\sqrt{2}\sin(x)\mathrm{d}x\nonumber\\
+&=\frac{\sqrt{2}}{2\pi}\int_{-\pi}^\pi \cos(x)\sin(x)\mathrm{d}x\nonumber
+\end{align}
+Since $\cos(x)\sin(x)$ is odd, then the integral evaluates to zero. Thus $\vec{b}_2$ is just $\cos(x)$.
+\begin{align}
+\langle \cos(x) \mid \cos(x) \rangle &= \frac{1}{2\pi}\int_{-\pi}^\pi \cos^2(x)\mathrm{d}x\nonumber\\
+&=\frac{1}{2\pi}\int_{-\pi}^{\pi} \frac{1+\cos(2x)}{2}\mathrm{d}x\qquad\text{By half angle formula}\nonumber\\
+&=\frac{1}{2\pi}\left(\frac{1}{2}\int_{-\pi}^\pi1+\cos(2x)\mathrm{d}x\right)\nonumber\\
+&=\frac{1}{2\pi}\left[\frac{1}{2}\left(\int_{-\pi}^\pi1\mathrm{d}x+\int_{-\pi}^\pi\cos(2x)\mathrm{d}x\right)\right]\nonumber\\
+&=\frac{1}{2\pi}\left[\frac{1}{2}\left(x+\frac{1}{2}\sin(2x)\right)\right]\biggr\rvert_{x=-\pi}^\pi\nonumber
+\end{align}
+\begin{align}
+&=\frac{1}{2\pi}\left[\frac{1}{2}\left(\pi+\frac{1}{2}\sin(2\pi)+\pi+\frac{1}{2}\sin(2\pi)\right)\right]\nonumber\\
+&=\frac{1}{2\pi}\left(\frac{1}{2}\left(2\pi\right)\right)\nonumber\\
+&=\frac{1}{2\pi}\left(\pi\right)\implies\int_{-\pi}^\pi\cos^2(x)\mathrm{d}x = \pi\\
+&=\frac{1}{2}\nonumber
+\end{align}
+This means that the length of $\vec{b}_2$ is $1/\sqrt{2}$, and after normalizing $\cos(x)$, we get the second orthonormal basis vector $\sqrt{2}\cos(x)$.
+\vspace{1em}
+\hrule
+\vspace{1em}
+$$
+\vec{b}_3 = x - \langle x \mid \sqrt{2}\sin(x) \rangle \sqrt{2}\sin(x) - \langle x \mid \sqrt{2}\cos(x) \rangle \sqrt{2}\cos(x)
+$$
+\begin{align}
+\langle x \mid \sqrt{2}\sin(x) \rangle & = \frac{1}{2\pi} \int_{-\pi}^\pi x\sqrt{2}\sin(x)\mathrm{d}x\nonumber\\
+&=\frac{\sqrt{2}}{2\pi} \int_{-\pi}^\pi x\sin(x)\mathrm{d}x\nonumber
+\end{align}
+We can evaluate this integral using tabular integration
+$$
+\begin{tikzpicture}[
+every edge/.style = {draw, -Straight Barb, semithick, black},
+every edge quotes/.append style = {inner sep=1pt, anchor=south},
+         M/.style = {matrix of math nodes,
+                     nodes = {inner sep=0pt, minimum height=2.2ex, anchor=east},
+                     column sep=3em,
+                     row sep=1ex}
+                    ]
+
+\matrix (m) [M]
+{
+d & I\\
+x & \sin x \\
+1 & - \cos x \\
+0 & - \sin x \\
+};
+\draw   (m-2-1.south east) edge ["$+$"]   (m-3-2)
+        (m-3-1.south east) edge ["$-$"]   (m-4-2);
+\end{tikzpicture}
+$$
+\begin{align}
+&= \frac{\sqrt{2}}{2\pi}(\sin(x)-x\cos(x))\biggr\rvert_{x=-\pi}^\pi\nonumber\\
+&= \frac{\sqrt{2}}{2\pi}(\sin(\pi)-\pi\cos(\pi) + \sin(\pi) -\pi\cos(-\pi))\nonumber\\
+&= \frac{\sqrt{2}}{2\pi}(2\pi) \implies \int_{-\pi}^\pi x\sin(x)\mathrm{d}x = 2\pi\\
+&= \sqrt{2}\nonumber
+\end{align}
+\begin{align}
+\langle x \mid \sqrt{2}\cos(x) \rangle & = \frac{1}{2\pi} \int_{-\pi}^\pi x\sqrt{2}\cos(x)\mathrm{d}x\nonumber\\
+&=\frac{\sqrt{2}}{2\pi}\nonumber\int_{-\pi}^\pi x\cos(x)\mathrm{d}x
+\end{align}
+Similarly, we can use tabular integration to compute this integral.
+$$
+\begin{tikzpicture}[
+every edge/.style = {draw, -Straight Barb, semithick, black},
+every edge quotes/.append style = {inner sep=1pt, anchor=south},
+         M/.style = {matrix of math nodes,
+                     nodes = {inner sep=0pt, minimum height=2.2ex, anchor=east},
+                     column sep=3em,
+                     row sep=1ex}
+                    ]
+
+\matrix (m) [M]
+{
+d & I\\
+x & \cos x \\
+1 & \sin x \\
+0 & - \cos x \\
+};
+\draw   (m-2-1.south east) edge ["$+$"]   (m-3-2)
+        (m-3-1.south east) edge ["$-$"]   (m-4-2);
+\end{tikzpicture}
+$$
+\begin{align}
+&=\frac{\sqrt{2}}{2\pi}(x\sin(x)+\cos(x))\biggr\rvert_{x=-\pi}^\pi\nonumber\\
+&=\frac{\sqrt{2}}{2\pi}(\pi\sin(\pi)+\cos(\pi)-\pi\sin(-\pi)-\cos(-\pi))\nonumber
+\end{align}
+\begin{align}
+&=\frac{\sqrt{2}}{2\pi}(0)\nonumber\\
+&=0\nonumber
+\end{align}
+Thus $\vec{b}_3=x-\sqrt{2}\sqrt{2}\sin(x)=x-2\sin(x)$. Now we must normalize it by finding its length and dividing by it.
+\begin{align*}
+\langle x - 2\sin(x) \mid x - 2\sin(x) \rangle & = \frac{1}{2\pi} \int_{-\pi}^\pi (x-2\sin(x))^2 \mathrm{d}x\\
+&=\frac{1}{2\pi}\int_{-\pi}^\pi x^2-4x\sin(x)+4\sin^2(x)\mathrm{d}x\\
+&=\frac{1}{2\pi}\left(\int_{-\pi}^\pi x^2\mathrm{d}x - 4\int_{-\pi}^\pi x\sin(x)\mathrm{d}x + 4\int_{-\pi}^\pi\sin^2(x)\mathrm{d}x\right)\\
+&=\frac{1}{2\pi}\left(\frac{x^3}{3}\biggr\rvert_{x=-\pi}^\pi - 4(2\pi)+4(\pi)\right) \qquad \text{By (1) and (2)}\\
+&=\frac{1}{2\pi}\left(\frac{2\pi^3}{3} - 4\pi\right)\\
+&=\frac{\pi^2}{3}-2=\frac{\pi^2-6}{3}
+\end{align*}
+This means that $||\vec{b}_3||=\sqrt{\frac{\pi^2-6}{3}}$, and normalizing our $\vec{b}_3$ we see that our third orthonormal basis vector is $\sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x))$.
+\vspace{1em}
+\hrule
+\vspace{1em}
+$$
+\vec{b}_4 = x^2-\langle x^2\mid\sqrt{2}\sin(x)\rangle\sqrt{2}\sin(x)-\langle x^2\mid\sqrt{2}\cos(x)\rangle\sqrt{2}\cos(x)-\langle x^2\mid\sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x)\rangle\sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x))
+$$
+Since $\sqrt{2}\sin(x)$ is odd and $x^2$ is even, their product will be odd. Thus the inner product will evaluate to zero. 
+\begin{align}
+\langle x^2 \mid\sqrt{2}\cos(x)\rangle &= \frac{1}{2\pi}\int_{-\pi}^\pi x^2\sqrt{2}\cos(x)\mathrm{d}x\nonumber\\
+&=\frac{\sqrt{2}}{2\pi} \int_{-\pi}^\pi x^2\cos(x)\mathrm{d}x\nonumber
+\end{align}
+We can evaluate the integral using tabular integration
+$$
+\begin{tikzpicture}[
+every edge/.style = {draw, -Straight Barb, semithick, black},
+every edge quotes/.append style = {inner sep=1pt, anchor=south},
+         M/.style = {matrix of math nodes,
+                     nodes = {inner sep=0pt, minimum height=2.2ex, anchor=east},
+                     column sep=3em,
+                     row sep=1ex}
+                    ]
+
+\matrix (m) [M]
+{
+d & I\\
+x^2 & \cos x \\
+2x & \sin x \\
+2 & -\cos x \\
+0 & - \sin x \\
+};
+\draw   (m-2-1.south east) edge ["$+$"]   (m-3-2)
+        (m-3-1.south east) edge ["$-$"]   (m-4-2)
+        (m-4-1.south east) edge ["$+$"] (m-5-2);
+\end{tikzpicture}
+$$
+\begin{align}
+&=\frac{\sqrt{2}}{2\pi}(x^2\sin(x)+2x\cos(x)-2\sin(x))\biggr\rvert_{x=-\pi}^\pi\nonumber\\
+&=\frac{\sqrt{2}}{2\pi}(2\pi\cos(\pi)+2\pi\cos(-\pi))\nonumber\\
+&=\frac{\sqrt{2}}{2\pi}(-4\pi)\implies \int_{-\pi}^\pi x^2\cos(x)\mathrm{d}x = -4\pi\\
+&=-2\sqrt{2}\nonumber
+\end{align}
+\begin{align}
+\langle x^2 \mid \sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x)) \rangle&=\frac{1}{2\pi} \int_{-\pi}^\pi x^2 \sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x)) \mathrm{d}x\nonumber\\
+&=\frac{1}{2\pi}\sqrt{\frac{3}{\pi^2-6}} \int_{-\pi}^\pi x^2(x-2\sin(x))\mathrm{d}x\nonumber\\
+&=\frac{1}{2\pi}\sqrt{\frac{3}{\pi^2-6}} \int_{-\pi}^\pi x^3 - 2x^2\sin(x)\mathrm{d}x\nonumber
+\end{align}
+We saw before that $x^2\sin(x)$ is odd, and $x^3$ is also odd, so the entire function is odd. Since the parity of the function is odd, that means that the integral will evaluate to 0. This means that $\vec{b}_4 = x^2 + 4\cos(x)$, now we must normalize it.
+\begin{align}
+\langle x^2 + 4\cos(x) \mid x^2 + 4\cos(x) \rangle &= \frac{1}{2\pi} \int_{-\pi}^\pi (x^2+4cos(x))^2\mathrm{d}x\nonumber\\
+&= \frac{1}{2\pi} \int_{-\pi}^\pi x^4+8x^2\cos(x)+16\cos^2(x)\mathrm{d}x\nonumber\\
+&=  \frac{1}{2\pi}\left(\int_{-\pi}^\pi x^4 \mathrm{d}x + 8\int_{-\pi}^\pi x^2\cos(x)\mathrm{d}x +16\int_{-\pi}^\pi \cos^2(x)\mathrm{d}x\right)\nonumber\\
+&= \frac{1}{2\pi}\left(\frac{x^5}{5}\biggr\rvert_{x=-\pi}^{\pi} + 8(-4\pi) + 16(\pi)\right)\qquad\text{By (2) and (4)}\nonumber\\
+&= \frac{1}{2\pi}\left(\frac{2\pi^5}{5}-16\pi\right)\nonumber\\
+&= \frac{\pi^4}{5}-8 = \frac{\pi^4-40}{5}\nonumber
+\end{align}
+Thus we can conclude that $||\vec{b}_4||=\sqrt{\frac{\pi^4-40}{5}}$, and after normalizing $\vec{b}_4$ we find the the last orthonormal basis vector is $\sqrt{\frac{5}{\pi^4-40}}(x^3+4\cos(x))$. \\
+\\
+\noindent Thus we can say that an orthonormal basis for the $\operatorname{span}(\sin(x), \cos(x), x, x^2)$ is 
+$$\langle\sqrt{2}\sin(x),\sqrt{2}\cos(x),\sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x)),\sqrt{\frac{5}{\pi^4-40}}(x^3+4\cos(x))\rangle$$
+
+\qs{}{ Let $W \subseteq C([-\pi, \pi])$ be $W=\operatorname{span}\left(\sin (x), \cos (x), x, x^2\right)$. Your answer from problem 4 should be an orthonormal basis for $W$. Compute:\\
+(a) $\operatorname{proj}_W(1)$\\
+(b) $\operatorname{proj}_W(x \sin (x))$}
+\begin{note}
+Recall: \\
+If $\langle \vec{u}_1, \ldots, \vec{u}_n \rangle$ is an orthonormal basis for $W$, then
+$$
+\operatorname{proj}_W(\vec{v}) = \sum_{k=1}^n \langle \vec{v} \mid \vec{u}_k \rangle \vec{u}_k
+$$
+\end{note}
+\sol \\
+(a)
+Using the formula from above, we can begin by computing the inner-products for each summand.
+$$
+\langle 1 \mid \sqrt{2}\sin(x) \rangle = \frac{1}{2\pi} \int_{-\pi}^\pi \sqrt{2}\sin(x)\mathrm{d}x = 0
+$$
+This integral evaluates to zero since $\sin(x)$ is odd.
+$$
+\begin{aligned}
+\langle 1 \mid \sqrt{2}\cos(x) \rangle &= \frac{1}{2\pi} \int_{-\pi}^\pi  \sqrt{2}\cos(x)\mathrm{d}x\\
+&=\frac{\sqrt{2}}{2\pi} \int_{-\pi}^\pi \cos(x)\mathrm{d}x\\
+&=\frac{\sqrt{2}}{2\pi} \sin(x)\biggr\rvert_{x=-\pi}^\pi\\
+&=\frac{\sqrt{2}}{2\pi}(0) = 0
+\end{aligned}
+$$
+Since this integral evaluates to zero, then the summand is also nullified, so we will continue.
+$$
+ \langle 1 \mid \sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x)) \rangle = \frac{1}{2\pi} \int_{-\pi}^\pi \sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x))\mathrm{d}x
+$$
+Like the first summand that we evaluated, the function is odd, so thus the integral will evaluate to zero.
+$$
+\begin{aligned}
+\langle 1 \mid \sqrt{\frac{5}{\pi^4-40}}(x^3+4\cos(x))\rangle &=  \frac{1}{2\pi} \int_{-\pi}^\pi\sqrt{\frac{5}{\pi^4-40}}(x^3+4\cos(x))\mathrm{d}x\\
+&=\frac{1}{2\pi}\sqrt{\frac{5}{\pi^4-40}} \int_{-\pi}^\pi x^3 + 4\cos(x)\mathrm{d}x\\
+&=\frac{1}{2\pi}\sqrt{\frac{5}{\pi^4-40}} \left(\int_{-\pi}^\pi x^3\mathrm{d}x + 4\int_{-\pi}^\pi\cos(x)\mathrm{d}x\right)
+\end{aligned}
+$$
+Since $x^3$ is odd, that integral will evaluate to zero, and as we saw in previously the integral of $\cos(x)$ from $x=-\pi$ to $\pi$ evaluates to zero as well. Since all the summands evaluate to zero, then $\operatorname{proj}_W(1) = 0$. \\
+\\
+\noindent(b) Lets follow the same process as (a), by first evaluating the summands.
+$$
+\langle x\sin(x) \mid \sqrt{2}\sin(x) \rangle = \frac{1}{2\pi} \int_{-\pi}^\pi x\sin(x)\sqrt{2}\sin(x)\mathrm{d}x = 0
+$$
+This evaluates to zero since we're multiplying an even function by an odd function. Thus the first summand will be nullified and is not necessary for the projection of $x\sin(x)$.
+$$
+\begin{aligned}
+\langle x\sin(x) \mid \sqrt{2}\cos(x) \rangle &= \frac{1}{2\pi} \int_{-\pi}^\pi x\sin(x)\sqrt{2}\cos(x)\mathrm{d}x\\
+&= \frac{\sqrt{2}}{2\pi} \int_{-\pi}^\pi x\sin(x)\cos(x)\mathrm{d}x\\
+&= \frac{\sqrt{2}}{2\pi} \int_{-\pi}^\pi \frac{x\sin(2x)}{2}\mathrm{d}x\qquad\text{By double angle formula}\\
+&= \frac{\sqrt{2}}{4\pi} \int_{-\pi}^\pi x\sin(2x)\mathrm{d}x
+\end{aligned}
+$$
+We can use tabular integration to complete this integral
+$$
+\begin{tikzpicture}[
+every edge/.style = {draw, -Straight Barb, semithick, black},
+every edge quotes/.append style = {inner sep=1pt, anchor=south},
+         M/.style = {matrix of math nodes,
+                     nodes = {inner sep=0pt, minimum height=2.2ex, anchor=east},
+                     column sep=3em,
+                     row sep=1ex}
+                    ]
+
+\matrix (m) [M]
+{
+d & I\\
+x & \sin 2x \\
+1 & -\frac{1}{2}\cos 2x\\
+0 & -\frac{1}{4}\sin 2x \\
+};
+\draw   (m-2-1.south east) edge ["$+$"]   (m-3-2)
+        (m-3-1.south east) edge ["$-$"]   (m-4-2);
+\end{tikzpicture}
+$$
+$$
+\begin{aligned}
+&=\frac{\sqrt{2}}{4\pi}\left(\frac{1}{4}\sin(2x)-\frac{1}{2}x\cos(2x)\right)\biggr\rvert_{x=-\pi}^\pi\\
+&=\frac{\sqrt{2}}{8\pi}\left(-\pi\cos(2\pi)-\pi\cos(-2\pi)\right) = -\frac{\sqrt{2}}{4}
+\end{aligned}
+$$
+$$
+\langle x\sin(x) \mid \sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x)) \rangle =\frac{1}{2\pi} \int_{-\pi}^\pi x\sin(x)\sqrt{\frac{3}{\pi^2-6}}(x-2\sin(x))\mathrm{d}x = 0
+$$
+This inner-product evaluates to zero since we multiply an even function by an odd function. Thus this summand will be nullified and is not necessary for the projection of $x\sin(x)$.
+$$
+\begin{aligned}
+\langle x\sin(x) \mid \sqrt{\frac{5}{\pi^4-40}}(x^3+4\cos(x)) \rangle &= \frac{1}{2\pi} \int_{-\pi}^\pi x\sin(x)\sqrt{\frac{5}{\pi^4-40}}(x^3+4\cos(x))\mathrm{d}x\\
+&=\frac{1}{2\pi}\sqrt{\frac{5}{\pi^4-40}}\int_{-\pi}^\pi x\sin(x)(x^3+4\cos(x))\mathrm{d}x\\
+&=\frac{1}{2\pi}\sqrt{\frac{5}{\pi^4-40}}\left(\int_{-\pi}^\pi x^4\sin(x)\mathrm{d}x + 4 \int_{-\pi}^\pi x\cos(x)\sin(x)\mathrm{d}x\right)\\
+&=\frac{1}{2\pi}\sqrt{\frac{5}{\pi^4-40}}(0 + -2\pi)\\
+&=-\sqrt{\frac{5}{\pi^4-40}}
+\end{aligned} 
+$$
+Since we have computed all the inner-products, we can now find the projection of $x\sin(x)$.
+$$
+\begin{aligned}
+\operatorname{proj}_W(x\sin(x)) &= -\frac{\sqrt{2}}{4}\sqrt{2}\cos(x) - \sqrt{\frac{5}{\pi^4-40}}^2(x^3+4\cos(x))\\
+&=-\frac{1}{2}\cos(x) - \frac{5x^3 + 20\cos(x)}{\pi^4-40}
+\end{aligned}
+$$ 
+\qs{}{ Let $A$ be as in problem 3.\\
+(a) Compute the matrix of $\operatorname{proj}_{\operatorname{ran}(A)}$, that is, find the matrix $M$ so that $M \vec{x}=\operatorname{proj}_{\operatorname{ran}(A)}(\vec{x})$ for all $\vec{x} \in \mathbb{R}^3$.\\
+(b) For each of the following $\vec{b}_i$ compute $\operatorname{proj}_{\operatorname{ran}(A)}\left(\vec{b}_i\right)$ :
+$$
+\vec{b}_1=\left[\begin{array}{l}
+2 \\
+1 \\
+2
+\end{array}\right] \quad \vec{b}_2=\left[\begin{array}{l}
+1 \\
+2 \\
+3
+\end{array}\right] \quad \vec{b}_3=\left[\begin{array}{l}
+1 \\
+1 \\
+1
+\end{array}\right] \quad \vec{b}_4=\left[\begin{array}{l}
+3 \\
+2 \\
+2
+\end{array}\right]
+$$
+(c) For each $\vec{b}_i$ from (b), let $\hat{b}_i=\operatorname{proj}_{\operatorname{ran}(A)}\left(\vec{b}_i\right)$, each $\hat{b}_i$ has $\hat{b}_i \in \operatorname{ran}(A)$ and so there is a solution to
+$$
+A \hat{x}=\hat{b}_i .
+$$
+
+Use $\operatorname{ker}(A)$ and the change of basis matrix you found in problem 3 to find full solution sets to
+$$
+A \hat{x}_i=\hat{b}_i
+$$
+for each $i=1,2,3,4$.}
+\begin{note}
+Recall: \\
+If $W \subseteq \mathbb{R}^n$, there exists a matrix for $\operatorname{proj}_W$. If $\langle \vec{u}_1, \ldots, \vec{u}_n \rangle$ is an orthonormal basis for $W$ then let
+$$
+Q = \begin{bmatrix} 
+\vline&\vline&&\vline\\
+\vec{u}_1&\vec{u}_2&\ldots&\vec{u}_n\\
+\vline&\vline&&\vline\\
+\end{bmatrix}
+$$
+Then $\operatorname{proj}_W(\vec{x}) = QQ^\top\vec{x}$
+\end{note}
+\sol \\
+(a)
+$$
+Q = \begin{bmatrix}
+1/\sqrt{5}&4\sqrt{5}/15\\
+0&\sqrt{5}/3\\
+2/\sqrt{5}&-2\sqrt{5}/15
+\end{bmatrix} \qquad \qquad
+Q^\top = \begin{bmatrix}
+1/\sqrt{5}&0&2\sqrt{5}\\
+4\sqrt{5}/15&\sqrt{5}/3&-2\sqrt{5}/15
+\end{bmatrix}
+$$
+$$
+QQ^\top =
+\begin{bmatrix}
+5/9&4/9&2/9\\
+4/9&5/9&-2/9\\
+2/9&-2/9&8/9
+\end{bmatrix}
+$$
+\end{document}
