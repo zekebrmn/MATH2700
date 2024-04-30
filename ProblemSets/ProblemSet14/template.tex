@@ -135,6 +135,21 @@ $$
 Hence we can say $C$ is orthogonal since $C^\top C = I_3$
 \qs{}{
 Verify that if $Q \in \mathbb{R}^{n \times n}$ is an orthogonal matrix, then $Q^{\top}$ is an orthogonal matrix}
+\sol Since $Q$ is orthogonal,  then we can conclude that $Q^\top Q = I$. This suggests that $Q^\top$ is a left inverse to $Q$.  If we would like to show that $Q^\top$ is orthogonal when $Q$ is orthogonal,  then we must show that
+$$
+(Q^\top)^\top Q^\top = QQ^\top = I
+$$
+To do so,  we must show that $Q^\top$ is also a right inverse to $Q$.
+\begin{proof}
+Suppose $Q$ has some right inverse $M$.  Let us prove that if $Q^\top$ is a left inverse to $Q$ that it is also a right inverse. 
+$$
+Q^\top = Q^\top I = Q^\top(QM) = (Q^\top Q)M = IM = M
+$$
+$$
+Q^\top = M
+$$
+\end{proof}
+\noindent The simple proof suggests that if $Q$ has a left inverse $Q^\top$, then it is also a right inverse to $Q$.  Hence we can say that $Q^\top$ is orthogonal since $QQ^\top = I$.
 \qs{}{Let $T: C([0,1]) \rightarrow C([0,1])$ be defined by
 $$
 T(f)=\sqrt{3} x f\left(x^3\right) .
@@ -144,7 +159,39 @@ Verify that $T$ is an orthogonal transformation where the inner-product on $C([0
 $$
 \langle f \mid g\rangle=\int_0^1 f(x) g(x) \mathrm{d} x .
 $$}
-
+\begin{note}
+Recall: \\
+If $V$ is an inner-product space and $T:V \rightarrow V$ is a linear transformation,  then $T$ is called orthogonal if for all $\vec{v}\in V$,  $||\vec{v}||=||T(\vec{v})||$,  in other words,  a linear transformation on an inner-product space is orthogonal if it is length preserving. 
+\end{note}
+\sol Let us check if $T(f)$ is length preserving on $C([0,1])$ with the given inner-product,  first by checking the length of $f(x)$.
+$$
+\begin{aligned}
+||f(x)|| &= \sqrt{\langle f(x) | f(x) \rangle} \\
+&= \sqrt{\int_{0}^1 f(x)f(x) \mathrm{d}x}\\
+&= \sqrt{\int_{0}^1 f(x)^2 \mathrm{d}x}
+\end{aligned}
+$$
+\newpage
+Now let us check the length of $T(f)$.
+$$
+\begin{aligned}
+||T(f)|| &= \sqrt{\langle T(f) | T(f) \rangle}\\
+&= \sqrt{\langle \sqrt{3}xf(x^3) | \sqrt{3}xf(x^3)}\\
+&= \sqrt{\int_{0}^1 (\sqrt{3}xf(x^3))^2\mathrm{d}x}\\
+&= \sqrt{\int_{0}^1 3x^2f(x^3)^2\mathrm{d}x} \qquad
+\left[
+\begin{aligned}
+u &= x^3 \\
+\mathrm{d}u &= 3x^2\mathrm{d}x
+\end{aligned}
+\right]\\
+&= \sqrt{\int_{0^3}^{1^3} f(u)^2 \mathrm{d}u}\\
+&=\sqrt{\int_0^1 f(u)^2\mathrm{d}u}\\
+&=\sqrt{\int_0^1 f(x)^2\mathrm{d}x}\\
+&= ||f(x)||
+\end{aligned}
+$$
+Since we have demonstrated the equality of $||f(x)||$ and $||T(f)||$,  then we have also demonstrated that $T$ is length perserving on the inner-product space and hence $T$ is orthogonal.
 \qs{}{
 Find the $Q R$ factorization of the following matrices.\\
 (a)
@@ -174,5 +221,240 @@ C=\left[\begin{array}{cccc}
 \end{array}\right]
 $$
 where $\vartheta, \tau \in[0,2 \pi)$.}
-
+\sol \\
+(a) Let us call the columns of $A$ as vectors $\vec{a}_1,  \vec{a}_2,  \vec{a}_3$. To find the $QR$ factorization,  we must first perform Gram-Schmidt,  on the vectors.
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_1 &= \frac{1}{||\vec{a}_1||}\vec{a}_1\\
+&= \frac{1}{\sqrt{1+4+9}}\vec{a}_1\\
+&=\frac{1}{\sqrt{14}}\begin{bmatrix}1\\2\\3\end{bmatrix}\\
+&=\begin{bmatrix}1/\sqrt{14}\\2/\sqrt{14}\\3/\sqrt{14}\end{bmatrix}
+\end{aligned}
+$$
+This also tells us that $\vec{a}_1 = (\sqrt{14})\vec{y}_1$.  This will be important for when we construct $R$.
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+\vec{b}_2 &= \vec{a}_2 - (\vec{a}_2 \cdot \vec{y}_1)\vec{y}_1\\
+&=\vec{a}_2 - (1/\sqrt{14} + 3/\sqrt{14})\vec{y}_1\\
+&=\vec{a}_2 - (4/\sqrt{14})\vec{y}_1\\
+&=\begin{bmatrix}1\\0\\1\end{bmatrix} - 4/\sqrt{14}\begin{bmatrix}1/\sqrt{14}\\2/\sqrt{14}\\3/\sqrt{14}\end{bmatrix}\\
+&=\begin{bmatrix}1\\0\\1\end{bmatrix} - \begin{bmatrix}4/14\\8/14\\12/14\end{bmatrix}\\
+&=\begin{bmatrix}10/14\\-8/14\\2/14\end{bmatrix} = \begin{bmatrix}5/7\\-4/7\\1/7\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+||\vec{b}_2|| &= \sqrt{\frac{25}{49} + \frac{16}{49} + \frac{1}{49}}\\
+&=\sqrt{\frac{42}{49}}\\
+&=\frac{\sqrt{42}}{7}
+\end{aligned}
+$$
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_2 &= \frac{1}{||\vec{b}_2||}\vec{b}_2\\
+&=7/\sqrt{42} \begin{bmatrix}5/7\\-4/7\\1/7\end{bmatrix}\\
+&=\begin{bmatrix}5/\sqrt{42}\\-4/\sqrt{42}\\1/\sqrt{42}\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}\\
+Similarly,  we need to see the linear combination of $\vec{y}_i$'s that construct $\vec{a}_2$
+$$
+\begin{aligned}
+\vec{b}_2 &= (\sqrt{42}/7)\vec{y}_2\\
+\vec{a}_2 - (4/\sqrt{14})\vec{y}_1 &= (\sqrt{42}/7)\vec{y}_2\\
+\vec{a}_2 & = (4/\sqrt{14})\vec{y}_1 + (\sqrt{42}/7)\vec{y}_2
+\end{aligned}
+$$
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+\vec{b}_3 &= \vec{a}_3 - (\vec{a}_3\cdot\vec{y}_2)\vec{y}_2 - (\vec{a}_3\cdot\vec{y}_1)\vec{y}_1\\
+&= \vec{a}_3 - (5/\sqrt{42} - 4/\sqrt{42} - 1/\sqrt{42})\vec{y}_2 \\ 
+&\qquad- (1/\sqrt{14} + 2/\sqrt{14} - 3/\sqrt{14})\vec{y}_1\\
+&= \vec{a}_3 - (0)\vec{y}_2 - (0)\vec{y}_1\\
+&=\vec{a}_3
+\end{aligned}
+$$
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+||\vec{b}_3|| &= \sqrt{1+1+1}\\
+&=\sqrt{3}
+\end{aligned}
+$$
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_3 &= \frac{1}{||\vec{b}_3||}\vec{b}_3\\
+&=1/\sqrt{3}\begin{bmatrix}1\\1\\-1\end{bmatrix}\\
+&=\begin{bmatrix}1/\sqrt{3}\\1/\sqrt{3}\\-1/\sqrt{3}\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}\\
+Since $\vec{b}_3 = \vec{a}_3$,  then we can quickly compute that $\vec{a}_3 = (\sqrt{3})\vec{y}_3$.
+\newpage
+\noindent So now to construct the $QR$ factorization of $A$,  we will use the vectors that form the orthogonal basis as columns for $Q$,  and the columns of $R$ will be the linear combination of $\vec{y}_i$ vectors that construct our $\vec{a}_i$'s,  so we see that
+$$
+A = QR = \begin{bmatrix}
+1/\sqrt{14}&5/\sqrt{42}&1/\sqrt{3}\\
+2/\sqrt{14}&-4/\sqrt{42}&1/\sqrt{3}\\
+3/\sqrt{14}&1/\sqrt{42}&-1/\sqrt{3}
+\end{bmatrix}
+\begin{bmatrix}
+\sqrt{14}&4/\sqrt{14}&0\\
+0&\sqrt{42}/7&0\\
+0&0&\sqrt{3}
+\end{bmatrix}
+$$
+(b) Like before,  let us call the columns of $B$ as vectors $\vec{a}_1, \vec{a}_2,\vec{a}_3,\vec{a}_4$ and then perform Gram-Schmidt on the vectors.
+$$
+\begin{aligned}
+\vec{y}_1 &= \frac{1}{||\vec{a}_1||}\vec{a}_1\\
+&=\frac{1}{\sqrt{1+1+1}}\vec{a}_1\\
+&=1/\sqrt{3}\begin{bmatrix}1\\0\\1\\1\end{bmatrix}\\
+&=\begin{bmatrix}1/\sqrt{3}\\0\\1/\sqrt{3}\\1/\sqrt{3}\end{bmatrix}
+\end{aligned}
+$$
+We can see that $\vec{a}_1 = (\sqrt{3})\vec{y}_1$.
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+\vec{b}_2 &= \vec{a}_2 - (\vec{a}_2\cdot\vec{y}_1)\vec{y}_1\\
+&=\vec{a}_2 - (2/\sqrt{3}-1/\sqrt{3}-1/\sqrt{3})\vec{y}_1\\
+&=\vec{a}_2 - (0)\vec{y}_1\\
+&=\vec{a}_2
+\end{aligned}
+$$
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+||\vec{b}_2|| &= \sqrt{4 + 1 + 1}\\
+&=\sqrt{6}
+\end{aligned}
+$$
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_2&=\frac{1}{||\vec{b}_2||}\vec{b}_2\\
+&=1/\sqrt{6}\begin{bmatrix}2\\0\\-1\\-1\end{bmatrix}\\
+&=\begin{bmatrix}2/\sqrt{6}\\0\\-1/\sqrt{6}\\-1/\sqrt{6}\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}\\
+So we can see that $\vec{a}_2 = (\sqrt{6})\vec{y}_2$
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+\vec{b}_3&=\vec{a}_3-(\vec{a}_3\cdot\vec{y}_2)\vec{y}_2 - (\vec{a}_3\cdot\vec{y}_1)\vec{y}_1\\
+&=\vec{a}_3-(2/\sqrt{6}-1/\sqrt{6})\vec{y}_2-(1/\sqrt{3}+1/\sqrt{3})\vec{y}_1\\
+&=\vec{a}_3-(1/\sqrt{6})\vec{y}_2-(2/\sqrt{3})\vec{y}_1\\
+&=\vec{a}_3-(1/\sqrt{6})\begin{bmatrix}2/\sqrt{6}\\0\\-1/\sqrt{6}\\-1/\sqrt{6}\end{bmatrix}-(2/\sqrt{3})\begin{bmatrix}1/\sqrt{3}\\0\\1/\sqrt{3}\\1/\sqrt{3}\end{bmatrix}\\
+&=\begin{bmatrix}1\\0\\0\\1\end{bmatrix} - \begin{bmatrix}2/6\\0\\-1/6\\-1/6\end{bmatrix} - \begin{bmatrix}2/3\\0\\2/3\\2/3\end{bmatrix} = \begin{bmatrix}0\\0\\-1/2\\1/2\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+||\vec{b}_3|| &= \sqrt{1/4 + 1/4}\\
+&=1/2\sqrt{2}
+\end{aligned}
+$$
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_3&=\frac{1}{||\vec{b}_3||}\vec{b}_3\\
+&=1/2\sqrt{2}\begin{bmatrix}0\\0\\-1/2\\1/2\end{bmatrix}\\
+&=\begin{bmatrix}0\\0\\-\sqrt{2}\\\sqrt{2}\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage} \\
+We now need to construct $\vec{a}_3$ using a linear combination of $\vec{y}_i$'s
+$$
+\begin{aligned}
+\vec{b}_3 &= (1/2\sqrt{2})\vec{y}_3\\
+\vec{a}_3-(1/\sqrt{6})\vec{y}_2-(2/\sqrt{3})\vec{y}_1 &= (1/2\sqrt{2})\vec{y}_3\\
+\vec{a}_3 &=(2/\sqrt{3})\vec{y}_1 + (1/\sqrt{6})\vec{y}_2 + (1/2\sqrt{2})\vec{y}_3
+\end{aligned}
+$$
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+\vec{b}_4 &= \vec{a}_4 - (\vec{a}_4\cdot\vec{y}_3)\vec{y}-(\vec{a}_4\cdot\vec{y}_2)\vec{y}_2 - (\vec{a}_4\cdot\vec{y}_1)\vec{y}_1\\
+&=\vec{a}_4 - (-\sqrt{2})\vec{y}_3-(-1/\sqrt{6})\vec{y}_2-(1/\sqrt{3})\vec{y}_1\\
+&=\begin{bmatrix}0\\1\\1\\0\end{bmatrix}+(\sqrt{2})\begin{bmatrix}0\\0\\-\sqrt{2}\\\sqrt{2}\end{bmatrix}+(1/\sqrt{6})\begin{bmatrix}2/\sqrt{6}\\0\\-1/\sqrt{6}\\-1/\sqrt{6}\end{bmatrix}\\
+&\qquad-(1/\sqrt{3})\begin{bmatrix}1/\sqrt{3}\\0\\1/\sqrt{3}\\1/\sqrt{3}\end{bmatrix}\\
+&=\begin{bmatrix}0\\1\\1\\0\end{bmatrix}+\begin{bmatrix}0\\0\\-2\\2\end{bmatrix}+\begin{bmatrix}2/6\\0\\-1/6\\-1/6\end{bmatrix}-\begin{bmatrix}1/3\\0\\1/3\\1/3\end{bmatrix}\\
+&=\begin{bmatrix}0\\1\\-3/2\\3/2\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+||\vec{b}_4||&=\sqrt{1+9/4+9/4}\\
+&=\sqrt{22/4}\\
+&=\sqrt{22}/2
+\end{aligned}
+$$
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_4&=\frac{1}{||\vec{b}_4||}\vec{b}_4\\
+&=2/\sqrt{22}\begin{bmatrix}0\\1\\-3/2\\3/2\end{bmatrix}\\
+&=\begin{bmatrix}0\\2/\sqrt{22}\\-3/\sqrt{22}\\3/\sqrt{22}\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}\\
+We now need to construct $\vec{a}_4$ using a linear combination of $\vec{y}_i$'s
+$$
+\begin{aligned}
+\vec{b}_4&=(\sqrt{22}/2)\vec{y}_4\\
+\vec{a}_4 +(\sqrt{2})\vec{y}_3+(1/\sqrt{6})\vec{y}_2-(1/\sqrt{3})\vec{y}_1&=(\sqrt{22}/2)\vec{y}_4\\
+\vec{a}_4 &= (1/\sqrt{3})\vec{y}_1 - (1/\sqrt{6})\vec{y}_2 - (\sqrt{2})\vec{y}_3 + (\sqrt{22}/2)\vec{y}_4
+\end{aligned}
+$$
+So now to construct the $QR$ factorization of $B$,  we will use the vectors that form the orthogonal basis as columns for $Q$,  and the columns of $R$ will be the linear combination of $\vec{y}_i$ vectors that construct our $\vec{a}_i$'s,  so we see that
+$$
+B = QR = \begin{bmatrix} 
+1/\sqrt{3}&2/\sqrt{6}&0&0\\
+0&0&0&2/\sqrt{22}\\
+1/\sqrt{3}&-1/\sqrt{6}&-\sqrt{2}&-3/\sqrt{22}\\
+1/\sqrt{3}&-1/\sqrt{6}&\sqrt{2}&3\sqrt{22}
+\end{bmatrix}\begin{bmatrix}
+\sqrt{3}&0&2/\sqrt{3}&1/\sqrt{3}\\
+0&\sqrt{6}&1/\sqrt{6}&-1/\sqrt{6}\\
+0&0&1/2\sqrt{2}&-\sqrt{2}\\
+0&0&0&\sqrt{22}/2
+\end{bmatrix}
+$$
 \end{document}
