@@ -457,4 +457,403 @@ B = QR = \begin{bmatrix}
 0&0&0&\sqrt{22}/2
 \end{bmatrix}
 $$
+(c) C is orthogonal, because it consists of only orthogonal matrices, as we saw from problem 1. Since C is orthogonal, then the columns of C also from an orthogonal basis for $\mathbb{R}^4$. If we consider $C = Q$, and $R = I$, then we have an orthogonal matrix $Q$ and a triangular matrix $R$ which when we find the product $QR$ gives us $C$.
+\newpage
+\qs{}{
+Let $D \in \mathbb{R}^{n \times n}$ be the diagonal matrix:
+$$
+D=\left[\begin{array}{llll}
+d_1 & & & \\
+& d_2 & & \\
+& & \ddots & \\
+& & & d_n
+\end{array}\right] .
+$$
+For which values of the $d_i$ is $D$ an orthogonal matrix?}
+\sol If $D$ is orthogonal, then that means $D^\top D=I$. Since $D$ is diagonal, then it is also symmetric and thus $D^\top = D$ so we have that $DD=I$ or $D^2 = I$. So then we can see that 
+$$
+D^\top D = D^2 = \begin{bmatrix}
+(d_1)^2&&&\\
+&(d_2)^2&&\\
+&&\ddots&\\
+&&&(d_n)^2
+\end{bmatrix} = \begin{bmatrix}
+1&&&\\
+&1&&\\
+&&\ddots&\\
+&&&1
+\end{bmatrix}
+$$
+So thus we can see that each $(d_i)^2 = 1$ and hence we can conclude that the value of the $d_i$'s must be $-1$ or $1$.
+\qs{}{
+For the following matrix $A$, find:\\
+(a) $A^{\top} A$\\
+(b) All eigenvalues of $A^{\top} A$\\
+(c) An eigenbasis for $A^{\top} A$\\
+(d) All singular values of $A$\\
+(e) An orthonormal eigenbasis for $A^{\top} A$\\
+(f) A singular value decomposition of $A$\\
+$$
+A=\left[\begin{array}{lll}
+1 & 2 & 0 \\
+2 & 0 & 2
+\end{array}\right]
+$$}
+\sol \\
+(a)
+$$
+A^\top A = \begin{bmatrix}
+1&2\\
+2&0\\
+0&2
+\end{bmatrix} \begin{bmatrix}
+1&2&0\\
+2&0&2
+\end{bmatrix} = \begin{bmatrix}
+5&2&4\\
+2&4&0\\
+4&0&4
+\end{bmatrix}
+$$
+(b) $\det(\lambda I_3 - A^\top A)$
+$$
+\det\begin{bmatrix}
+\lambda-5&-2&-4\\
+-2&\lambda-4&0\\
+-4&0&\lambda-4
+\end{bmatrix}
+$$
+If we perform a cofactor expansion about row 3
+$$
+\begin{aligned}
+&=-4\det\begin{bmatrix}-2&-4\\\lambda-4&0\end{bmatrix} + (\lambda-4)\det\begin{bmatrix}\lambda-5&-2\\-2&\lambda-4\end{bmatrix}\\
+&=-4(4(\lambda-4))+(\lambda-4)((\lambda-5)(\lambda-4)-4)\\
+&=-16(\lambda-4)+(\lambda-4)(\lambda^2-9\lambda+20-4)\\
+&=(\lambda-4)(\lambda^2-9\lambda)\\
+&=(\lambda-9)(\lambda-4)(\lambda)
+\end{aligned}
+$$
+We can see that $A^\top A$ has eigenvalues $9, 4, 0$. \\
+\\
+\noindent
+(c)
+$$
+9I - A^\top A = \begin{bmatrix}
+4&-2&-4\\
+-2&5&0\\
+-4&0&5
+\end{bmatrix}\qquad\vec{v}_1 = \begin{bmatrix}5\\2\\4\end{bmatrix}
+$$
+$$
+4I-A^\top A = \begin{bmatrix}
+-1&-2&-4\\
+-2&0&0\\
+-4&0&0
+\end{bmatrix}\qquad\vec{v}_2 = \begin{bmatrix}0\\-2\\1\end{bmatrix}
+$$
+$$
+0I-A^\top A = \begin{bmatrix}
+-5&-2&-4\\
+-2&-4&0\\
+-4&0&-4
+\end{bmatrix}\qquad\vec{v}_3 = \begin{bmatrix}2\\-1\\-2\end{bmatrix}
+$$
+From this then we can say that an eigenbases for $A^\top A$
+$$
+\left\{
+\begin{bmatrix}5\\2\\4\end{bmatrix},\begin{bmatrix}0\\-2\\1\end{bmatrix},\begin{bmatrix}2\\-1\\-2\end{bmatrix}
+\right\}
+$$
+(d) We can find the singular values $\sigma_i$'s by taking the square root of each eigenvalue, we see that we have singular values 3, 2, 0 \\
+\\
+\noindent (e) Since an eigenbasis for a symmetric matrix is always orthogonal, then we need normalize each of the eigenbasis vectors to make it orthonormal.
+$$
+||\vec{v}_1|| = \sqrt{25 + 4 + 16} = \sqrt{45} = 3\sqrt{5}\qquad\qquad\frac{1}{||\vec{v}_1||}\vec{v}_1 = 1/3\sqrt{5}\begin{bmatrix}5\\2\\4\end{bmatrix}=\begin{bmatrix}5/3\sqrt{5}\\2/3\sqrt{5}\\4/3\sqrt{5}\end{bmatrix}
+$$
+$$
+||\vec{v}_2|| = \sqrt{4+1} = \sqrt{5}\qquad\qquad\qquad\frac{1}{||\vec{v}_2||}\vec{v}_2 = 1/\sqrt{5}\begin{bmatrix}0\\-2\\1\end{bmatrix} = \begin{bmatrix}0\\-2/\sqrt{5}\\1/\sqrt{5}\end{bmatrix}
+$$
+$$
+||\vec{v}_3|| = \sqrt{4+1+4} = \sqrt{9} = 3\qquad\qquad\frac{1}{||\vec{v}_3||}\vec{v}_3 = 1/3\begin{bmatrix}2\\-1\\-2\end{bmatrix} = \begin{bmatrix}2/3\\-1/3\\-2/3\end{bmatrix}
+$$
+So we can say that an orthonormal eigenbasis for $A^\top A$ is
+$$
+\left\{
+\begin{bmatrix}5/3\sqrt{5}\\2/3\sqrt{5}\\4/3\sqrt{5}\end{bmatrix},
+\begin{bmatrix}0\\-2/\sqrt{5}\\1/\sqrt{5}\end{bmatrix},
+\begin{bmatrix}2/3\\-1/3\\-2/3\end{bmatrix}
+\right\}
+$$
+(f) $A = u\sum V^\top$
+$$
+V = \begin{bmatrix}5/3\sqrt{5}&0&2/3\\
+2/3\sqrt{5}&-2/\sqrt{5}&-1/3\\
+4/3\sqrt{5}&1/\sqrt{5}&-2/3
+\end{bmatrix}
+$$
+We can construct $\sum$ using the singular values 3 and 2
+$$
+\sum = \begin{bmatrix}3&0&0\\0&2&0\end{bmatrix}
+$$
+In order to find $u$, then we must calculate them using the non-zero singular values.
+$$
+\vec{u}_1 = \frac{1}{\sigma_1}A\vec{v}_1 = 1/3\begin{bmatrix}1&2&0\\2&0&2\end{bmatrix}\begin{bmatrix}5/3\sqrt{5}\\2/3\sqrt{5}\\4/3\sqrt{5}\end{bmatrix} = 1/3\begin{bmatrix}9/3\sqrt{5}\\18/3\sqrt{5}\end{bmatrix} = \begin{bmatrix}1/\sqrt{5}\\2/\sqrt{5}\end{bmatrix}
+$$
+$$
+\vec{u}_2 = \frac{1}{\sigma_2}A\vec{v}_2 = 1/2\begin{bmatrix}1&2&0\\2&0&2\end{bmatrix}\begin{bmatrix}0\\-2/\sqrt{5}\\1/\sqrt{5}\end{bmatrix} = 1/2\begin{bmatrix}-4/\sqrt{5}\\2/\sqrt{5}\end{bmatrix} = \begin{bmatrix}-2/\sqrt{5}\\1/\sqrt{5}\end{bmatrix}
+$$
+$$
+u = \begin{bmatrix}
+1/\sqrt{5}&-2/\sqrt{5}\\
+2/\sqrt{5}&1/\sqrt{5}
+\end{bmatrix}
+$$
+So with these matrices that we have found, we can now construct $A$ by taking the product
+$$
+A = \begin{bmatrix}
+1/\sqrt{5}&-2/\sqrt{5}\\
+2/\sqrt{5}&1/\sqrt{5}
+\end{bmatrix}
+\begin{bmatrix}
+3&0&0\\
+0&2&0
+\end{bmatrix}
+\begin{bmatrix}
+5/3\sqrt{5}&2/3\sqrt{5}&4/3\sqrt{5}\\
+0&-2/\sqrt{5}&1/\sqrt{5}\\
+2/3&-1/3&-2/3
+\end{bmatrix}
+$$
+\qs{}{
+For the following matrix $B$, find:\\
+(a) $B^{\top} B$\\
+(b) All eigenvalues of $B^{\top} B$\\
+(c) An eigenbasis for $B^{\top} B$\\
+(d) All singular values of $B$\\
+(e) An orthonormal eigenbasis for $B^{\top} B$\\
+(f) A singular value decomposition of $B$.
+$$
+B=\left[\begin{array}{ccc}
+1 & 1 & 3 \sqrt{7 / 15} \\
+1 & -1 & -\sqrt{7 / 15} \\
+0 & 0 & \sqrt{7 / 15} \\
+1 & 2 & -2 \sqrt{7 / 15}
+\end{array}\right]
+$$}
+\sol \\
+(a)
+$$
+B^\top B = \begin{bmatrix}
+1&1&0&1\\
+1&-1&0&2\\
+3\sqrt{7/15}&-\sqrt{7/15}&\sqrt{7/15}&-2\sqrt{7/15}
+\end{bmatrix}
+\begin{bmatrix}
+1&1&3\sqrt{7/15}\\
+1&-1&-\sqrt{7/15}\\
+0&0&\sqrt{7/15}\\
+1&2&-2\sqrt{7/15}\\
+\end{bmatrix}=\begin{bmatrix}
+3&2&0\\
+2&6&0\\
+0&0&7
+\end{bmatrix}
+$$
+(b) $\det(\lambda I - B^\top B)$
+$$
+\det\begin{bmatrix}
+\lambda-3&-2&0\\
+-2&\lambda-6&0\\
+0&0&\lambda-7
+\end{bmatrix}
+$$
+We can perform cofactor expansion about the 3rd row
+$$
+\begin{aligned}
+&=(\lambda-7)((\lambda-3)(\lambda-6)-4)\\
+&=(\lambda-7)(\lambda^2-9\lambda+14)\\
+&=(\lambda-7)(\lambda-7)(\lambda-2)
+\end{aligned}
+$$
+So then we can say $B^\top B$ has eigenvalues 7, 2.\\
+\\
+\noindent(c)
+$$
+7I - B^\top B = \begin{bmatrix}
+4&-2&0\\
+-2&1&0\\
+0&0&0
+\end{bmatrix}\qquad\vec{v}_1=\begin{bmatrix}0\\0\\1\end{bmatrix}\qquad\vec{v}_2=\begin{bmatrix}1\\2\\0\end{bmatrix}
+$$
+$$
+2I- B^\top B = \begin{bmatrix}
+-1&-2&0\\
+-2&-4&0\\
+0&0&-5
+\end{bmatrix}\qquad\vec{v}_3=\begin{bmatrix}2\\-1\\0\end{bmatrix}
+$$
+From this then we can say that an eigenbases for $B^\top B$
+$$
+\left\{
+\begin{bmatrix}0\\0\\1\end{bmatrix},
+\begin{bmatrix}1\\2\\0\end{bmatrix},
+\begin{bmatrix}2\\-1\\0\end{bmatrix}
+\right\}
+$$
+(d) The singular values can are found by taking the square root of each eigenvalue, the singular values are $\sqrt{7}, \sqrt{7}, \sqrt{2}$\\
+\\
+\noindent(e) The set of vectors is already orthogonal, so now we must normalize each vector.
+$$
+||\vec{v}_1|| = \sqrt{1} = 1 \qquad \vec{v}_1\text{ is already normalized}
+$$
+$$
+||\vec{v}_2|| = \sqrt{1 + 4} = \sqrt{5} \qquad \frac{1}{||\vec{v}_2||}\vec{v}_2 = 1/\sqrt{5}\begin{bmatrix}1\\2\\0\end{bmatrix} = \begin{bmatrix}1/\sqrt{5}\\2/\sqrt{5}\\0\end{bmatrix}
+$$
+$$
+||\vec{v}_3|| = \sqrt{1 + 4} = \sqrt{5} \qquad \frac{1}{||\vec{v}_2||}\vec{v}_3 = 1/\sqrt{5}\begin{bmatrix}2\\-1\\0\end{bmatrix} = \begin{bmatrix}2/\sqrt{5}\\-1/\sqrt{5}\\0\end{bmatrix}
+$$
+So then an orthonormal eigenbasis for $B^\top B$ is
+$$
+\left\{
+\begin{bmatrix}0\\0\\1\end{bmatrix}
+\begin{bmatrix}1/\sqrt{5}\\2/\sqrt{5}\\0\end{bmatrix}
+\begin{bmatrix}2/\sqrt{5}\\-1/\sqrt{5}\\0\end{bmatrix}
+\right\}
+$$
+(f) $B = u\Sigma V^\top$
+$$
+V = \begin{bmatrix}
+0&1/\sqrt{5}&2/\sqrt{5}\\
+0&2/\sqrt{5}&-1/\sqrt{5}\\
+1&0&0
+\end{bmatrix}
+$$
+We can construct $\Sigma$ using the singular values
+$$
+\Sigma = \begin{bmatrix}
+\sqrt{7}&0&0\\
+0&\sqrt{7}&0\\
+0&0&\sqrt{2}\\
+0&0&0
+\end{bmatrix}
+$$
+In order to find $u$, then we must calculate it using the non-zero singular values.
+$$
+\vec{u}_1 = \frac{1}{\sigma_1}B\vec{v}_1 = 1/\sqrt{7}\begin{bmatrix}
+1&1&3\sqrt{7/15}\\
+1&-1&-\sqrt{7/15}\\
+0&0&\sqrt{7/15}\\
+1&2&-2\sqrt{7/15}\\
+\end{bmatrix}
+\begin{bmatrix}0\\0\\1\end{bmatrix} = 1/\sqrt{7}\begin{bmatrix}3\sqrt{7/15}\\-\sqrt{7/15}\\\sqrt{7/15}\\-2\sqrt{7/15}\end{bmatrix} = \begin{bmatrix}3/\sqrt{15}\\-1/\sqrt{15}\\1/\sqrt{15}\\-2/\sqrt{15}\end{bmatrix}
+$$
+$$
+\vec{u}_2  = \frac{1}{\sigma_2}B\vec{v}_2 = 1/\sqrt{7}
+\begin{bmatrix}
+1&1&3\sqrt{7/15}\\
+1&-1&-\sqrt{7/15}\\
+0&0&\sqrt{7/15}\\
+1&2&-2\sqrt{7/15}
+\end{bmatrix}
+\begin{bmatrix}1/\sqrt{5}\\2/\sqrt{5}\\0\end{bmatrix} = 1/\sqrt{7}\begin{bmatrix}3/\sqrt{5}\\-1/\sqrt{5}\\0\\5/\sqrt{5}\end{bmatrix} = \begin{bmatrix} 3/\sqrt{35}\\-1/\sqrt{35}\\0\\5/\sqrt{35}\end{bmatrix}
+$$
+$$
+\vec{u}_3 = \frac{1}{\sigma_3}B\vec{v}_2 = 1/\sqrt{7}
+\begin{bmatrix}
+1&1&3\sqrt{7/15}\\
+1&-1&-\sqrt{7/15}\\
+0&0&\sqrt{7/15}\\
+1&2&-2\sqrt{7/15}
+\end{bmatrix}
+\begin{bmatrix}2/\sqrt{5}\\-1/\sqrt{5}\\0\end{bmatrix} =
+1/\sqrt{2}\begin{bmatrix}1/\sqrt{5}\\3/\sqrt{5}\\0\\0\end{bmatrix} = \begin{bmatrix}1/\sqrt{10}\\3/\sqrt{10}\\0\\0\end{bmatrix}
+$$
+But we need to extend our set of vectors since it needs to be a basis for $\mathbb{R}^4$. An obvious candidate is the standard basis vector $\vec{e}_3$, since it means we will have to do the least amount of work when we perform Gram-Schmidt
+$$
+\begin{aligned}
+\vec{b}_4 &= \vec{a}_4 - (\vec{a}_4\cdot\vec{u}_3)\vec{u}_3 - (\vec{a}_4\cdot\vec{u}_2)\vec{u}_2 - (\vec{a}_4\cdot\vec{u}_1)\vec{u}_1\\
+&= \vec{a}_4 - 0\vec{u}_3 - 0\vec{u}_2 - 1/\sqrt{5}\vec{u}_1\\
+&=\begin{bmatrix}0\\0\\1\\0\end{bmatrix} - \begin{bmatrix}3/15\\-1/15\\1/15\\-2/15\end{bmatrix} = \begin{bmatrix}-3/15\\1/15\\14/15\\2/15\end{bmatrix}
+\end{aligned}
+$$
+Now to normalize $\vec{b}_4$.
+$$
+||\vec{b}_4|| = \sqrt{\frac{9}{15} + \frac{196}{225} + \frac{1}{225} + \frac{4}{225}} = \sqrt{210/225} = \sqrt{14/15} \qquad \vec{u}_4 = \frac{1}{||\vec{b}_4||}\vec{b}_4 = \sqrt{15/14}\begin{bmatrix}-3/15\\1/15\\14/15\\2/15\end{bmatrix} =\begin{bmatrix}-\sqrt{3/70}\\1/\sqrt{210}\\\sqrt{14/15}\\\sqrt{2/105}\end{bmatrix}
+$$
+$$
+u = \begin{bmatrix}
+3/\sqrt{15}&3/\sqrt{35}&1/\sqrt{10}&-\sqrt{3/70}\\
+-1/\sqrt{15}&-1/\sqrt{35}&3/\sqrt{10}&1/\sqrt{210}\\
+1/\sqrt{15}&0&0&\sqrt{14/15}\\
+-2/\sqrt{15}&5/\sqrt{35}&0&\sqrt{2/105}
+\end{bmatrix}
+$$
+Since we have found the matrices required for the singular value decomposition of $B$, then we can say
+$$
+B = \begin{bmatrix}
+3/\sqrt{15}&3/\sqrt{35}&1/\sqrt{10}&-\sqrt{3/70}\\
+-1/\sqrt{15}&-1/\sqrt{35}&3/\sqrt{10}&1/\sqrt{210}\\
+1/\sqrt{15}&0&0&\sqrt{14/15}\\
+-2/\sqrt{15}&5/\sqrt{35}&0&\sqrt{2/105}
+\end{bmatrix}
+\begin{bmatrix}
+\sqrt{7}&0&0\\
+0&\sqrt{7}&0\\
+0&0&\sqrt{2}\\
+0&0&0
+\end{bmatrix}
+\begin{bmatrix}
+0&0&1\\
+1/\sqrt{5}&2/\sqrt{5}&0\\
+2/\sqrt{5}&-1/\sqrt{5}&0
+\end{bmatrix}
+$$
+\qs{}{Consider $C([-\pi, \pi])$ with the inner-product
+$$
+\langle f \mid g\rangle=\frac{1}{\pi} \int_{-\pi}^\pi f(x) g(x) \mathrm{d} x .
+$$
+
+For each integer $n \geq 1$ let $W_n$ be the subspace of $C([-\pi, \pi])$
+$$
+W_n=\operatorname{span}(1, \sin (x), \cos (x), \sin (2 x), \cos (2 x), \sin (3 x), \cos (3 x), \ldots, \sin (n x), \cos (n x)) .
+$$
+
+Take for granted (you pretty much verified this on the last problem set) that
+$$
+\mathfrak{B}_n=\{1 / 2, \sin (x), \cos (x), \sin (2 x), \cos (2 x), \ldots, \sin (n x), \cos (n x)\}
+$$
+is an orthonormal basis for $W_n$. Then the $n$th Fourier approximation of $f \in C([-\pi, \pi])$ is:
+$$
+\operatorname{proj}_{W_n}(f)=\langle 1 / 2 \mid f\rangle+\sum_{k=1}^n\langle\sin (k x) \mid f\rangle \sin (k x)+\langle\cos (k x) \mid f\rangle \cos (k x)
+$$
+and the Fourier series of $f^1$ is:
+$$
+\lim _{n \rightarrow \infty} \operatorname{proj}_{W_n}(f)=\langle 1 / 2 \mid f\rangle+\sum_{k=1}^{\infty}\langle\sin (k x) \mid f\rangle \sin (k x)+\langle\cos (k x) \mid f\rangle \cos (k x) .
+$$
+(a) Compute the Fourier series of $x^2$. \\
+(b) Compute the Fourier series of $x^3$.
+}
+\sol \\
+(a)
+$$
+\begin{aligned}
+\operatorname{proj}_{W_n}(x^2) &= \langle 1/2 | x^2 \rangle + \sum_{k=1}^n \langle \sin(kx) | x^2 \rangle\sin(kx) + \langle\cos(kx)|x^2\rangle\cos(kx)\\
+&=\frac{1}{\pi}\int_{-\pi}^\pi x^2/2\mathrm{d}x + \ldots\\
+&=\frac{1}{2\pi}\int_{-\pi}^\pi x^2\mathrm{d}x + \ldots\\
+&=\frac{1}{2\pi}\left[\frac{x^3}{3}\right]_{x=-\pi}^\pi + \ldots\\
+&=\frac{1}{2\pi}\left[\frac{\pi^3}{3}+\frac{\pi^3}{3}\right]\\
+&=\frac{\pi^2}{3} + \sum_{k=1}^n \langle \sin(kx) | x^2 \rangle\sin(kx) + \langle\cos(kx)|x^2\rangle\cos(kx)\\
+&=\frac{\pi^2}{3} + \sum_{k=1}^n \langle\cos(kx)|x^2\rangle\cos(kx)\\
+&=\frac{\pi^2}{3} + \sum_{k=1}^n \left(\frac{1}{\pi}\int_{-\pi}^{\pi}x^2\cos(kx)\right)\cos(kx)\\
+&=\frac{\pi^2}{3} + \sum_{k=1}^n \frac{1}{\pi}\left(\left[\frac{x^2}{k}\sin(kx)+\frac{2x}{k^2}\cos(kx)-\frac{2}{k^3}\sin(kx)\right]_{x=-\pi}^\pi\right)\cos(kx)\\
+&=\frac{\pi^2}{3} + \sum_{k=1}^n \frac{1}{\pi}\left(\frac{2\pi}{k^2}\cos(k\pi)-\frac{2(-\pi)}{k^2}\cos(k\pi)\right)\cos(kx)\\
+&=\frac{\pi^2}{3} + \sum_{k=1}^n \frac{1}{\pi}\left(\frac{4\pi}{k^2}\cos(k\pi)\right)\cos(kx)\\
+&=\frac{\pi^2}{3} + \sum_{k=1}^n \frac{1}{\pi}\left(\frac{4(-1)^k}{k^2}\right)\cos(kx)
+\end{aligned}
+$$
+(b)
+$$
+\begin{aligned}
+\end{aligned}
+$$
 \end{document}
