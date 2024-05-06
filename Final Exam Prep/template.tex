@@ -1,0 +1,1078 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+
+\usepackage{titling}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \vspace{0.2em}
+    \begin{center}\large\bfseries#1\end{center}
+    \vskip0.5em}%
+}
+
+\title{Math 2700.009: Linear Algebra}
+\subtitle{Final Exam Notes}
+\author{Ezekiel Berumen}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\section{How to find a solution to $A\vec{x} = \vec{b}$ when $A$ is full rank}
+\thm{Invertible Matrix Theorem}{
+for a given matrix $A\in\mathbb{R}^{n\times n}$, the following are equivalent
+\begin{itemize}
+\item $A$ is invertible
+\item $A$ is full rank
+\item $\det(A) \ne 0$
+\end{itemize}
+}
+\noindent To find a solution to the equation $A\vec{x} = \vec{b}$ where $A\in\mathbb{R}^{n\times n}$, it may be favorable to check if $A$ is invertible first by checking that the determinant is non-zero. If $A$ is found to have an non-zero determinant or is found to be full rank, then a right inverse can be found by augmenting the matrix with $I_n$ and then performing Guass-Jordan elimination. Below is an example
+\ex{}{
+$$A = \begin{bmatrix}
+1 & 1 & 1 & 1 \\
+1 & 1 &1 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0
+\end{bmatrix}$$
+\begin{align*}
+	&\left[\begin{array}{cccc|cccc}
+		1 & 1 & 1 & 1 & 1 & 0 & 0 & 0 \\
+		1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+		1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1
+	\end{array}\right]
+	&& \begin{aligned} & R_1 \leftrightarrow R_4 \\ & R_2 \leftrightarrow R_3 \end{aligned}
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+		1 & 1 & 1 & 1 & 1 & 0 & 0 & 0
+	\end{array}\right]
+	&& R_4 - R_3 \rightarrow R_4 \\
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		1 & 1 & 1 & 0 & 0 & 1 & 0 & 0 \\
+		0 & 0 & 0 & 1 & 1 & -1 & 0 & 0
+	\end{array}\right]
+	&& R_3 - R_2 \rightarrow R_3
+	&\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 \\
+		0 & 0 & 1 & 0 & 0 & 1 & -1 & 0 \\
+		0 & 0 & 0 & 1 & 1 & -1 & 0 & 0
+	\end{array}\right]
+	&& R_2 - R_1 \rightarrow R_2 \\
+\end{align*}
+\[
+	\left[\begin{array}{cccc|cccc}
+		1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+		0 & 1 & 0 & 0 & 0 & 0 & 1 & -1 \\
+		0 & 0 & 1 & 0 & 0 & 1 & -1 & 0 \\
+		0 & 0 & 0 & 1 & 1 & -1 & 0 & 0
+	\end{array}\right]
+	\implies A^{-1} = \begin{bmatrix} 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & -1 \\ 0 & 1 & -1 & 0 \\ 1 & -1 & 0 & 0\end{bmatrix}
+\]\\
+}
+\section{Relationships between the dimension of a space and the possible sizes of linearly (in)dependent and spanning sets}
+\dfn{Dimension}{The dimension of $V$ denoted $\operatorname{dim}(V)$ is the number of elements in a basis}
+\noindent By the definition of dimension, we know that it represents the number of linearly independent elements that also span the space. That is to say, that the size of basis for a space cannot exceed the dimension of that space. As a result, you cannot have more linearly independent elements in a space than that of the size of the basis. Spanning sets however differ, since the span of a set of vectors can potentially contain linearly dependent vectors. In particular we say that: \\
+\\
+\noindent If $S\le V$ and $\vec{v}\in\operatorname{span}(S)$, $\vec{v}\in S$, then if $S'$ is obtained by removing $\vec{v}$ from $S$ and $\vec{v}\in\operatorname{span}(S')$, then $\operatorname{span}(S)=\operatorname{span}(S')$ \\
+\\
+\noindent In more simple terms, we can have two unique sets of vectors which can have equal spans. This is because the span of a linearly independent set of vectors is equal to that of a linearly dependent vectors which span the same space.
+\section{How to find a basis for a subspace of $\mathbb{R}^n$ and the dimension of a subspace}
+\dfn{Subspace}{If $V$ is a vector space and $W$ is a subset of $V$, we say $W$ is a subspace of $V$ if
+\begin{itemize}
+\item $\vec{0}^V\in W$
+\item $\vec{x},\vec{y}\in W \implies \vec{x}+\vec{y}\in W$
+\item $\vec{x}\in W$, $r\in\mathbb{R} \implies r\vec{x}\in W$
+\end{itemize}
+}
+\noindent To find a basis of a subspace in $\mathbb{R}^n$,  we must ensure that the set of vectors selected meet certain conditions.
+\begin{itemize}
+\item The span of the set of vectors contains the zero vector from $\mathbb{R}^n$
+\item The span of the set of vectors is closed under addition and scalar multiplication.
+\end{itemize}
+I will include examples from previous homeworks to demonstrate different methods for which this can be verified. 
+\qs{Homework 05, Question 3}{What is the dimension of the following subspace of $\mathbb{R}^3$ ? Justify your answer.
+$$
+\operatorname{span}\left(\left[\begin{array}{c}
+1 \\
+-1 \\
+2
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+3 \\
+4
+\end{array}\right],\left[\begin{array}{l}
+2 \\
+1 \\
+8
+\end{array}\right]\right)
+$$}
+\sol The dimension of the subspace generated by taking the span of the vectors is 2. This is because one of the vectors in the set is linearly dependent, in particular we can see that
+$$
+\begin{aligned}
+	2 \begin{bmatrix} 1 \\ -1 \\ 2 \end{bmatrix} +
+	\begin{bmatrix} 0 \\ 3 \\ 4 \end{bmatrix}  & =
+	\begin{bmatrix} 2 \\ -2 \\ 4 \end{bmatrix} +
+	\begin{bmatrix} 0 \\ 3 \\ 4 \end{bmatrix} \\
+	& = \begin{bmatrix} 2 + 0 \\ -2 + 3 \\ 4 + 4 \end{bmatrix} \\
+	& = \begin{bmatrix} 2 \\ 1 \\ 8 \ \end{bmatrix}
+\end{aligned}
+$$
+Because of this, it is sufficient to say that the vectors form a 2-dimensional subspace of $\mathbb{R}^3$. This is because by definition, a basis is a set of linearly independent vectors that span a subspace. Since the two remaining vectors are linearly indepdendent and span the subspace, they serve as a basis for this subspace, and thus the dimension is 2. \\
+\\
+\noindent However,  this is not the only methodology to finding a basis and the dimension of a subspace from $\mathbb{R}^n$.  Below is a modified version of a previous homework question to demonstrate another method for finding a subspaces basis and its dimension.
+\qs{Homework 05, Question 8}{Let
+$$
+W = \operatorname{span}\left\{\begin{bmatrix} 1\\0\\0 \end{bmatrix},\begin{bmatrix} 0\\1\\0 \end{bmatrix}\right\}
+$$
+be a subspace of $\mathbb{R}^3$\\
+(a) Find a basis for $W$\\
+(b) Find the $\dim(W)$}
+\sol Since $W$ contains all linear combinations of the vectors
+$$
+\left\{\begin{bmatrix} 1\\0\\0 \end{bmatrix},\begin{bmatrix} 0\\1\\0 \end{bmatrix}\right\}
+$$
+Then we can use any scalar multiple of these to attempt to argue the case that they form a basis for the subspace $W$.  The intuitive option will be to use the vectors as they appear in the definition,  and that is what we will do.  To verify that they form a basis for the subspace,  then we can first check linear independence.  We can see that there is no way to generate a vector as a linear combination of the other so that condition is met. \\
+\\
+\noindent SInce the subspace definition tells us that the subspace is generated by taking the span of the two vectors,  then that automatically satisfies the spanning condition of a basis,  hence it is sufficient to say that the set of vectors forms a basis for the subspace $W$.\\
+\\
+\noindent We have just found a basis of $W$ to contain two vectors,  so if we appeal to the definition of dimension, then we can say that $\dim(W)=2$.  This is because,  as we saw earlier the number of vectors in a basis is what defines the dimension,  hence why the dimension of $W$ is equal to 2 when a basis for $W$ contains two elements.
+\section{How to verify a function is a linear transformation}
+Recall that if $V,W$ are vector spaces, to verify a linear transformation from $V$ to $W$, two properties must be verified:
+\begin{itemize}
+\item Additivity: A function $T:V\rightarrow W$ is additive for any $\vec{x},\vec{y}\in V$
+$$
+T(\vec{x}+\vec{y}) = T(\vec{x}) + T(\vec{y})
+$$
+\item Homogenity: A function $T:V \rightarrow W$ is homogenous if for any $c\in\mathbb{R}$ and $\vec{x}\in V$
+$$
+T(c\vec{x}) = cT(\vec{x})
+$$
+\end{itemize}
+\pagebreak
+\dfn{Kernel}{The kernel (sometimes known as null-sapce) of a linear transformation is the subset of the domain that is transformed into the zero vector}
+\thm{Rank-Nullity}{If $T: V\rightarrow W$ is a linear transformation:
+$$
+\dim(V) = \dim(\ker(T)) + \dim(\ran(T))
+$$}
+\section{How to find the matrix of a linear transformation}
+\textbf{$T:\mathbb{R}^n\rightarrow\mathbb{R}^k$ with the standard bases} \\
+For every linear transformation $T:\mathbb{R}^n\rightarrow\mathbb{R}^k$ has an $A\in\mathbb{R}^{k\times n}$ such that
+$$
+[T(\vec{x})]_{\mathfrak{E}^k} = A[\vec{x}]_{\mathfrak{E}^n}
+$$
+To find such a matrix $A$ for the transformation,  a matrix can be constructed by taking the values of the transformed standard basis vectors and "glueing" them together,  in particular we say that
+$$
+A = \begin{bmatrix}
+\vline&\vline&&\vline\\
+&&&&\\
+\quad T(e_1)&T(e_2)&\ldots&T(e_n)\\
+&&&\\
+\vline&\vline&&\vline
+\end{bmatrix}
+$$
+\textbf{$T:W \rightarrow W$ when a basis for $W$ is given} \\
+For every transformation $T:W \rightarrow W$ where $\dim(W)=n$ and a basis $\mathfrak{B}=\langle b_1, b_2, \ldots, b_n\rangle$,  there exists a matrix $A\in\mathbb{R}^{n\times n}$ such that
+$$
+[T(\vec{x})]_\mathfrak{B} = A[\vec{x}]_\mathfrak{B}
+$$
+To find such a matrix $A$ for the transformation,  a matrix can be constructed by computing the coordinates of the transformed basis vectors and "glueing" them together,  in particular we say that
+$$
+A = \begin{bmatrix}
+\vline&\vline&&\vline\\
+&&&&\\
+\quad[T(b_1)]_\mathfrak{B}&[T(b_2)]_\mathfrak{B}&\ldots&[T(b_n)]_\mathfrak{B}\\
+&&&\\
+\vline&\vline&&\vline
+\end{bmatrix}
+$$
+\subsection{How to find change of basis matrix}
+If $\mathfrak{B}_1$ and $\mathfrak{B}_2$ are bases for $\mathbb{R}^n$,  then there exists a matrix $P_{\mathfrak{B}_1\rightarrow\mathfrak{B}_2}\in\mathbb{R}^{n\times n}$ so that for all $\vec{x}\in\mathbb{R}^n$
+$$
+P_{\mathfrak{B}_1\rightarrow\mathfrak{B}_2}[\vec{x}]_{\mathfrak{B}_1} = [\vec{x}]_{\mathfrak{B}_2}
+$$
+Notice if $\mathfrak{B}_3$ is another basis
+$$
+P_{\mathfrak{B}_2\rightarrow\mathfrak{B}_3}P_{\mathfrak{B}_1\rightarrow\mathfrak{B}_2}[\vec{x}]_{\mathfrak{B}_1} = [\vec{x}]_{\mathfrak{B}_3}
+$$
+In particular,  we also see that $(P_{\mathfrak{B}_1\rightarrow\mathfrak{B}_2})^{-1} = P_{\mathfrak{B}_2\rightarrow\mathfrak{B}_1}$. This is particularly useful when finding the matrix of a linear transformation with non-standard bases. \\
+\\
+\textbf{$T:\mathbb{R}^n\rightarrow\mathbb{R}^k$ with the non-standard bases} \\
+For every linear transformation $T:\mathbb{R}^n\rightarrow\mathbb{R}^k$ with bases $\mathfrak{B}^n = \langle b_1, b_2,\ldots,b_n \rangle,\mathfrak{B}^k=\langle v_1,v_2,\ldots,v_k \rangle$,  there exists a matrix $A\in\mathbb{R}^{k\times n}$ such that
+$$
+[T(\vec{x})]_{\mathfrak{B}^k} = A[\vec{x}]_{\mathfrak{B}^n}
+$$
+Such a matrix can be constructed by applying the formula
+$$
+A = P_{\mathfrak{E}^k\rightarrow\mathfrak{B}^k}MP_{\mathfrak{B}^n\rightarrow\mathfrak{E}^n}
+$$
+Where M is the matrix from the original function definition of $T$ such that $T(\vec{x}) = M\vec{x}$
+\ex{Matrix of $T:\mathbb{R}^3\rightarrow\mathbb{R}^2$}{
+If $T:\mathbb{R}^3\rightarrow\mathbb{R}^2$ is a linear transformation with definition
+$$
+T(\vec{x}) = \begin{bmatrix} 1&2&-1\\0&2&1 \end{bmatrix}\vec{x}
+$$
+With ordered bases $\mathfrak{B}^3,\mathfrak{B}^2$
+$$
+\mathfrak{B}^3 = \left\langle \begin{bmatrix}1\\-1\\0\end{bmatrix},\begin{bmatrix}1\\0\\2\end{bmatrix},\begin{bmatrix}0\\3\\0\end{bmatrix} \right\rangle
+$$
+$$
+\mathfrak{B}^2 = \left\langle \begin{bmatrix}1\\1\end{bmatrix},\begin{bmatrix}1\\0\end{bmatrix}\right\rangle
+$$
+To find our matrix $A$,  we can use the formula from earlier
+$$
+A = P_{\mathfrak{E}^2\rightarrow\mathfrak{B}^2}MP_{\mathfrak{B}^3\rightarrow\mathfrak{E}^3}
+$$
+Where $\mathfrak{E}^n$ are the standard bases.  We must compute the change of basis matrices for the ordered bases that we have.  In particular, we must compute $P_{\mathfrak{B}^3\rightarrow\mathfrak{E}^3}, P_{\mathfrak{B}^2\rightarrow\mathfrak{E}^2}$ and $(P_{\mathfrak{B}^2\rightarrow\mathfrak{E}^2})^{-1}$
+$$
+P_{\mathfrak{B}^3\rightarrow\mathfrak{E}^3} = \begin{bmatrix} 1&1&0\\-1&0&3\\0&2&0 \end{bmatrix}
+$$
+$$
+P_{\mathfrak{B}^2\rightarrow\mathfrak{E}^2} = \begin{bmatrix} 1&1\\1&0 \end{bmatrix}
+$$
+$$
+(P_{\mathfrak{B}^2\rightarrow\mathfrak{E}^2})^{-1} = -1\begin{bmatrix} 0&-1\\-1&1 \end{bmatrix}
+$$
+Now the matrix $A$ can be computed
+$$
+\begin{aligned}
+A & = \begin{bmatrix} 0&1\\1&-1 \end{bmatrix}\begin{bmatrix} 1&2&-1\\0&2&1 \end{bmatrix}\begin{bmatrix} 1&1&0\\-1&0&3\\0&2&0 \end{bmatrix} \\
+& =\begin{bmatrix} 0&1\\1&-1 \end{bmatrix}\begin{bmatrix} -1&-1&-6\\-2&2&6 \end{bmatrix} \\
+& = \begin{bmatrix} -2&2&6\\1&-3&0 \end{bmatrix}
+\end{aligned}
+$$
+And thus we have computed a matrix $A$ such so that $[T(\vec{x})]_{\mathfrak{B}^2}=A[\vec{x}]_{\mathfrak{B}^3}$
+}
+\section{How to find bases for the range and kernel of a matrix}
+To find a basis for the range of a matrix,  we can take the linearly independent columns of a given matrix.  I will use an example from Quiz 06 to help demonstrate this.
+$$
+A = \begin{bmatrix}1&1&2\\0&1&1\\0&0&0\end{bmatrix}
+$$
+We can see that while the first two columns are linearly independent,  the third column can be expressed as some linear combination of the first two,  in particular
+$$
+\begin{bmatrix}2\\1\\0\end{bmatrix} = \begin{bmatrix}1\\0\\0\end{bmatrix} + \begin{bmatrix}1\\1\\0\end{bmatrix}
+$$
+We can then say that a basis for the range of $A$ is
+$$
+\left\{\begin{bmatrix}1\\0\\0\end{bmatrix},\begin{bmatrix}1\\1\\0\end{bmatrix}\right\}
+$$
+To construct a basis for the kernel of $A$,  we must analyze the linearly dependent vector.  We see that $\vec{a_3} = \vec{a_1} + \vec{a_2}$ where $\vec{a_j}$ is the $j$th column of $A$.  We can manipulate this equation to see that
+$$
+\vec{a_1}+\vec{a_2}-\vec{a_3} = \vec{0}
+$$
+This is sufficient to say that an element of the kernel of $A$ is $\begin{bmatrix}1&1&-1\end{bmatrix}^\top$.  The kernel will contain all scalar multiples of this vector,  however we only need one for a basis of the kernel so we can say that
+$$
+\left\{\begin{bmatrix}1\\1\\-1\end{bmatrix}\right\}
+$$
+is a basis for the $\ker(A)$
+\dfn{Isomorphism}{If $T:V\rightarrow W$ is a linear transformation,  then if $T$ is bijective,  we call it an Isomorphism.}
+\section{Finding full solution sets using kernel and change of basis}
+A useful property of the change of basis matrices is the ability to find the coordinate for an ordered basis to the linear combination of vectors that results in a given solution.  I will use the example from Quiz 09 to express this technique. \\
+\\
+\noindent Given a matrix $A$
+$$
+A = \begin{bmatrix}
+2&1&3\\
+3&2&5\\
+0&0&0
+\end{bmatrix}
+$$
+We can find solutions for the following using a change of basis matrix.
+$$
+A\vec{x} = \begin{bmatrix}6/5\\19/10\\0\end{bmatrix}\qquad\qquad\text{and}\qquad\qquad A\vec{x}=\begin{bmatrix}1\\2\\4\end{bmatrix}
+$$
+Firstly,  we must find a basis for the range of $A$.  Since the third column is a linear combination of the first two we can say an ordered basis $\mathfrak{B}$ for $A$ is
+$$
+\mathfrak{B} = \langle\vec{a_1},\vec{a_2}\rangle
+$$
+In order to find a change of basis matrix,  we must expand the ordered basis so that it is an ordered basis for $\mathbb{R}^3$.  We can call this new ordered basis $\mathfrak{B}'$ defined by
+$$
+\mathfrak{B}' = \langle\vec{a_1},\vec{a_2}\vec{e_3}\rangle
+$$
+Where $\vec{e_3}$ is the 3rd standard basis vector for $\mathbb{R}^3$.  We can find $P_{\mathfrak{E}\rightarrow\mathfrak{B}'}$ to be
+$$
+\begin{bmatrix}
+2&1&0\\
+3&2&0\\
+0&0&1
+\end{bmatrix}^{-1} = \begin{bmatrix}
+2&-1&0\\
+-3&2&0\\
+0&0&1
+\end{bmatrix}
+$$
+This is particularly useful because the product $P_{\mathfrak{E}\rightarrow\mathfrak{B}'}$ and the value of $A\vec{x}$ will result in the $\mathfrak{B}'$-coordinate for a solution $\vec{x}$. 
+$$
+P_{\mathfrak{E}\rightarrow\mathfrak{B}'}\begin{bmatrix}6/5\\19/10\\0\end{bmatrix} =
+\begin{bmatrix}
+2&-1&0\\
+-3&2&0\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}6/5\\19/10\\0\end{bmatrix} =
+\begin{bmatrix}1/2\\1/5\\0\end{bmatrix}
+$$
+This doesn't immediately tell us everything we need to know,  because recall this is a $\mathfrak{B}'$-coordinate solution to $\vec{x}$,  but the basis $\mathfrak{B}'$ was constructed using an additional standard basis vector.  In this case since the third coordinate is zero,  then that means the solution can exists without utilizing the standard basis vector we added earlier.  \\
+\\
+\noindent We can expand upon this further by using the kernel to form a full set of solutions.  We saw earlier that $\vec{a_1}+\vec{a_2}=\vec{a_3}$.  This means that $\vec{a_1}+\vec{a_2}-\vec{a_3} = 0$.  This means that a basis for the kernel is
+$$
+\left\{\begin{bmatrix}1\\1\\-1\end{bmatrix}\right\}
+$$
+So now we can expand the full set of solutions to be
+$$
+\left\{
+\begin{bmatrix}1/2\\1/5\\0\end{bmatrix} + c_1\begin{bmatrix}1\\1\\-1\end{bmatrix} : c_1\in\mathbb{R}
+\right\}
+$$
+A similar process can be used for the other vector
+$$
+P_{\mathfrak{E}\rightarrow\mathfrak{B}'}\begin{bmatrix}1\\2\\4\end{bmatrix} =
+\begin{bmatrix}
+2&-1&0\\
+-3&2&0\\
+0&0&1
+\end{bmatrix}\begin{bmatrix}1\\2\\4\end{bmatrix} =
+\begin{bmatrix}0\\1\\4\end{bmatrix}
+$$
+In this case,  we see that the third coordinate is nonzero.  This means that this solution was constructed using the additional standard basis vector we added earlier to make $\mathbb{B}'$.  This means that there does not exist a solution for this $\vec{x}$. 
+\section{Multilinear Forms}
+A multilinear form is a type of function which accepts multiple vectors as inputs and satisfies certain conditions. More specifically,  a linear $n$-form is a function $f:V^n\rightarrow\mathbb{R}$,  where $V$ is a vector space,  and it takes $n$ vectors as inputs. \\
+\\
+\noindent For example $f:V\times V\rightarrow\mathbb{R}$ a linear two form if it satisfies the conditions
+\begin{itemize}
+\item \textbf{Homogenity:}
+$$
+\left\{\begin{aligned}
+f(c\vec{v},  \vec{w}) & = cf(\vec{v},\vec{w})\\
+f(\vec{v},  c\vec{w}) & = cf(\vec{v},\vec{w})
+\end{aligned}
+\right.  \text{ where } c\in\mathbb{R} \text{ and } \vec{v},\vec{w}\in V
+$$
+\item \textbf{Additivity:}
+$$
+\left\{\begin{aligned}
+f(\vec{v}+\vec{u}, \vec{w}) & = f(\vec{v},\vec{w})+f(\vec{u},\vec{w})\\
+f(\vec{v},  \vec{w}+\vec{u}) & = f(\vec{v},\vec{w})+f(\vec{v},\vec{u})
+\end{aligned}
+\right.  \text{ where } \vec{v},\vec{w},\vec{u}\in V
+$$
+\end{itemize}
+I've included an example from our homework to demonstrate properties of linear $n$-forms.
+\qs{Homework 09,  Question 3}{
+Suppose $f: \mathbb{R}^2 \times \mathbb{R}^2 \times \mathbb{R}^2 \rightarrow \mathbb{R}$ was a 3-linear form on $\mathbb{R}^2$ such that
+$$
+\begin{aligned}
+& f\left(\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}\right)=0, \qquad  f\left(\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}\right)=1 \\
+& f\left(\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}\right)=-1, \qquad  f\left(\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}\right)=1 \\
+& f\left(\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}\right)=2, \qquad f\left(\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix}\right)=2 \\
+& f\left(\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+1 \\
+0
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}\right)=-3, \qquad f\left(\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix},\begin{bmatrix}
+0 \\
+1
+\end{bmatrix}\right)=1.
+\end{aligned}
+$$
+
+Compute
+$$
+f\left(\begin{bmatrix}
+1 \\
+2
+\end{bmatrix},\begin{bmatrix}
+3 \\
+4
+\end{bmatrix},\begin{bmatrix}
+0 \\
+-1
+\end{bmatrix}\right) .
+$$}
+\sol To compute the value we can apply linearity properties of $f$, in particular, addition and scalar properties. Firstly
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) & =
+f\left(\begin{bmatrix} 1 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = f\left(\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) +
+f\left(\begin{bmatrix} 0 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = f\left(\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) +
+2f\left(\begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = -1 + 2(-3) = -7
+\end{aligned}
+$$
+We can use this calculated value for subsequent computations, next to modify the final $\mathbb{R}^2$ vector since it will take only one operation we can see that
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & = 
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, -1\begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = -f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = 7
+\end{aligned}
+$$
+And then lastly the middle vector:
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 3 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & =
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, 3\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = 3f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = 21
+\end{aligned}
+$$
+However you may notice that this requires the calculation of another value of $f$ to continue, in particular we must find
+$$
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right)
+$$
+To do so lets repeat similar steps
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) & =
+f\left(\begin{bmatrix} 1 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) + 2f\left(\begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = 1 + 2(1) = 3
+\end{aligned}
+$$
+Similar to before we must also find that
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & = 
+-f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix} \right) \\
+& = -3
+\end{aligned}
+$$
+And furthermore we must compute
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & =
+4f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 1 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = -12
+\end{aligned}
+$$
+Since we now have all required pieces, we can put them together to compute the final unknown value and we see that
+$$
+\begin{aligned}
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 3 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) & =
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 3 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 3 \\ 0 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) +
+f\left(\begin{bmatrix} 1 \\ 2 \end{bmatrix}, \begin{bmatrix} 0 \\ 4 \end{bmatrix}, \begin{bmatrix} 0 \\ -1 \end{bmatrix} \right) \\
+& = 21 - 12 = 9
+\end{aligned}
+$$
+\section{Determinant}
+\dfn{Determinant}{A determinant is an $n$-linear form on $\mathbb{R}^n$ with the properties:\\
+$f:\mathbb{R}^{n\times n}\rightarrow\mathbb{R}$
+\begin{itemize}
+\item $f(I_n) = 1$
+\item If two columns of $A\in\mathbb{R}^{n\times n}$ are the same,  then $f(A) = 0$
+\item If you swap two columns of $A$ to get $B$,  then $-f(A) = f(B)$
+\end{itemize}}
+\noindent The determinant of a $2\times2$ $\begin{bmatrix}a&b\\c&d\end{bmatrix}$ is (ad-bc), and the determinant of a singular value is just the value. Determinants of larger matrices can be calculated in a number of ways. One such is the cofactor expansion, which is the method that must be used when none of the shortcuts can be applied.
+\dfn{Minor of a $n\times n$ matrix}{
+If $A\in\mathbb{R}^{n\times n}$, the minor $M_{ij}$ of a matrix is the $(n-1)\times(n-1)$ matrix obtained by deleting the $i$th row and $j$th column of $A$
+$$
+A = \begin{bmatrix}
+1&2&3&4\\
+5&6&7&8\\
+-1&0&1&1\\
+2&0&0&1
+\end{bmatrix}
+\qquad
+M_{23} = \begin{bmatrix}
+1&2&4\\
+-1&0&1\\
+2&0&1
+\end{bmatrix}
+$$
+}
+\noindent To perform a cofactor expansion about a column $i$ for a matrix $A\in\mathbb{R}^{n\times n}$ such that $1 \le i \le n$
+$$
+\det(A) = \sum_{k=1}^n (A)_{ik}(-1)^{i+k} \det(M_{ik})
+$$
+Similarly, a cofactor expansion can also be performed about a row $j$ such that $1 \le j \le n$
+$$
+\det(A) = \sum_{k=1}^n (A)_{kj}(-1)^{k+j} \det(M_{kj})
+$$
+\begin{itemize}
+\item If a matrix A is either triangular or diagonal, the determinant can be computed by taking the product of its diagonal elements
+$$
+A = \begin{bmatrix}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+& a_{22} & & a_{2n} \\
+& & \ddots &  \vdots \\
+& & & a_{nn} \end{bmatrix} \qquad
+A = \begin{bmatrix}
+a_{11} & & &  \\
+a_{21} & a_{22} & & \\
+\vdots & & \ddots & \\
+a_{n1} & a_{n2} &  \ldots & a_{nn}
+\end{bmatrix} \qquad
+A = \begin{bmatrix}
+a_{11} & & & \\
+& a_{22} & & \\
+& & \ddots & \\
+& & & a_{nn}
+\end{bmatrix}
+$$
+$$
+\operatorname{det}(A) = a_{11} \cdot a_{22} \cdot \ldots \cdot a_{nn}
+$$
+\item Similarly,  if a matrix A is either block triangular or block diagonal, the determinant can be computed by taking the product of the determinants of its diagonal elements
+$$
+A = \begin{bmatrix}
+A_{11} & A_{12} & \ldots & A_{1n} \\
+& A_{22} & & A_{2n} \\
+& & \ddots & \vdots \\
+& & & A_{nn}
+\end{bmatrix}\qquad
+A = \begin{bmatrix}
+A_{11}&&&\\
+A_{21}&A_{22}&&\\
+\vdots&&\ddots&\\
+A_{n1}&A_{n2}&\ldots&A_{nn}
+\end{bmatrix}\qquad
+A = \begin{bmatrix}
+A_{11}&&&\\
+&A_{22}&&\\
+&&\ddots&\\
+&&&A_{nn}
+\end{bmatrix}
+$$
+$$
+\operatorname{det}(A) = \operatorname{det}(A_{11}) \cdot \operatorname{det}(A_{22}) \cdot \ldots \cdot \operatorname{det}(A_{nn})
+$$
+\item If $E$ is a blocked off matrix
+$$
+E = \begin{bmatrix}
+A & B \\ C & D
+\end{bmatrix}
+$$
+and $A$ is an invertible matrix,  then $\det(E)=\det(A)\det(D-CA^{-1}B)$
+\end{itemize}
+We can extend our invertible matrix theorem from earlier
+\thm{Invertible Matrix Theorem Part 2}{
+\begin{itemize}
+\item $\det(A) \ne 0$
+\item Columns of $A$ form a basis for $\mathbb{R}^n$
+\item Rows of $A$ form a basis for $\mathbb{R}^n$
+\end{itemize}
+}
+\subsection{Inverse of $2\times2$ and block diagonal matrices}
+The inverse of a $2\times2$ matrix $A = \begin{bmatrix}a&b\\c&d\end{bmatrix}$ can be found with the formula
+$$
+\frac{1}{\det(A)}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}
+$$
+If we have a block diagonal matrix $A$, we can find its inverse in a similar fashion to how we computed the determinant of block diagonal matrices. in particular we see that
+$$
+A = \begin{bmatrix}
+A_{11}&&&\\
+&A_{22}&&\\
+&&\ddots&\\
+&&&A_{nn}
+\end{bmatrix}\qquad
+A^{-1} = \begin{bmatrix}
+(A_{11})^{-1}&&&\\
+&(A_{22})^{-1}&&\\
+&&\ddots&\\
+&&&(A_{nn})^{-1}
+\end{bmatrix}
+$$
+\newpage
+\section{Eigen-ness}
+\dfn{Eigenvectors and Eigenvalues}{Let $T:V\rightarrow V$ be a linear transformation. An eigenvector of $T$ is a non-zero vector $\vec{v}\in V$ such that
+$$
+T(\vec{v}) = \lambda\vec{v}
+$$
+for some scalar $\lambda$. $\lambda$ is called an eigenvalue of $T$ and $\lambda$ is the associated eigenvalue with $\vec{v}$. The eigenvalues of $A$ are found by taking the zeros of the characteristic polynomial of $A$.}
+\ex{$T:\mathbb{R}^2\rightarrow\mathbb{R}^2$}{
+$$
+T(\vec{x}) = \begin{bmatrix}2&1\\0&4\end{bmatrix}\vec{x}
+$$
+$$
+\begin{bmatrix}1\\0\end{bmatrix}\quad\text{Is an eigenvector of }T\text{ with eiegenvalue 2}\qquad
+\begin{bmatrix}1\\2\end{bmatrix}\quad\text{Is an eigenvector of }T\text{ with eigenvalue 4}
+$$
+}
+\dfn{Characteristic Polynomial}{
+The characteristic polynomial of $A\in\mathbb{R}^{n\times n}$ is
+$$
+\det(\lambda I_n - A)
+$$
+}
+\ex{Characteristic polynomial of $\begin{bmatrix}1&2\\0&4\end{bmatrix}$}{
+$$
+\begin{aligned}
+\det\left(\begin{bmatrix}\lambda&0\\0&\lambda\end{bmatrix} - \begin{bmatrix}1&2\\0&4\end{bmatrix}\right) &= \det\left(\begin{bmatrix}\lambda-1&-2\\0&\lambda-4\end{bmatrix}\right)\\
+&=(\lambda-1)(\lambda-4)
+\end{aligned}
+$$
+}
+\dfn{Algebraic Multiplicity}{If $\lambda$ is an eigenvalue of $A$, then its algebraic multiplicity is the multiplicity of $\lambda$ as a root of the characteristic polynomial of $A$.}
+\dfn{Geometric Multiplicity}{If $\lambda$ is an eigenvalue of $A$, then its geometric multiplicity is the dimension of the $\lambda$-eigenspace of $A$}
+\dfn{Eigenbasis and Diagonalizability}{
+An eigenbasis for a matrix $B\in\mathbb{R}^{n\times n}$ is a basis for $\mathbb{R}^n$ consisting only of eigenvectors of $B$. $B$ is called diagonalizable exactly when there is an eigenbasis.
+}
+\begin{note}
+Recall:
+\begin{itemize}
+\item If $T: V \rightarrow V$ is a linear transformation with eigenvalues $\lambda_1, \lambda_2, \ldots, \lambda_n$, then set $d_i=\operatorname{dim}(E_{\lambda_{i}}(T))$. T is diagonalizable exactly when $d_1 + d_2 + \ldots + d_n = \operatorname{dim}(V)$
+\item 1 $\le$ Geometric multiplicity of $\lambda \le$ Algebraic multiplicity of $\lambda$
+\item $\dim(E_\lambda(A)) = \dim(\ker(\lambda I - A))$
+\item If we have $A\in\mathbb{R}^{n\times n}$ with eigenvalues $\lambda_1,  \lambda_2, \lambda_3$ and $\{v_1,\ldots,v_n\}$ as a basis for $E_{\lambda_1}(A)$,  $\{u_1,\ldots,u_k\}$ as a basis for $E_{\lambda_2}(A)$ and $\{w_1,\ldots,w_j\}$ as a basis for $E_{\lambda_3}(A)$,  then we find that $\{v_1,\ldots,v_n,u_1,\ldots,u_k,w_1,\ldots,w_j\}$ are linearly independent vectors.  In other words,  vectors from a basis of a particular eigenspace are linearly independent from the vectors that form a basis for another eigenspace.  This is particularly important because we can use this concept when determining whether a matrix or transformation is diagonalizable.
+\end{itemize}
+\end{note}
+\section{Orthogonality}
+\dfn{Orthogonal}{If $\vec{v},\vec{w}\in V$, then $\vec{v}$ and $\vec{w}$ are orthogonal when $\langle \vec{v} | \vec{w} \rangle = 0$. If $\vec{v}$ and $\vec{w}$ are orthogonal, we write $\vec{v}\perp\vec{w}$}
+\dfn{Perpendicular Space}{
+Let $V$ be an inner-product space with inner product $\langle \cdot\; |\; \cdot \rangle$. If $W$ is a subspace of $V$, then
+$$
+W^\perp = \{\vec{v}\in V : \langle \vec{v} | \vec{w} \rangle = 0 \text{ for all } \vec{w}\in W\}
+$$
+is called the perpendicular space (sometimes orthogonal complement) of $W$.
+}
+\mprop{Dimension of $W^\perp$}{Let $V$ be an inner-product space with inner product $\langle \cdot \; | \; \cdot \rangle$. $W$ and $W^\perp$ are subspaces such that $W^\perp$ is the orthogonal complement of $W$. Then
+$$
+V = W + W^\perp = \{\hat{v} + \vec{z} : \hat{v}\in W, \vec{z} \in W^\perp\}
+$$
+So hence we can conclude the dimensionality of the subspaces, and in particular we see that
+$$
+\dim(V) = \dim(W) + \dim(W^\perp)
+$$}
+\thm{Gram-Schmidt Algorithm}{
+Let $V$ be a finite dimensional inner product space. $V$ has an orthonormal basis. Let $\langle \vec{x}_1, \vec{x}_2, \ldots, \vec{x}_n \rangle$ be a basis for $V$. The steps for the Gram-Schmidt Algorithm are as following.
+$$
+\vec{b}_1 = \vec{x}_1 \qquad \vec{y}_1 = \frac{\vec{b}_1}{||\vec{b}_1||}
+$$
+$$
+\vec{b}_i = \vec{x}_i - \sum_{k=1}^{i-1} \langle \vec{y}_k | \vec{x}_i \rangle \vec{y}_k
+\qquad \vec{y}_i = \frac{\vec{b}_i}{||\vec{b}_i||}
+$$
+After performing the algorithm, an orthonormal basis for $V$ is $\langle \vec{y}_1, \vec{y}_2, \ldots, \vec{y}_n \rangle$
+}
+\mprop{Projections}{If $W$ is a finite dimensional subsapce of an inner product space $V$ with inner product $\langle \cdot \; | \; \cdot \rangle$, and given an orthonormal basis for $W$, $\langle \vec{u}_1, \vec{u}_2, \ldots, \vec{u}_n \rangle$, then
+$$
+\operatorname{proj}_W(\vec{v}) = \sum_{k=1}^n \langle \vec{v} | \vec{u}_k \rangle \vec{u}_k
+$$
+}
+\noindent If $W \subseteq \mathbb{R}^n$, then a matrix exists for $\operatorname{proj}_W$. If we have an orthonormal basis $\langle \vec{u}_1, \vec{u}_2, \ldots, \vec{u}_k \rangle$ for $W$, then
+$$
+Q = \begin{bmatrix}
+\vline&\vline&&\vline\\
+\vec{u}_1&\vec{u}_2&\ldots&\vec{u}_k\\
+\vline&\vline&&\vline
+\end{bmatrix}
+$$
+Then $\operatorname{proj}_W(\vec{x}) = QQ^\top\vec{x}$
+\dfn{Orthogonal Transformations}{Let $V$ be an inner-product space and $T: V\rightarrow V$ be a linear transformation. $T$ is called orthogonal if for all $\vec{v}\in V$ is called orthogonal if it is length perserving, i.e, $||\vec{v}|| = ||T(\vec{v})||$. \\
+\\
+\noindent $A\in\mathbb{R}^{n\times n}$ is orthogonal if $T(\vec{x}) = A\vec{x}$ is an orthogonal transformation}
+\mprop{Matrix orthogonality}{For a matrix $A\in\mathbb{R}^{n\times n}$ that is orthogonal:
+\begin{itemize}
+\item The columns of $A$ form an orthonormal basis for $\mathbb{R}^n$
+\item $A^\top A = I_n$
+\item $A^\top = A^{-1}$
+\end{itemize}}
+\subsection{QR Decomposition}
+\thm{}{
+If $A\in\mathbb{R}^{n\times n}$ and has linearly independent columns, then theres an upper-triangular matrix $R\in\mathbb{R}^{n\times n}$ and an orthogonal matrix $Q$ so that $A = QR$
+}
+\ex{}{
+$$
+A=\left[\begin{array}{ccc}
+1 & 1 & 1 \\
+2 & 0 & 1 \\
+3 & 1 & -1
+\end{array}\right]
+$$
+Let us call the columns of $A$ as vectors $\vec{a}_1,  \vec{a}_2,  \vec{a}_3$. To find the $QR$ factorization,  we must first perform Gram-Schmidt,  on the vectors.
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_1 &= \frac{1}{||\vec{a}_1||}\vec{a}_1\\
+&= \frac{1}{\sqrt{1+4+9}}\vec{a}_1\\
+&=\frac{1}{\sqrt{14}}\begin{bmatrix}1\\2\\3\end{bmatrix}\\
+&=\begin{bmatrix}1/\sqrt{14}\\2/\sqrt{14}\\3/\sqrt{14}\end{bmatrix}
+\end{aligned}
+$$
+This also tells us that $\vec{a}_1 = (\sqrt{14})\vec{y}_1$.  This will be important for when we construct $R$.
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+\vec{b}_2 &= \vec{a}_2 - (\vec{a}_2 \cdot \vec{y}_1)\vec{y}_1\\
+&=\vec{a}_2 - (1/\sqrt{14} + 3/\sqrt{14})\vec{y}_1\\
+&=\vec{a}_2 - (4/\sqrt{14})\vec{y}_1\\
+&=\begin{bmatrix}1\\0\\1\end{bmatrix} - 4/\sqrt{14}\begin{bmatrix}1/\sqrt{14}\\2/\sqrt{14}\\3/\sqrt{14}\end{bmatrix}\\
+&=\begin{bmatrix}1\\0\\1\end{bmatrix} - \begin{bmatrix}4/14\\8/14\\12/14\end{bmatrix}\\
+&=\begin{bmatrix}10/14\\-8/14\\2/14\end{bmatrix} = \begin{bmatrix}5/7\\-4/7\\1/7\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+||\vec{b}_2|| &= \sqrt{\frac{25}{49} + \frac{16}{49} + \frac{1}{49}}\\
+&=\sqrt{\frac{42}{49}}\\
+&=\frac{\sqrt{42}}{7}
+\end{aligned}
+$$
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_2 &= \frac{1}{||\vec{b}_2||}\vec{b}_2\\
+&=7/\sqrt{42} \begin{bmatrix}5/7\\-4/7\\1/7\end{bmatrix}\\
+&=\begin{bmatrix}5/\sqrt{42}\\-4/\sqrt{42}\\1/\sqrt{42}\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}\\
+Similarly,  we need to see the linear combination of $\vec{y}_i$'s that construct $\vec{a}_2$
+$$
+\begin{aligned}
+\vec{b}_2 &= (\sqrt{42}/7)\vec{y}_2\\
+\vec{a}_2 - (4/\sqrt{14})\vec{y}_1 &= (\sqrt{42}/7)\vec{y}_2\\
+\vec{a}_2 & = (4/\sqrt{14})\vec{y}_1 + (\sqrt{42}/7)\vec{y}_2
+\end{aligned}
+$$
+\vspace{0.5em}
+\hrule
+\vspace{0.5em}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+\vec{b}_3 &= \vec{a}_3 - (\vec{a}_3\cdot\vec{y}_2)\vec{y}_2 - (\vec{a}_3\cdot\vec{y}_1)\vec{y}_1\\
+&= \vec{a}_3 - (5/\sqrt{42} - 4/\sqrt{42} - 1/\sqrt{42})\vec{y}_2 \\ 
+&\qquad- (1/\sqrt{14} + 2/\sqrt{14} - 3/\sqrt{14})\vec{y}_1\\
+&= \vec{a}_3 - (0)\vec{y}_2 - (0)\vec{y}_1\\
+&=\vec{a}_3
+\end{aligned}
+$$
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+$$
+\begin{aligned}
+||\vec{b}_3|| &= \sqrt{1+1+1}\\
+&=\sqrt{3}
+\end{aligned}
+$$
+\hrule
+\vspace{0.5em}
+$$
+\begin{aligned}
+\vec{y}_3 &= \frac{1}{||\vec{b}_3||}\vec{b}_3\\
+&=1/\sqrt{3}\begin{bmatrix}1\\1\\-1\end{bmatrix}\\
+&=\begin{bmatrix}1/\sqrt{3}\\1/\sqrt{3}\\-1/\sqrt{3}\end{bmatrix}
+\end{aligned}
+$$
+\end{minipage}\\
+Since $\vec{b}_3 = \vec{a}_3$,  then we can quickly compute that $\vec{a}_3 = (\sqrt{3})\vec{y}_3$.
+\newpage
+\noindent So now to construct the $QR$ factorization of $A$,  we will use the vectors that form the orthogonal basis as columns for $Q$,  and the columns of $R$ will be the linear combination of $\vec{y}_i$ vectors that construct our $\vec{a}_i$'s,  so we see that
+$$
+A = QR = \begin{bmatrix}
+1/\sqrt{14}&5/\sqrt{42}&1/\sqrt{3}\\
+2/\sqrt{14}&-4/\sqrt{42}&1/\sqrt{3}\\
+3/\sqrt{14}&1/\sqrt{42}&-1/\sqrt{3}
+\end{bmatrix}
+\begin{bmatrix}
+\sqrt{14}&4/\sqrt{14}&0\\
+0&\sqrt{42}/7&0\\
+0&0&\sqrt{3}
+\end{bmatrix}
+$$}
+\subsection{Singular Value Decomposition}
+\thm{Spectral Theroem}{
+A matrix $A\in\mathbb{R}^{n\times n}$ has an orthonormal eigenbasis exactly when $A$ is symmetric $(A = A^\top)$.
+}
+\mprop{Orthogonal Eigenbasis}{If $A\in\mathbb{R}^{n\times n}$ is symmetric, then its eigenbasis is orthogonal.}
+\begin{myproof} Given eigenvalues $\lambda_1$ and $\lambda_2$ with respective eigenvectors $\vec{v}_1$ and $\vec{v}_2$ for a matrix $A$ such that $\lambda_1 \ne \lambda_2$
+$$
+\begin{aligned}
+\lambda_1(\vec{v}_1 \cdot \vec{v}_2) &= (\lambda_1\vec{v}_1)\vec{v}_2\\
+&=(A\vec{v}_1)\vec{v}_2\\
+&=(A\vec{v}_1)^\top\vec{v}_2\\
+&=(\vec{v}_1)^\top(A^\top\vec{v}_2)\\
+&=(\vec{v}_1)^\top(A\vec{v}_2) \qquad\text{Since } A = A^\top\\
+&=(\vec{v}_1)^\top(\lambda_2\vec{v}_2)\\
+&=\lambda_2(\vec{v}_1^\top\vec{v}_2)\\
+&=\lambda_2(\vec{v}_1\cdot\vec{v}_2)
+\end{aligned}
+$$
+So thus we can see that $\lambda_1(\vec{v}_1 \cdot \vec{v}_2)=\lambda_2(\vec{v}_1\cdot\vec{v}_2)$, but what exactly does this reveal?
+$$
+\begin{aligned}
+\lambda_1(\vec{v}_1 \cdot \vec{v}_2)-\lambda_2(\vec{v}_1\cdot\vec{v}_2)&=0\\
+(\lambda_1-\lambda_2)(\vec{v}_1\cdot\vec{v}_2)&=0
+\end{aligned}
+$$
+However since $\lambda_1 \ne \lambda_2$, then that must mean $\vec{v}_1\cdot\vec{v}_2 = 0$, and hence $\vec{v}_1$ and $\vec{v}_2$ are orthogonal. As we know, eigenvectors for a matrix are linearly independent, so thus the eigenvectors for $A$ form an orthogonal eigenbasis for $\mathbb{R}^n$.
+\end{myproof}
+\noindent Since all eigenbases for symmetric matrices are orthogonal, then to find an orthonormal eigenbasis for a matrix, the vectors from an orthogonal eigenbasis must be normalized. \\
+\\
+\noindent Below is a homework example from the previous homework to showcase the process of singular value decomposition.
+\qs{Singular Value Decomposition}{
+For the following matrix $B$, find:\\
+(a) $B^{\top} B$\\
+(b) All eigenvalues of $B^{\top} B$\\
+(c) An eigenbasis for $B^{\top} B$\\
+(d) All singular values of $B$\\
+(e) An orthonormal eigenbasis for $B^{\top} B$\\
+(f) A singular value decomposition of $B$.
+$$
+B=\left[\begin{array}{ccc}
+1 & 1 & 3 \sqrt{7 / 15} \\
+1 & -1 & -\sqrt{7 / 15} \\
+0 & 0 & \sqrt{7 / 15} \\
+1 & 2 & -2 \sqrt{7 / 15}
+\end{array}\right]
+$$}
+\sol \\
+(a)
+$$
+B^\top B = \begin{bmatrix}
+1&1&0&1\\
+1&-1&0&2\\
+3\sqrt{7/15}&-\sqrt{7/15}&\sqrt{7/15}&-2\sqrt{7/15}
+\end{bmatrix}
+\begin{bmatrix}
+1&1&3\sqrt{7/15}\\
+1&-1&-\sqrt{7/15}\\
+0&0&\sqrt{7/15}\\
+1&2&-2\sqrt{7/15}\\
+\end{bmatrix}=\begin{bmatrix}
+3&2&0\\
+2&6&0\\
+0&0&7
+\end{bmatrix}
+$$
+(b) $\det(\lambda I - B^\top B)$
+$$
+\det\begin{bmatrix}
+\lambda-3&-2&0\\
+-2&\lambda-6&0\\
+0&0&\lambda-7
+\end{bmatrix}
+$$
+We can perform cofactor expansion about the 3rd row
+$$
+\begin{aligned}
+&=(\lambda-7)((\lambda-3)(\lambda-6)-4)\\
+&=(\lambda-7)(\lambda^2-9\lambda+14)\\
+&=(\lambda-7)(\lambda-7)(\lambda-2)
+\end{aligned}
+$$
+So then we can say $B^\top B$ has eigenvalues 7, 2.\\
+\\
+\noindent(c)
+$$
+7I - B^\top B = \begin{bmatrix}
+4&-2&0\\
+-2&1&0\\
+0&0&0
+\end{bmatrix}\qquad\vec{v}_1=\begin{bmatrix}0\\0\\1\end{bmatrix}\qquad\vec{v}_2=\begin{bmatrix}1\\2\\0\end{bmatrix}
+$$
+$$
+2I- B^\top B = \begin{bmatrix}
+-1&-2&0\\
+-2&-4&0\\
+0&0&-5
+\end{bmatrix}\qquad\vec{v}_3=\begin{bmatrix}2\\-1\\0\end{bmatrix}
+$$
+From this then we can say that an eigenbases for $B^\top B$
+$$
+\left\{
+\begin{bmatrix}0\\0\\1\end{bmatrix},
+\begin{bmatrix}1\\2\\0\end{bmatrix},
+\begin{bmatrix}2\\-1\\0\end{bmatrix}
+\right\}
+$$
+(d) The singular values can are found by taking the square root of each eigenvalue, the singular values are $\sqrt{7}, \sqrt{7}, \sqrt{2}$\\
+\\
+\noindent(e) The set of vectors is already orthogonal, so now we must normalize each vector.
+$$
+||\vec{v}_1|| = \sqrt{1} = 1 \qquad \vec{v}_1\text{ is already normalized}
+$$
+$$
+||\vec{v}_2|| = \sqrt{1 + 4} = \sqrt{5} \qquad \frac{1}{||\vec{v}_2||}\vec{v}_2 = 1/\sqrt{5}\begin{bmatrix}1\\2\\0\end{bmatrix} = \begin{bmatrix}1/\sqrt{5}\\2/\sqrt{5}\\0\end{bmatrix}
+$$
+$$
+||\vec{v}_3|| = \sqrt{1 + 4} = \sqrt{5} \qquad \frac{1}{||\vec{v}_2||}\vec{v}_3 = 1/\sqrt{5}\begin{bmatrix}2\\-1\\0\end{bmatrix} = \begin{bmatrix}2/\sqrt{5}\\-1/\sqrt{5}\\0\end{bmatrix}
+$$
+So then an orthonormal eigenbasis for $B^\top B$ is
+$$
+\left\{
+\begin{bmatrix}0\\0\\1\end{bmatrix}
+\begin{bmatrix}1/\sqrt{5}\\2/\sqrt{5}\\0\end{bmatrix}
+\begin{bmatrix}2/\sqrt{5}\\-1/\sqrt{5}\\0\end{bmatrix}
+\right\}
+$$
+(f) $B = u\Sigma V^\top$
+$$
+V = \begin{bmatrix}
+0&1/\sqrt{5}&2/\sqrt{5}\\
+0&2/\sqrt{5}&-1/\sqrt{5}\\
+1&0&0
+\end{bmatrix}
+$$
+We can construct $\Sigma$ using the singular values
+$$
+\Sigma = \begin{bmatrix}
+\sqrt{7}&0&0\\
+0&\sqrt{7}&0\\
+0&0&\sqrt{2}\\
+0&0&0
+\end{bmatrix}
+$$
+In order to find $u$, then we must calculate it using the non-zero singular values.
+$$
+\vec{u}_1 = \frac{1}{\sigma_1}B\vec{v}_1 = 1/\sqrt{7}\begin{bmatrix}
+1&1&3\sqrt{7/15}\\
+1&-1&-\sqrt{7/15}\\
+0&0&\sqrt{7/15}\\
+1&2&-2\sqrt{7/15}\\
+\end{bmatrix}
+\begin{bmatrix}0\\0\\1\end{bmatrix} = 1/\sqrt{7}\begin{bmatrix}3\sqrt{7/15}\\-\sqrt{7/15}\\\sqrt{7/15}\\-2\sqrt{7/15}\end{bmatrix} = \begin{bmatrix}3/\sqrt{15}\\-1/\sqrt{15}\\1/\sqrt{15}\\-2/\sqrt{15}\end{bmatrix}
+$$
+$$
+\vec{u}_2  = \frac{1}{\sigma_2}B\vec{v}_2 = 1/\sqrt{7}
+\begin{bmatrix}
+1&1&3\sqrt{7/15}\\
+1&-1&-\sqrt{7/15}\\
+0&0&\sqrt{7/15}\\
+1&2&-2\sqrt{7/15}
+\end{bmatrix}
+\begin{bmatrix}1/\sqrt{5}\\2/\sqrt{5}\\0\end{bmatrix} = 1/\sqrt{7}\begin{bmatrix}3/\sqrt{5}\\-1/\sqrt{5}\\0\\5/\sqrt{5}\end{bmatrix} = \begin{bmatrix} 3/\sqrt{35}\\-1/\sqrt{35}\\0\\5/\sqrt{35}\end{bmatrix}
+$$
+$$
+\vec{u}_3 = \frac{1}{\sigma_3}B\vec{v}_2 = 1/\sqrt{7}
+\begin{bmatrix}
+1&1&3\sqrt{7/15}\\
+1&-1&-\sqrt{7/15}\\
+0&0&\sqrt{7/15}\\
+1&2&-2\sqrt{7/15}
+\end{bmatrix}
+\begin{bmatrix}2/\sqrt{5}\\-1/\sqrt{5}\\0\end{bmatrix} =
+1/\sqrt{2}\begin{bmatrix}1/\sqrt{5}\\3/\sqrt{5}\\0\\0\end{bmatrix} = \begin{bmatrix}1/\sqrt{10}\\3/\sqrt{10}\\0\\0\end{bmatrix}
+$$
+But we need to extend our set of vectors since it needs to be a basis for $\mathbb{R}^4$. An obvious candidate is the standard basis vector $\vec{e}_3$, since it means we will have to do the least amount of work when we perform Gram-Schmidt
+$$
+\begin{aligned}
+\vec{b}_4 &= \vec{a}_4 - (\vec{a}_4\cdot\vec{u}_3)\vec{u}_3 - (\vec{a}_4\cdot\vec{u}_2)\vec{u}_2 - (\vec{a}_4\cdot\vec{u}_1)\vec{u}_1\\
+&= \vec{a}_4 - 0\vec{u}_3 - 0\vec{u}_2 - 1/\sqrt{5}\vec{u}_1\\
+&=\begin{bmatrix}0\\0\\1\\0\end{bmatrix} - \begin{bmatrix}3/15\\-1/15\\1/15\\-2/15\end{bmatrix} = \begin{bmatrix}-3/15\\1/15\\14/15\\2/15\end{bmatrix}
+\end{aligned}
+$$
+Now to normalize $\vec{b}_4$.
+$$
+||\vec{b}_4|| = \sqrt{\frac{9}{15} + \frac{196}{225} + \frac{1}{225} + \frac{4}{225}} = \sqrt{210/225} = \sqrt{14/15} \qquad \vec{u}_4 = \frac{1}{||\vec{b}_4||}\vec{b}_4 = \sqrt{15/14}\begin{bmatrix}-3/15\\1/15\\14/15\\2/15\end{bmatrix} =\begin{bmatrix}-\sqrt{3/70}\\1/\sqrt{210}\\\sqrt{14/15}\\\sqrt{2/105}\end{bmatrix}
+$$
+$$
+u = \begin{bmatrix}
+3/\sqrt{15}&3/\sqrt{35}&1/\sqrt{10}&-\sqrt{3/70}\\
+-1/\sqrt{15}&-1/\sqrt{35}&3/\sqrt{10}&1/\sqrt{210}\\
+1/\sqrt{15}&0&0&\sqrt{14/15}\\
+-2/\sqrt{15}&5/\sqrt{35}&0&\sqrt{2/105}
+\end{bmatrix}
+$$
+Since we have found the matrices required for the singular value decomposition of $B$, then we can say
+$$
+B = \begin{bmatrix}
+3/\sqrt{15}&3/\sqrt{35}&1/\sqrt{10}&-\sqrt{3/70}\\
+-1/\sqrt{15}&-1/\sqrt{35}&3/\sqrt{10}&1/\sqrt{210}\\
+1/\sqrt{15}&0&0&\sqrt{14/15}\\
+-2/\sqrt{15}&5/\sqrt{35}&0&\sqrt{2/105}
+\end{bmatrix}
+\begin{bmatrix}
+\sqrt{7}&0&0\\
+0&\sqrt{7}&0\\
+0&0&\sqrt{2}\\
+0&0&0
+\end{bmatrix}
+\begin{bmatrix}
+0&0&1\\
+1/\sqrt{5}&2/\sqrt{5}&0\\
+2/\sqrt{5}&-1/\sqrt{5}&0
+\end{bmatrix}
+$$
+\end{document}
