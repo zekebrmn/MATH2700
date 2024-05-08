@@ -91,7 +91,7 @@ $$A = \begin{bmatrix}
 \\
 \noindent If $S\le V$ and $\vec{v}\in\operatorname{span}(S)$, $\vec{v}\in S$, then if $S'$ is obtained by removing $\vec{v}$ from $S$ and $\vec{v}\in\operatorname{span}(S')$, then $\operatorname{span}(S)=\operatorname{span}(S')$ \\
 \\
-\noindent In more simple terms, we can have two unique sets of vectors which can have equal spans. This is because the span of a linearly independent set of vectors is equal to that of a linearly dependent vectors which span the same space.
+\noindent In more simple terms, we can expand a set of linearly independent vectors that spans a space while still maintaining the property of spanning. This is because the span of a linearly independent set of vectors is equal to that of the span of a linearly dependent set of vectors that spans the same space. All this is to say that the smallest possible spanning set of a given space will contain AT LEAST as many vectors as a basis, but isn't limited to just that number of vectors.
 \section{How to find a basis for a subspace of $\mathbb{R}^n$ and the dimension of a subspace}
 \dfn{Subspace}{If $V$ is a vector space and $W$ is a subset of $V$, we say $W$ is a subspace of $V$ if
 \begin{itemize}
@@ -99,6 +99,47 @@ $$A = \begin{bmatrix}
 \item $\vec{x},\vec{y}\in W \implies \vec{x}+\vec{y}\in W$
 \item $\vec{x}\in W$, $r\in\mathbb{R} \implies r\vec{x}\in W$
 \end{itemize}
+}
+\ex{}{
+\begin{note}
+Recall from Homework 03, Question 7:  \\
+$\mathbb{E}$ is a vector space that is generated when $\mathbb{R}^2$ is equiped with addition and a scalar multiplcation by 
+$$
+\begin{pmatrix} x \\ y \end{pmatrix} \oplus \begin{pmatrix} a \\ b \end{pmatrix} = \begin{pmatrix} x + a +1 \\ y + b + 1 \end{pmatrix} \quad \text{and} \quad
+c \odot \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} cx + c -1 \\ cy + c -1 \end{pmatrix}
+$$
+\end{note}
+$$
+W_1=\left\{\left[\begin{array}{l}
+t \\
+0
+\end{array}\right]: t \in \mathbb{R}\right\} \quad \text { and } \quad W_2=\left\{\left[\begin{array}{c}
+2 t-1 \\
+t-1
+\end{array}\right]: t \in \mathbb{R}\right\} .
+$$
+(i) Is $W_1$ a subspace of $\mathbb{E}$ ? If it is, verify this, if not, explain why not.\\
+(ii) Is $W_2$ a subspace of $\mathbb{E}$ ? If it is, verify this, if not, explain why not.\\
+\sol \\
+(i) $W_1 \le \mathbb{E}$ \\
+$\indent$ $W_1$ is not a subspace of $\mathbb{E}$. This is because the $\vec{0}^{\mathbb{E}}$ is $\begin{bmatrix} -1 \\ -1 \end{bmatrix}$, which $\notin W_`1$ \\
+(ii) $W_2 \le \mathbb{E}$ \\
+$\indent$ (1) $\vec{0}^{\mathbb{E}}\in W_2$, take $t=0$ because $\begin{bmatrix} 2(0)-1 \\ 0 -1 \end{bmatrix}\in W_2$ \\
+$\indent$ (2) To show $W_2$ is closed under addition with regard to $\mathbb{E}$, take some $t,n,m \in \mathbb{R}$ such that $t = n+m$
+\begin{align*}
+\begin{bmatrix} 2n - 1 \\ n -1 \end{bmatrix} \oplus \begin{bmatrix} 2m -1 \\ m -1 \end{bmatrix} & = \begin{bmatrix} 2n +2m -2 +1 \\ n + m -2 +1 \end{bmatrix} \\
+& = \begin{bmatrix} 2(n + m) - 1 \\ (n + m) - 1 \end{bmatrix} \\
+& = \begin{bmatrix} 2t -1 \\ t - 1 \end{bmatrix}
+\end{align*}\\
+\\
+$\indent$ (3) To show $W_2$ is closed under multiplication with regard to $\mathbb{E}$, take some $t,r,m \in \mathbb{R}$ such that $t = r \times m$
+\begin{align*}
+r \odot \begin{bmatrix} 2m -1 \\ m - 1\end{bmatrix} &  = \begin{bmatrix} r(2m-1) + r -1 \\ r(m-1) + r - 1 \end{bmatrix} \\
+& = \begin{bmatrix} 2rm -1 \\ rm - 1 \end{bmatrix} \\
+& = \begin{bmatrix} 2t - 1 \\ t - 1 \end{bmatrix}
+\end{align*}
+$\indent$ (1), (2), (3) $\implies$ $W_2$ is a subspace of $\mathbb{E}$ \\
+
 }
 \noindent To find a basis of a subspace in $\mathbb{R}^n$,  we must ensure that the set of vectors selected meet certain conditions.
 \begin{itemize}
@@ -544,6 +585,8 @@ $f:\mathbb{R}^{n\times n}\rightarrow\mathbb{R}$
 \item If two columns of $A\in\mathbb{R}^{n\times n}$ are the same,  then $f(A) = 0$
 \item If you swap two columns of $A$ to get $B$,  then $-f(A) = f(B)$
 \end{itemize}}
+\noindent We know that the determinant is reliant on the linear (in)dependence of the columns or rows, but the reason for this might not be so intuitive. Although it is described in our particular definition of the determinant, perhaps a more geometrically intuitive description may make this more clear. Like many other aspects of linear algebra, our computations can actually be used to describe some transformation in a vector space. For instance, in 2-dimensional space vectors could be describing some geometry like a parellogram, or in 3-dimensional space could be describing some parallelepiped. These geometric representations will have some area or volume respectively, and the determinant of a transformation matrix describes how these values will be scalled after the transformation has been applied. How does this translate to our understanding of a zero or nonzero determinant? Well to understand that we have to understand what it means to have linearly dependent vectors. This means that we can construct at least one vector from a linear combination of other vectors in a set. In other words if we have a transformation matrix for a 3 dimensional space that has one linearly dependent vector, then we are effectively losing a dimension after the transformation. If we transform a 3d geometry to 2-dimensions, then we are loosing all volume and effectively it is being scaled by a value of zero. We can say then that a transformation matrix has a zero determinant when we are losing some amount of dimension, or in simpler terms, when we have linearly dependent columns or rows. \\
+\\
 \noindent The determinant of a $2\times2$ $\begin{bmatrix}a&b\\c&d\end{bmatrix}$ is (ad-bc), and the determinant of a singular value is just the value. Determinants of larger matrices can be calculated in a number of ways. One such is the cofactor expansion, which is the method that must be used when none of the shortcuts can be applied.
 \dfn{Minor of a $n\times n$ matrix}{
 If $A\in\mathbb{R}^{n\times n}$, the minor $M_{ij}$ of a matrix is the $(n-1)\times(n-1)$ matrix obtained by deleting the $i$th row and $j$th column of $A$
@@ -654,7 +697,6 @@ A^{-1} = \begin{bmatrix}
 &&&(A_{nn})^{-1}
 \end{bmatrix}
 $$
-\newpage
 \section{Eigen-ness}
 \dfn{Eigenvectors and Eigenvalues}{Let $T:V\rightarrow V$ be a linear transformation. An eigenvector of $T$ is a non-zero vector $\vec{v}\in V$ such that
 $$
@@ -1075,4 +1117,34 @@ B = \begin{bmatrix}
 2/\sqrt{5}&-1/\sqrt{5}&0
 \end{bmatrix}
 $$
+\section{How to take the derivative of $e^{cx}$ with respect to $x$}
+\begin{note}
+Recall:\\
+The exponential function denoted $\operatorname{exp}(x)$ or $e^x$ is  the unique function that satisfies the conditions
+$$
+\left\{
+\begin{aligned}
+&f(t)\\
+&f(0)=1\\
+&\frac{\mathrm{d}}{\mathrm{d}x}f(t) = kf(t)
+\end{aligned}
+\right.
+$$
+\end{note}
+\ex{}{
+Recall that $C^1(\mathbb{R})$ is the vector space of all differentiable real-valued functions with continues derivative, that is, the set of all $f(x)$ which are differentiable at all points $x\in\mathbb{R}$ and with $f'(x)$ continuous. Define $T: C^1(\mathbb{R})\rightarrow C(\mathbb{R})$ by
+$$
+T(f) = 2f(x)-\frac{\mathrm{d}}{\mathrm{d}x}f(x)
+$$
+$T$ is a linear transformation with $\dim(\ker(T)) = 1$. Give a basis for $\ker(T)$. Justify briefly that the basis you give is a basis. \\
+\sol \\
+To find a basis for the kernel, we are finding all the $f(x)$ that causes $T(f) = \vec{0}$.  Essentially, what we are looking for is the function that satisfies the condition $2f(x) = f'(x)$. Well we know that the exponential function is the unique function with the property that $\frac{\mathrm{d}}{\mathrm{d}x}\operatorname{exp}(2x) = k\operatorname{exp}(kx)$. Hence we have found some $f(x)$ that we can substitute to demonstrate this equality: $\operatorname{exp}(2x)$. In particular we see that
+$$
+T(\operatorname{exp}(2x)) = 2\operatorname{exp}(2x) - 2\operatorname{exp}(2x) = \vec{0}
+$$
+Since we have found a single function which maps to the zero vector, we can use it to construct a basis for the $\ker(T)$ since the kernel is one dimensional and only requires one element. Thus we can say that a basis for the kernel of $T$ is
+$$
+\left\{\operatorname{exp}(2x)\right\}
+$$
+}
 \end{document}
